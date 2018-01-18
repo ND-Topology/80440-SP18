@@ -1,0 +1,202 @@
+
+\documentclass{article}
+\setcounter{tocdepth}{2} % 2 = subsections
+\usepackage{hyperref}
+\hypersetup{bookmarksdepth=3}
+
+\errorcontextlines 10000
+
+%\setsecnumdepth{subsection}  % number subsections and above (default is sections and above)
+
+% Use utf-8 encoding for foreign characters
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+\usepackage{amsmath}       
+\usepackage{amsthm}        
+\usepackage{amssymb}       
+\usepackage{amsfonts}
+%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+\usepackage{url}
+
+%\usepackage[normalem]{ulem}  % for strikeout: \sout
+
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+
+\usepackage[backend=biber,maxbibnames=99, style=alphabetic]{biblatex}
+\addbibresource{HPrin.bib}
+
+
+
+%%%%%% Tikz  %%%%%%%%%%%%%
+\usepackage{tikz}
+\usepgflibrary{arrows.meta}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+%%%%%%%%%%%%%%%%%%%%%% Theorem Styles and Counters %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% These all use the same "theorem" counter. 
+\theoremstyle{plain} %%% Plain Theorem Styles.
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}          
+\newtheorem{proposition}[theorem]{Proposition}              
+
+\theoremstyle{definition} %%%% Definition-like Commands  
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}{Exercise}[section]
+
+
+\theoremstyle{remark}  %%%% Remark-like Commands
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{warning}[theorem]{{Warning}}
+\newtheorem{question}[theorem]{{Question}}
+\newtheorem*{question*}{{Question}}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%% End Theorem Styles and Counters %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%% New Commands %%%%%%%%%%%%%%
+
+
+
+
+
+\DeclareMathOperator{\codim}{codim} % codimension 
+\DeclareMathOperator*{\colim}{colim}
+\DeclareMathOperator*{\hocolim}{hocolim}
+\DeclareMathOperator*{\CoEq}{CoEq}
+\DeclareMathOperator*{\Eq}{Eq}
+
+\def\bDelta{\mathbf \Delta}
+
+
+% this makes a box with an upward diagonal slash. It is sized to match \boxtimes
+\newcommand{\boxslash}{{\mathrel{
+	\mathchoice{\tikz{ \draw (0,0) rectangle (6.5pt,6.5pt) -- (0,0);}} %display
+		{\tikz{ \draw (0,0) rectangle (6.5pt,6.5pt) -- (0,0);}} % text
+		{\tikz{ \draw (0,0) rectangle (5pt,5pt) -- (0,0);}} % script
+		{\tikz{ \draw (0,0) rectangle (5pt,5pt) -- (0,0);}} % scriptscript
+}}}
+
+
+\newcommand{\Comment}[1]{ \textcolor{Emerald}{[#1]} }
+
+% Letters 
+
+\def\cA{\mathcal A}\def\cB{\mathcal B}\def\cC{\mathcal C}\def\cD{\mathcal D}
+\def\cE{\mathcal E}\def\cF{\mathcal F}\def\cG{\mathcal G}\def\cH{\mathcal H}
+\def\cI{\mathcal I}\def\cJ{\mathcal J}\def\cK{\mathcal K}\def\cL{\mathcal L}
+\def\cM{\mathcal M}\def\cN{\mathcal N}\def\cO{\mathcal O}\def\cP{\mathcal P}
+\def\cQ{\mathcal Q}\def\cR{\mathcal R}\def\cS{\mathcal S}\def\cT{\mathcal T}
+\def\cU{\mathcal U}\def\cV{\mathcal V}\def\cW{\mathcal W}\def\cX{\mathcal X}
+\def\cY{\mathcal Y}\def\cZ{\mathcal Z}
+
+\def\A{\mathbb A}\def\B{\mathbb B}\def\C{\mathbb C}\def\D{\mathbb D}
+\def\E{\mathbb E}\def\F{\mathbb F}\def\G{\mathbb G}\def\H{\mathbb H}
+\def\I{\mathbb I}\def\J{\mathbb J}\def\K{\mathbb K}\def\L{\mathbb L}
+\def\M{\mathbb M}\def\N{\mathbb N}\def\O{\mathbb O}\def\P{\mathbb P}
+\def\Q{\mathbb Q}\def\R{\mathbb R}
+\def\S{\mathbb S}\def\T{\mathbb T}
+\def\U{\mathbb U}\def\V{\mathbb V}\def\W{\mathbb W}\def\X{\mathbb X}
+\def\Y{\mathbb Y}\def\Z{\mathbb Z}
+
+
+% bold math symbols (for vectors/tuples)
+
+\newcommand*\Bell{\ensuremath{\boldsymbol\ell}}
+\newcommand*\Bm{\ensuremath{\boldsymbol m}}
+\newcommand*\Bn{\ensuremath{\boldsymbol n}}
+\newcommand*\Bt{\ensuremath{\boldsymbol t}}
+\newcommand*\BW{\ensuremath{\boldsymbol W}}
+\newcommand*\Bxi{\ensuremath{\boldsymbol \xi}}
+\newcommand*\BM{\ensuremath{\boldsymbol M}}
+
+
+%%%%%%%%%%%%%%%%%%%%%% End New Commands  %%%%%%%%%%%%%%
+
+
+%%%%% Commenting Commands
+\setlength{\marginparwidth}{2cm}
+\definecolor{comment-color}{rgb}{0.25,0.25,0.25}	% Textcolor for comment
+
+% Margin Comment
+\newcommand{\MarCom}[1]{\marginpar{\vspace*{-20pt}\tiny\color{comment-color}{ #1}\vspace*{20pt}}}
+%\newcommand{\CSPcomm}[1]{{\color{CSPcolor}{#1}}}
+
+
+\begin{document}
+%\frontmatter
+
+%% Title page
+
+\pagestyle{empty}
+
+% first column
+\begin{minipage}{0.05\textwidth}
+{\hspace{0.0cm}}
+%{\line(0,1){\textheight} }
+\tikz{\draw (0,0) -- (0, \textheight);}
+%{\hspace{0.1cm}}
+\end{minipage}
+%second column
+\begin{minipage}{0.95\textwidth}
+	\textbf{\LARGE The H-Principle}\\[1.5cm]
+	%\textsc{\LARGE after Galatius-Madsen-Tillmann-Weiss}\\[0.5cm]
+%\\[0pt]
+	\text{\Large \emph{Christopher Schommer-Pries}}
+	
+	\vspace{8cm}
+	
+%	% Bottom of the page
+	{\large \today}
+\vfill
+
+\end{minipage}
+
+\cleardoublepage
+
+% Frontmatter
+
+\subsection*{Abstract}
+
+abstract
+
+
+
+
+\clearpage
+\pagestyle{plain}
+
+\tableofcontents
+%\listoffigures  
+%\listoftables
+
+
+%\mainmatter
+
+\section{Basic Homotopy Theory}
+
+
+test test \MarCom{this is a text.}
+
+
+\printbibliography
+
+\end{document}
