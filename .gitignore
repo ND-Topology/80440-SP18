@@ -2,3 +2,9 @@
 *.aux
 *.log
 *~
+*.bcf
+*.dvi
+*.out
+*.run.xml
+*.toc
+auto/*
