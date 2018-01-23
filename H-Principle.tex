@@ -17,6 +17,7 @@
 \usepackage{amsthm}        
 \usepackage{amssymb}       
 \usepackage{amsfonts}
+\usepackage[all]{xy}
 %\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
 \usepackage{url}
@@ -141,6 +142,8 @@
 \newcommand*\BW{\ensuremath{\boldsymbol W}}
 \newcommand*\Bxi{\ensuremath{\boldsymbol \xi}}
 \newcommand*\BM{\ensuremath{\boldsymbol M}}
+\newcommand{\xymat}[1]{\begin{align*}\xymatrix{ #1}\end{align*}}
+\newcommand{\xymattal}[2]{\begin{align} \label{#1} \xymatrix{ #2}\end{align}}
 
 
 %%%%%%%%%%%%%%%%%%%%%% End New Commands  %%%%%%%%%%%%%%
@@ -206,15 +209,66 @@ abstract
 %\mainmatter
 
 \section{Basic Homotopy Theory}
+Let $M$ be a manifold, and let $\mathcal{F}(M)$ be some space related to the geometry of $M$, e.g., the space of Riemanian metrics on $M$ positive sectional curvature, or the space of immersions or submersions in to some fixed manifold $W$. The goal of the course is trying to understand $\mathcal{F}(M)$. This will be done by constructing some other space $\mathcal{F}^h(M)$ that is the space of sections of some fiber bundle and therefore more amenable to homotopical methods, and posses a comparison map $\mathcal{F}(M)\to \mathcal{F}^h(M)$. Under certain nice conditions this map is a weak homotopy equivalence, for some class of manifolds $\{M\}$, e.g., Gromonov's theorem.
 
+To carry out this program we have some questions that need answering:
+\begin{itemize}
+\item Which bundle should we take sections of?
+\item How do we analyse/compute $\mathcal{F}^h(M)$?
+\item How do we detect weak homotopy equivalences? 
+\end{itemize} 
+We will start with the last question first.
 
-Making some edits. More edits! Yay!
+\subsection{Weak Equivalences}
+Most of this section should be considered review, and can be found in more details in several other sources. When it is included here, it is because we will need to generalize some well known theorems to slightly non standard cases.
 
-test test \MarCom{this is a text.}
+Recall, given a based space $(X,x_0)$ we can define its homotopy groups $\pi_n(X,x_0)$ by $\{\text{based maps }f:(S^n,s_0)\to (X,x_0)\}/\text{based homotopy}$, for some fixed basepoint $s_0\in S^n$. 
+\begin{definition}
+A based map $f:(X,x_0)\to (Y,y_0)$ is a weak homotopy equivalence if $f_*:\pi_n(X,x_0)\to \pi_n(Y,y_0)$ for all $n$.
+\end{definition}
+We will from now drop the base points from our notations to avoid clutter. A more complete treatment can be found in \cite{may1999concise}.
 
-The homotopy principle is a method to reduce differential geometric
+We want a different characterization of weak homotopy equivalence, which will allow us to show some locality property of the notion. Given a commutative square of pointed spaces, and pointed maps of the form  
+\xymattal{LiftSquare}{\partial D^n \ar@{=}[r] \ar@{^{(}->}[dr]&S^{n-1} \ar[r]^\alpha  & X \ar[d]^f \\& D^n \ar[r]^\beta & Y}
+One could wonder when a lift $\overline{\beta}: D^n \to X$, making the whole diagram commute. This turns out to be a much stronger condition than $F$ being a weak homotopy equivalence. We instead define:
+\begin{definition}
+A pointed map $f:X\to Y$ is a weak equivalence if for all commuting diagrams of the form $(\ref{LiftSquare})$, there exists $\overline{\beta}:D^n\to X$ such that
+\xymat{\partial D^n \ar[r]^\alpha \ar@{^{(}->}[d]& X \\ D^n \ar[ur]_{\overline{\beta}} &} commutes, and 
+\xymat{& X \ar[d] \\ D^n \ar[ur]^{\overline{\beta}} \ar[r]_\beta & Y}
+commutes up to homotopy relative to $\partial D^n$.
+\end{definition}
+\begin{lemma}
+$f:X\to Y$ is a weak homotopy equivalence if and only if it is a weak equivalence.
+\end{lemma}
+\begin{proof}
+For ease of writing up the proof let $X$ and $Y$ be connected. See \cite{may1999concise} for more details.
 
+\emph{only if}: Assume $\alpha: S^{n-1}$, such that $f_*[\alpha]=0$ in $\pi_{n-1}Y$. That means that we have a commuting square 
+\xymat{\partial D^n=S^{n-1} \ar[r]^\alpha \ar@{^{(}->}[d] & X \ar[d]^f \\ D^n \ar[r]^\beta & Y} for some $\beta$, but then the existence of a lift $\overline{\beta}$ implies that $\alpha$ is null homotopic, and hence $f_*$ is injective. To show that $f_*$ is surjective take $\beta: S^n\to Y$, need to produce $\tilde{\beta}: S^n\to X$ such that $f_*[\tilde{\beta}]=[\beta]$. Note we have the following commuting square
+\xymat{\partial D^n=S^{n-1} \ar[rrr]^{\text{const}_*} \ar@{^{(}->}[d]& & & X \ar[d]^f \\ D^n \ar[r] & D^n/\partial D^n \ar@{=}[r]&S^{n-1} \ar[r]^\beta & Y}
+where $\text{const}_*$ is the map that sends everything to the basepoint. This square is clearly of the form (\ref{LiftSquare}), and therefore there is $\overline{\beta}: D^n \to X$, but by the strict commutativity we see that $\partial D^n \hookrightarrow D^n \stackrel{\beta}{\to} X$ is constant onto the basepoint, and hence, we get an induced map $\tilde{\beta}:S^n=D^n/\partial D^n \to X$, by the homotopy commutativity of the lower triangle we see that $f_*[\tilde{\beta}]=[\beta]$.
 
+\emph{if}: Given a commuting square of the form (\ref{LiftSquare}), we want to produce a lift with the correct properties. Note $[\alpha]\in\pi_{n-1} X$ with $[f\circ \alpha]=0$ in $\pi_{n-1} Y$, but by $f_*$ being an isomorphism we see that $[\alpha]=0$, so there exists a map $\tilde{\beta}:D^n\to X$ such that the diagram
+\xymat{\partial D^n \ar@{^{(}->}[d] \ar[r]^\alpha & X \\ D^n\ar[ur]_{\tilde{\beta}}}
+commutes. Unfortunately $f\circ \tilde{\beta}$ need not be homotopic to $\beta$, so we need to rectify this. By construction $\beta$ and $f\circ \tilde{\beta}$ agree along the boundry so we can glue them together to get a map $\gamma: S^{n+1}\to Y$, given by $\beta$ on one hemisphere, $f\circ \tilde{\beta}$ on the other, and $f\circ \alpha$ on the equator, by assumption there is unique $[\tilde{\gamma}]\in \pi_{n+1}X$ with $f_*[\tilde{\gamma}]=\gamma$, note then $f\circ \tilde{\gamma}|_{S^n}\simeq f\circ \alpha$, so by $f_*:\pi_nX \to \pi_nY$ injective $\tilde{\gamma}|_{S^n}\simeq \alpha$, pick such a homotopy $H:S^n\times I \to X$, such that $H(-,1)=\alpha$, and $H(-,0)=\tilde{\gamma}|_{S^n}$. So we construct $\overline{\beta}: D^n\to X$, by when $|x|>\frac{1}{2}$ we use $H(\frac{x}{|x|}, 2|x|)$, and when $|x| \leq \frac{1}{2}$, we rescale $\tilde{\gamma}$ restricted to the hemisphere that under $f$ gets homotoped to the hemisphere corresponding to $\beta$. It is easy to check that this satisfies what it needs.
+\end{proof}
+
+We can now prove a locality property
+\begin{theorem} \label{Thm:LocalWeak}
+Let $f:X\to Y$, and $\{Y_\alpha\}_{\alpha \in A}$ an open cover of $Y$, closed under finite intersections, s.t. for $X_\alpha:=f^{-1}(Y_\alpha)$, $f|_{X_\alpha}: X_{\alpha} \to Y_{\alpha}$ are weak equivalences for all $\alpha \in A$, then $f$ is a weak equivalence.
+\end{theorem}
+
+Note the criterion on finite intersections is necessary, otherwise given any map $X\to Y$, the suspension would always be a homotopy equivalence $\Sigma X \to \Sigma Y$, as $\Sigma Y$ has a cover consisting of the two cones (extended slightly so they are open and overlap), which since the map is a suspension of map lifts to the same cover for $\Sigma X$. But each cone is contractible, so the restriction is a weak equivalence, but the map need not be an equivalence.
+
+\begin{proof}[Theorem \ref{Thm:LocalWeak}]
+For simplicity assume that $Y$ is covered by $\{Y_1,Y_2,Y_{12}=Y_1\cap Y_2\}$. The general case follows from this by building up more complicated intersections from twofold ones. Assume we are give a diagram of shape (\ref{LiftSquare}), and we need to produce a lift $\overline{\beta}$. 
+
+We identify $D^n$ with $I^n$, where $I$ is the standard interval. Since $I^n$ is compact there is $N\in \mathbb{N}$, such that if we subdivide each copy of $I$ into subintervals of length $\frac{1}{N}$, then each subcube is entire contained in some $Y_\alpha$ for $\alpha=1,2,12$. By assumption we will know proceed to lift each subcube by first dimension, and then by first lifting those fully contained in $Y_{12}$. If we have a point on $\partial I^n$ we already know how to lift it using $\alpha$. I will now in detail give the 0th and 1st dimensional case, the rest is left as an exercise. Assume $x\in \beta(I^n-\partial I^n)$ the image of a corner of a subcube, then we have the following diagram
+\xymat{\partial D^0 =\emptyset \ar[r] \ar@{^{(}->}[d] & X_\alpha \ar[d]^f \\ D^0=pt \ar[r]^y & Y_\alpha }
+so by assumption we have a lift $x:D^0 \to X$. We pick a path $p_y$ in $Y_\alpha$ from  $y$ to $f(x)$, which we can do by assumption of $f:X_\alpha \to Y_\alpha$ is a weak equivalence. Now assume that we have lifted all corners of subcubes, and let $x_0$ and $x_1$ be the lift of such $y_0$ and respectively $y_1$, such that the preimage of $y_0$ and $y_1$ in $I^n$ is connected by an edge $e$. We now need to lift this edge. We construct a map $D^1=I \to Y$ by first we do $p_{y_0}$ backwards, then $\beta|_e$, and finally $p_{y_1}$, and then rescale. This gives a path from $f(x_0)$ to $f(x_1)$, and hence the following diagram commutes
+\xymat{\partial D^1 \ar@{=}[r]\ar@{^{(}->}[dr]& pt \cup pt \ar[r]^{x_0 \cup x_1}  & X_\alpha \ar[d]^f \\ & D^1=pt \ar[r]^y & Y_\alpha}
+So by assumption we have a list of this path $\overline{e}: D^1\to X$, and a choice homotopy $H_e$ from $\beta|_e$ to $f\circ \overline{e}$. We need to remember this choice of homotopy to be able to lift the 2D part of the subcubes for the same reason as we needed to remember the path for the 1D case.
+\end{proof}
 \printbibliography
 
 \end{document}
