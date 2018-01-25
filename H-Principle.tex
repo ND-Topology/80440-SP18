@@ -181,7 +181,7 @@
 	\text{\large Lectures Notes by:}\\[0.3cm]
 	\text{\large Ethan Addison, Tim Campion, Shih-Kai Chiu,}\\[0.25cm]
 	\text{\large Jens Kjaer, Jacob Landgraf, Jeremy Mann,}\\[0.25cm]
-	\text{\large James Quigley, Hari Rau-Murthy, Taylor Sutton,}\\[0.25cm]
+	\text{\large J.D. Quigley, Hari Rau-Murthy, Taylor Sutton,}\\[0.25cm]
 	\text{\large Aaron Tyrrell, Timothy Warner, and Laura Wells}
 	\vspace{6cm}
 	
@@ -286,26 +286,27 @@ Another class of maps that we'll be talking about are fibrations.
 \begin{definition}
 A map $p:E\to B$ is a Hurewicz (Serre, respectively) fibration if for each commuting square
 \xymat{A\times \lbrace 0\rbrace \ar[r] \ar@{^{(}->}[d] & E \ar[d]^p \\ A\times [0,1] \ar[r] & B} 
-there exists a lift such that the whole diagram commutes (strictly):
-\xymat{\partial A\times \lbrace 0\rbrace \ar[r] \ar@{^{(}->}[d] & E \ar[d]^p \\ A\times [0,1] \ar[r]\ar@{.>}[ur] & B}
+there exists a lift such that the following diagram commutes (strictly)
+\xymat{\partial A\times \lbrace 0\rbrace \ar[r] \ar@{^{(}->}[d] & E \ar[d]^p \\ A\times [0,1] \ar[r]\ar@{.>}[ur] & B,}
 where $A$ ranges over all spaces (all disks $D^n$, respectively).
 \end{definition}
-Note: Such a property is called a \textit{right lifting property} with respect to maps $\lbrace A\times \lbrace 0\rbrace\hookrightarrow A\times [0,1]\rbrace$.
+We say that $p$ has the \textit{right lifting property} with respect to the set of maps $\lbrace A\times \lbrace 0\rbrace\hookrightarrow A\times [0,1]\rbrace$.
 
-\begin{example}(a Hurewicz fibration) Consider the map $p: B\times F\to B$. Then for any square
+\begin{example}(a Hurewicz fibration) Consider the projection map $p: B\times F\to B$. Then for any square
 \xymat{A\times \lbrace 0\rbrace \ar[r]^f \ar@{^{(}->}[d] & B\times F \ar[d]^p \\ A\times [0,1] \ar[r]_g & B}
-construct a lift by sending $(a,t)\mapsto (g(a,t), P_1(f(a)))$, where $P_1: B\times F\to F$ is the projection map. This works for any space $A$; so $B\times F\to B$ is an example of a Hurewicz fibration. 
+construct a lift $A \times [0,1] \to B \times F$ by sending $(a,t)\mapsto (g(a,t), P_1(f(a)))$, where $P_1: B\times F\to F$ is the projection map. This works for any space $A$, so $p : B\times F\to B$ is an example of a Hurewicz fibration. 
 \end{example}
 
 \begin{example}
-Let $\mathbb{Q}_\delta$ be the rational numbers considered as a discrete space. Note that we have a continuous map $\mathbb{Q}_\delta\to \mathbb{Q}$. Consider the map $p:E=\mathbb{Q}_\delta\times I\cup_{\mathbb{Q}_\delta\times \lbrace 0\rbrace} \mathbb{Q}\times \lbrace 0\rbrace \to B=\mathbb{Q}\times I$. For any commuting square 
-\xymat{D^n\times \lbrace 0\rbrace \ar[r] \ar@{^{(}->}[d] & E=\mathbb{Q}_\delta\times I\cup_{\mathbb{Q}_\delta\times \lbrace 0\rbrace} \mathbb{Q}\times \lbrace 0\rbrace \ar[d]^p \\ D^n\times [0,1] \ar[r] & B=\mathbb{Q}\times I} if we fix a single element in $\mathbb{Q}$, we get a map $I\to I$.
-%Question: where is this map $I\to I$ coming in? I'm confused with the details here...
-Taking the trivial lift, one sees that $p$ is a Serre fibration
+Let $\mathbb{Q}_\delta$ be the rational numbers considered as a discrete space, so we have a continuous map $\mathbb{Q}_\delta\to \mathbb{Q}$. Consider the map 
+$$p:E=\mathbb{Q}_\delta\times I\cup_{\mathbb{Q}_\delta\times \lbrace 0\rbrace} \mathbb{Q}\times \lbrace 0\rbrace \to B=\mathbb{Q}\times I.$$ 
+Suppose we have a commutative square
+\xymat{D^n\times \lbrace 0\rbrace \ar[r] \ar@{^{(}->}[d] & E=\mathbb{Q}_\delta\times I\cup_{\mathbb{Q}_\delta\times \lbrace 0\rbrace} \mathbb{Q}\times \lbrace 0\rbrace \ar[d]^p \\ D^n\times [0,1] \ar[r]^g & B=\mathbb{Q}\times I.}
+Since $D^n$ is connected and $g$ is continuous, the image of $D^n$ in $\mathbb{Q}$ is a single point $q$. Therefore we can consider $g$ as a map $const \times g'$ where $g' : I\to I$, and we define a lift $D^n \times [0,1] \to E$ by taking the lift which sends $D^n$ to $q \in \mathbb{Q}_\delta$. This shows that $p$ is a Serre fibration. 
 \end{example}
 Note that this previous example is \textit{not} a Hurewicz fibration. To see a counter-example, consider the square
 \xymat{\mathbb{Q}\times \lbrace 0\rbrace \ar[r]^f \ar@{^{(}->}[d] & E \ar[d]^p \\ \mathbb{Q}\times [0,1] \ar[r]_g & B}
-No lift exists for this square; and so this $p:E=\mathbb{Q}_\delta\times I\cup_{\mathbb{Q}_\delta\times \lbrace 0\rbrace} \mathbb{Q}\times \lbrace 0\rbrace \to B=\mathbb{Q}\times I$ is not a Hurewicz fibration.
+No lift exists for this square, since a lift $\Q \times [0,1] \to E$ would show that $p$ is a homeomorphism, which it is not. Therefore  $p:E=\mathbb{Q}_\delta\times I\cup_{\mathbb{Q}_\delta\times \lbrace 0\rbrace} \mathbb{Q}\times \lbrace 0\rbrace \to B=\mathbb{Q}\times I$ is not a Hurewicz fibration.
 \begin{example}
 Replacing $\mathbb{Q}$ by $\lbrace 0 \rbrace \cup \lbrace \frac{1}{n}|n\geq 1\rbrace$ in the above example gives another example of a Serre fibration which is not a Hurewicz fibration. 
 \end{example}
@@ -331,18 +332,18 @@ more formal and general & more geometric and point set topological \\
 An open cover is numerable if it admits a subordinate partition of unity.
 \end{definition}
 
-When we're talking about infinite dimensional spaces (such as the space of all metrics with positive scalar curvature, and the other motivating examples mentioned at the beginning), it is harder to talk about partitions of unity.
+When we're talking about infinite dimensional spaces (such as the space of all metrics with positive scalar curvature, and the other motivating examples mentioned at the beginning), it is harder to talk about partitions of unity. 
 
 %Because of this, we want to have similar locality arguments for fibrations as we did for weak equivalences.---is this the correct motivation/direction we're going??
 
 \begin{theorem}
-Let $p:E\to B$ be a map and $\lbrace B_\alpha\rbrace$ is an open cover of $B$ (numerable cover, respectively). Set $E_\alpha:=p^{-1}(B_\alpha)$. Suppose that $p|_{E_\alpha}$ is a Serre fibration (Hurewicz fibration, respectively). Then $p:E\to B$ is also a Serre fibration (Hurewicz fibration, respectively). 
+Let $p:E\to B$ be a map and $\lbrace B_\alpha\rbrace$ is an open cover of $B$ (numerable open cover, respectively). Set $E_\alpha:=p^{-1}(B_\alpha)$. Suppose that $p|_{E_\alpha} : E_\alpha \to B_\alpha$ is a Serre fibration (Hurewicz fibration, respectively) for all $\alpha$. Then $p:E\to B$ is also a Serre fibration (Hurewicz fibration, respectively). 
 \end{theorem}
 
 \begin{proof}
-(sketch of Serre version; a similar argument hold for the Hurewicz version) We want to construct: 
-\xymat{D^n\times \lbrace 0\rbrace \ar[r] \ar@{^{(}->}[d] & E \ar[d]^p \\ D^n\times [0,1] \ar[r] \ar@{.>}[ur] & B}
-As we did for weak equivalences (see Thm 2.4) we will inductively build this lift by lifting smaller cubes. It is actually an easier construct here, because in this case we're dealing with regular lifts, not lifts up to homotopy. 
+We sketch the proof for Serre fibrations. We want to construct a lift: 
+\xymat{D^n\times \lbrace 0\rbrace \ar[r] \ar@{^{(}->}[d] & E \ar[d]^p \\ D^n\times [0,1] \ar[r]^g \ar@{.>}[ur] & B}
+As we did for weak equivalences (see Thm 2.4) we will inductively build this lift by lifting smaller cubes. It is actually an easier construct here, because in this case we're dealing with lifts which make the diagram commute strictly, instead of lifts up to homotopy. Since $D^n \times I$ is compact, we can subdivide the cube $D^n \times I$ into $(n+1)$-dimensional cubes so that the image of each small cube is contained in some $B_\alpha$. Since each vertex of the small cubes lands in some $B_\alpha$, we can define a lift of each vertex as in the proof of Thm 2.4. We can then lift the 1-dimensional edges of each small cube, followed by the 2-dimensional faces, and so on. Note that we implicitly assumed that the restrictions of $p$ to intersections $E_\alpha \cap E_\beta$ were fibrations; we will address this assumption after proving Theorem 2.12.
 \end{proof}
 
 \begin{corollary}
@@ -353,26 +354,42 @@ If $p:E\to B$ is a fiber bundle, then it is locally trivial; i.e. locally, it lo
 \end{proof}
 
 \begin{theorem}
-Let $\mathcal{A}$ be a collection of maps. Define $\mathcal{A}^\boxtimes:=\lbrace$maps satisfying the right lifting property with respect to $\mathcal{A}\rbrace$. Then $\mathcal{A}^\boxtimes$ is closed under pullbacks, retracts, and transfinite compositions. 
+Let $\mathcal{A}$ be a collection of maps. Define $\mathcal{A}^\boxslash:=\lbrace$maps satisfying the right lifting property with respect to $\mathcal{A}\rbrace$. Then $\mathcal{A}^\boxslash$ is closed under pullbacks, retracts, and transfinite compositions. 
 \end{theorem}
 
-%I don't think Chris described the proof for this yet...
-
+\begin{proof}
+To see invariance under pullback, consider the following diagram where $p \in \mathcal{A}^\boxslash$, the square on the right is a pullback square, and $C \to D \in \mathcal{A}$.
 \xymat{
 C \ar[r] \ar[d] & E\times_B X \ar[d] \ar[r] &E\ar[d]^p\\ 
 D \ar[r]\ar@{.>}[ur]\ar@{.>}[urr] & X\ar[r] & B} 
+We wish to construct a lift $D \to E \times_B X$. Since $p \in \mathcal{A}^\boxslash$, there exists a lift $D \to E$ as shown. The desired lift then follows from the universal property of pullbacks.
 
+To see invariance under compositions, consider the following diagram where $E_2 \to E_1$ and $E_1 \to B$ are in $\mathcal{A}^\boxslash$, and $C \to D \in \mathcal{A}$. 
 \xymat{
-C \ar[r]\ar[d] & E_2 \ar[d]\\
-C \ar[r]\ar[d] & E_{?}\ar[d]\\
+C \ar[r]\ar[dd] & E_2 \ar[d]\\
+ & E_{1}\ar[d]\\
 D \ar[r] \ar@{.>}[ur]\ar@{.>}[uur] & B\\
 }
+We wish to construct a lift $D \to E_2$. We may rewrite the diagram as 
+\xymat{
+C \ar[r]\ar[d]^= & E_2 \ar[d]\\
+C \ar[r]\ar[d] & E_{1}\ar[d]\\
+D \ar[r] \ar@{.>}[ur]\ar@{.>}[uur] & B\\
+}
+to obtain the intermediate lift $D \to E_1$ since $E_1 \to B \in \mathcal{A}^\boxslash$. The desired lift then follows since $E_2 \to E_1 \in \mathcal{A}^\boxslash.$ The proof for transfinite compositions is similar.
 
+To see invariance under retracts, consider the following diagram
+
+[[we didn't do this yet]]
+
+\end{proof}
+
+We can now show that the assumption that the restriction to intersections was a fibration in the proof of Thm 2.10 was automatically satisfied. Indeed, we can obtain the restriction to the intersection as the pullback 
 \xymat{
 E_1\ar[d]_p  & p^{-1}(B_1\cap B_2)\ar[d]\ar[l]\\
 B_1 & B_1\cap B_2\ar[l]
 }
-
+from which we conclude the restriction is a fibration by the previous theorem.
 
 \printbibliography
 
