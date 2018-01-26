@@ -36,6 +36,7 @@
 
 %%%%%% Tikz  %%%%%%%%%%%%%
 \usepackage{tikz}
+\usepackage{tikz-cd}
 \usepgflibrary{arrows.meta}
 
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
@@ -292,7 +293,7 @@ where $A$ ranges over all spaces (all disks $D^n$, respectively).
 \end{definition}
 We say that $p$ has the \textit{right lifting property} with respect to the set of maps $\lbrace A\times \lbrace 0\rbrace\hookrightarrow A\times [0,1]\rbrace$.
 
-\begin{example}(a Hurewicz fibration) Consider the projection map $p: B\times F\to B$. Then for any square
+\begin{example}~\label{projfib}(a Hurewicz fibration) Consider the projection map $p: B\times F\to B$. Then for any square
 \xymat{A\times \lbrace 0\rbrace \ar[r]^f \ar@{^{(}->}[d] & B\times F \ar[d]^p \\ A\times [0,1] \ar[r]_g & B}
 construct a lift $A \times [0,1] \to B \times F$ by sending $(a,t)\mapsto (g(a,t), P_1(f(a)))$, where $P_1: B\times F\to F$ is the projection map. This works for any space $A$, so $p : B\times F\to B$ is an example of a Hurewicz fibration. 
 \end{example}
@@ -336,24 +337,24 @@ When we're talking about infinite dimensional spaces (such as the space of all m
 
 %Because of this, we want to have similar locality arguments for fibrations as we did for weak equivalences.---is this the correct motivation/direction we're going??
 
-\begin{theorem}
+\begin{theorem}~\label{fibcov}
 Let $p:E\to B$ be a map and $\lbrace B_\alpha\rbrace$ is an open cover of $B$ (numerable open cover, respectively). Set $E_\alpha:=p^{-1}(B_\alpha)$. Suppose that $p|_{E_\alpha} : E_\alpha \to B_\alpha$ is a Serre fibration (Hurewicz fibration, respectively) for all $\alpha$. Then $p:E\to B$ is also a Serre fibration (Hurewicz fibration, respectively). 
 \end{theorem}
 
 \begin{proof}
 We sketch the proof for Serre fibrations. We want to construct a lift: 
 \xymat{D^n\times \lbrace 0\rbrace \ar[r] \ar@{^{(}->}[d] & E \ar[d]^p \\ D^n\times [0,1] \ar[r]^g \ar@{.>}[ur] & B}
-As we did for weak equivalences (see Thm 2.4) we will inductively build this lift by lifting smaller cubes. It is actually an easier construct here, because in this case we're dealing with lifts which make the diagram commute strictly, instead of lifts up to homotopy. Since $D^n \times I$ is compact, we can subdivide the cube $D^n \times I$ into $(n+1)$-dimensional cubes so that the image of each small cube is contained in some $B_\alpha$. Since each vertex of the small cubes lands in some $B_\alpha$, we can define a lift of each vertex as in the proof of Thm 2.4. We can then lift the 1-dimensional edges of each small cube, followed by the 2-dimensional faces, and so on. Note that we implicitly assumed that the restrictions of $p$ to intersections $E_\alpha \cap E_\beta$ were fibrations; we will address this assumption after proving Theorem 2.12.
+As we did for weak equivalences (see Theorem ~\ref{Thm:LocalWeak})) we will inductively build this lift by lifting smaller cubes. It is actually an easier construct here, because in this case we're dealing with lifts which make the diagram commute strictly, instead of lifts up to homotopy. Since $D^n \times I$ is compact, we can subdivide the cube $D^n \times I$ into $(n+1)$-dimensional cubes so that the image of each small cube is contained in some $B_\alpha$. Since each vertex of the small cubes lands in some $B_\alpha$, we can define a lift of each vertex as in the proof of Theorem ~\ref{Thm:LocalWeak}. We can then lift the 1-dimensional edges of each small cube, followed by the 2-dimensional faces, and so on. Note that we implicitly assumed that the restrictions of $p$ to intersections $E_\alpha \cap E_\beta$ were fibrations; we will address this assumption after proving Theorem ~\ref{RLPclosed}.
 \end{proof}
 
 \begin{corollary}
 If $p:E\to B$ is a fiber bundle, then $p$ is a Hurewicz (and Serre) fibration.
 \end{corollary}
 \begin{proof}
-If $p:E\to B$ is a fiber bundle, then it is locally trivial; i.e. locally, it looks like $B_\alpha\times F\to B_\alpha$. From Example 2.6, we know this is a Hurewicz fibration. Therefore, by Theorem 2.10 we know $p:E\to B$ is a Hurewicz fibration.
+If $p:E\to B$ is a fiber bundle, then it is locally trivial; i.e. locally, it looks like $B_\alpha\times F\to B_\alpha$. From Example ~\ref{projfib}, we know this is a Hurewicz fibration. Therefore, by Theorem ~\ref{fibcov} we know $p:E\to B$ is a Hurewicz fibration.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}~\label{RLPclosed}
 Let $\mathcal{A}$ be a collection of maps. Define $\mathcal{A}^\boxslash:=\lbrace$maps satisfying the right lifting property with respect to $\mathcal{A}\rbrace$. Then $\mathcal{A}^\boxslash$ is closed under pullbacks, retracts, and transfinite compositions. 
 \end{theorem}
 
@@ -384,12 +385,145 @@ To see invariance under retracts, consider the following diagram
 
 \end{proof}
 
-We can now show that the assumption that the restriction to intersections was a fibration in the proof of Thm 2.10 was automatically satisfied. Indeed, we can obtain the restriction to the intersection as the pullback 
+We can now show that the assumption that the restriction to intersections was a fibration in the proof of Theorem ~\ref{fibcov} was automatically satisfied. Indeed, we can obtain the restriction to the intersection as the pullback 
 \xymat{
 E_1\ar[d]_p  & p^{-1}(B_1\cap B_2)\ar[d]\ar[l]\\
 B_1 & B_1\cap B_2\ar[l]
 }
 from which we conclude the restriction is a fibration by the previous theorem.
+
+\begin{proposition}
+Let $p : E \to B$ be a Serre fibration. Then it has the RLP with respect to the set of maps $\{A \times \{0\} \to A \times [0,1]\}$ for $A$ any CW complex. 
+\end{proposition}
+
+\emph{A priori} Serre fibrations only satisfied the RLP with respect to maps above where $A$ is a disk. The proposition says that we can construct lifts for much more general spaces $A$. 
+
+\begin{proof}
+We would like to construct a lift
+\[
+\begin{tikzcd}
+A \times \{0 \} \arrow[r] \arrow[d] & E \arrow[d] \\
+A \times [0,1] \arrow[r] \arrow[dashed,ur]  & B .
+\end{tikzcd}
+\]
+For example, if $A = S^1$ is the circle, then $A \times [0,1]$ is a cylinder. We can divide this cylinder into disks by letting $A_1 = S^1_+ \times [0,1]$ be the upper-half of the cylinder and $A_2 = S^1_- \times [0,1]$ be the lower-half of the cylinder. First, we can lift the copy of $S^0$ sitting inside of $S^1 \times \{0\}$ and the copy of $S^0$ sitting inside of $S^1 \times \{1\}$ since $p$ is a Serre fibration. We can lift the $1$-cells which cover $S^1 \times \{0\}$ and $S^1 \times \{1\}$ compatibly with our lifts of the $0$-cells. Further, we can lift the $1$-cells running along the cylinder compatibly. Finally, we can lift the $2$-cells compatibly with our lifts of the $1$-cells. 
+
+More generally, our ability to lift a map with $A = S^n$  follows from the homeomorphism
+$$(D^n \times [0,1], D^n \times \{0\} \cup \partial D^n \times [0,1]) \cong (D^n \times [0,1], D^n \times \{0\}).$$
+The general case follows by induction up the skeleton of $A$.  
+\end{proof}
+
+\begin{corollary}\label{sesfib}
+Suppose we are given a Serre fibration $p : (E,e_0) \to (B,b_0)$. Let $F = p^{-1}(b_0)$ be the fiber over the basepoint. Then we have an exact sequence of homotopy groups
+$$\pi_n(F,e_0) \to \pi_n(E,e_0) \to \pi_n(B,b_0).$$
+\end{corollary}
+
+\begin{proof}
+Exactness follows from the diagram
+\[
+\begin{tikzcd}
+ && F \arrow[d] \\
+S^n \times \{0\} \arrow[dashed,urr,"\tilde{\alpha}"] \arrow[rr,"\alpha"] \arrow[d] & &E \arrow[d,"p"] \\
+S^n \times [0,1] \arrow[r] \arrow[dashed, urr, "\gamma"]&D^{n+1} \arrow{r} &B.
+\end{tikzcd}
+\]
+where the lift $\gamma$ exists by the previous proposition. Indeed, suppose that the class $\alpha \in \pi_n(E,e_0)$ maps to a trivial class $p_*\alpha \in \pi_n (B,b_0)$, i.e. the composition $p \circ \alpha$ is homotopic to the constant map. Then $\alpha$ is homotopic to a map $\tilde{\alpha}$ with image contained in $F$. The lift $\gamma$ provides a homotopy between $\tilde{\alpha}$ and $\alpha$, which implies that $\alpha$ is the image of $\tilde{\alpha}$ under the map $\pi_n(F) \to \pi_n(E)$. Conversely, if $\alpha$ is in the image of the map $\pi_n(F) \to \pi_n(E)$, then $\gamma$ provides a homotopy between $p \circ \alpha$ and the constant map to $b_0 \in B$.
+\end{proof}
+
+\subsection{More examples of fibrations}
+Suppose we are given a map of spaces $A \hookrightarrow B$ and a fixed space $X$. Let $X^B = maps(B,X)$ be the space of maps from $B$ to $X$. If we want to show that
+$$p : X^B \to X^A$$
+is a Hurewicz fibration, then we need to solve the lifting problem
+\[
+\begin{tikzcd}
+C \times \{0\} \arrow[r] \arrow[d] & X^B \arrow[d] \\
+C \times [0,1] \arrow[r] \arrow[dashed,ur] & X^A.
+\end{tikzcd}
+\]
+By adjunction, solving this lifting problem is equivalent to solving the extension problem
+\[
+\begin{tikzcd}
+C \times B \times \{0 \} \cup_{C \times A \times \{0\}} C \times A \times [0,1] \arrow[r] \arrow[d] & X \\
+C \times B \times [0,1] \arrow[dashed,ur]
+\end{tikzcd}
+\]
+From this perspective, it is clear that it suffices to produce a retract
+$$B \times \{0\} \cup_{A \times \{0\}} A \times [0,1] \dashleftarrow B \times [0,1].$$
+Indeed, applying $C \times -$ to the retract and then composing with the horizontal arrow provides an extension. 
+
+\begin{proposition}
+If $A \hookrightarrow B$ is a relative CW pair, then $p : X^B \to X^A$ is a Hurewicz fibration.
+\end{proposition}
+
+\begin{proof}
+As above, induction on the cells reduces us to the case where $B = D^n$ and $A = \partial D^n$. We saw above that it suffices to produce a retration 
+$$D^n \times [0,1] \to S^n \times [0,1] \cup_{S^n \times \{0\}} D^n \times \{0\}.$$
+The desired deformation retraction is the usual by radial retraction. 
+\end{proof}
+
+\begin{example}
+Consider the CW inclusion $\partial D^1 \hookrightarrow D^1 = I$. Then the map from the free path space $X^I$ to $X \times X$ defined by sending a path to its endpoints is a Hurewicz fibration. 
+\end{example}
+
+\begin{example}
+Consider the pullback diagram
+\[
+\begin{tikzcd}
+PX \arrow[r] \arrow[d] & X^I \arrow[d] \\
+X \times \{x_0\} \arrow[r] & X \times X.
+\end{tikzcd}
+\]
+By the previous example and closure of Hurewicz fibrations under pullback, the map $PX \to X \times \{x_0\}$ from the based path-space of $X$ to $X$ is a Hurewicz fibration. 
+\end{example}
+
+\begin{theorem}
+If $p : E \to X$ is a Serre fibration, then there is a long exact sequence of homotopy groups
+$$ \cdots \to \pi_{n+1} E \to \pi_{n+1} X \to \pi_n F \to \pi_n E \to \pi_n X \to \cdots$$
+where $F$ is the fiber.
+\end{theorem}
+
+We will need the following lemma.
+
+\begin{lemma}
+If $p : E \to X$ is a Serre fibration with fiber $F$, then the map
+$$F \to E \times_X PX, \quad  f \mapsto (f,const_{x_0})$$
+is a weak homotopy equivalence. 
+\end{lemma}
+
+\begin{proof}[Proof of Theorem]
+Consider the diagram
+\[
+\begin{tikzcd}
+E \arrow[d] & E \times_X PX \arrow[l] \arrow[d] & F \arrow[l] \arrow[d] \\
+X  & PX \arrow[l] & pt \arrow[l]
+\end{tikzcd}
+\]
+where the bottom row is a fibration and the left-hand square is a pullback. We can  produce a long exact sequence by iterating the procedure illustrated in the following diagram:
+\[
+\begin{tikzcd}
+& & \Omega X  \arrow[d] & \pi_{n+1}X \arrow[d] \\
+\pi_n F \arrow[d]  & F \arrow[d] \arrow[r,"\simeq"] & E \times_X PX \arrow{d} & \pi_n F \arrow[d] \\
+\pi_n E \arrow[d] & E  \arrow[d] \arrow[r,"="]& E & \pi_n E \\
+\pi_n X & X
+\end{tikzcd}
+\]
+The exactness of each vertical sequence of homotopy groups follows from Lemma ~\ref{sesfib}. 
+\end{proof}
+
+\begin{proof}[Proof of Lemma]
+Suppose we have produced a lift
+\[
+\begin{tikzcd}
+\partial D^n \arrow[r] \arrow[d] & F \arrow[d] \\
+D^n \arrow[r] \arrow[dashed, ur] & E \times_X PX.
+\end{tikzcd}
+\]
+
+%I didn't quite follow this argument, but maybe it will be repeated Monday?
+
+Note that a map $D^n \to PX$ is equivalent to a map $D^n \times I \to X$. Therefore a map $D^n \to E \times_X \to PX$ is equivalent to the non-blue data in the diagram. Since $\partial D^n$ lands in the fiber...
+
+\end{proof}
 
 \printbibliography
 
