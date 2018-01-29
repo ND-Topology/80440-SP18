@@ -100,6 +100,10 @@
 \DeclareMathOperator*{\CoEq}{CoEq}
 \DeclareMathOperator*{\Eq}{Eq}
 
+\DeclareMathOperator{\CF}{\mathcal F}
+\DeclareMathOperator{\CFh}{\mathcal{F}^{h}} % Not sure why the `h'
+                                % doesn't look mathy in the output
+
 \def\bDelta{\mathbf \Delta}
 
 
@@ -218,12 +222,12 @@ abstract
 To be added by Chris at a some point in the future. 
 
 \section{Homotopy Theory}
-Let $M$ be a manifold, and let $\mathcal{F}(M)$ be some space related to the geometry of $M$, e.g., the space of Riemanian metrics on $M$ with positive sectional curvature, or the space of immersions or submersions into some fixed manifold $W$. The goal of the course is trying to understand $\mathcal{F}(M)$. This will be done by constructing some other space $\mathcal{F}^h(M)$ that is the space of sections of some fiber bundle (and therefore more amenable to homotopical methods), which also possesses a comparison map $\mathcal{F}(M)\to \mathcal{F}^h(M)$. Under certain nice conditions this map is a weak homotopy equivalence, for some class of manifolds $\{M\}$, e.g., Gromonov's theorem.
+Let $M$ be a manifold, and let $\CF(M)$ be some space related to the geometry of $M$, e.g., the space of Riemanian metrics on $M$ with positive sectional curvature, or the space of immersions or submersions into some fixed manifold $W$. The goal of the course is trying to understand $\CF(M)$. This will be done by constructing some other space $\CFh(M)$ that is the space of sections of some fiber bundle (and therefore more amenable to homotopical methods), which also possesses a comparison map $\CF(M)\to \CFh(M)$. Under certain nice conditions this map is a weak homotopy equivalence, for some class of manifolds $\{M\}$, e.g., Gromonov's theorem.
 
 To carry out this program we have some questions that need answering:
 \begin{itemize}
 \item Which bundle should we take sections of?
-\item How do we analyze/compute $\mathcal{F}^h(M)$?
+\item How do we analyze/compute $\CFh(M)$?
 \item How do we detect weak homotopy equivalences? 
 \end{itemize} 
 We will start with the last question first.
@@ -240,7 +244,7 @@ We will from now drop the base points from our notations to avoid clutter. A mor
 We want a different characterization of weak homotopy equivalence, which will allow us to show some locality property of the notion. Consider a commutative square of pointed spaces, and pointed maps of the form:  
 \xymattal{LiftSquare}{\partial D^n \ar@{=}[r] \ar@{^{(}->}[dr]&S^{n-1} \ar[r]^\alpha  & X \ar[d]^f \\& D^n \ar[r]^\beta & Y}
 One could wonder when a lift $\overline{\beta}: D^n \to X$, making the whole diagram commute, exists. This turns out to be a much stronger condition than $F$ being a weak homotopy equivalence. We instead define:
-\begin{definition}
+\begin{definition} \label{def:weak-equiv}
 A pointed map $f:X\to Y$ is a weak equivalence if for all commuting diagrams of the form $(\ref{LiftSquare})$, there exists $\overline{\beta}:D^n\to X$ such that
 \xymat{\partial D^n \ar[r]^\alpha \ar@{^{(}->}[d]& X \\ D^n \ar[ur]_{\overline{\beta}} &} commutes, and 
 \xymat{& X \ar[d] \\ D^n \ar[ur]^{\overline{\beta}} \ar[r]_\beta & Y}
@@ -476,7 +480,7 @@ X \times \{x_0\} \arrow[r] & X \times X.
 By the previous example and closure of Hurewicz fibrations under pullback, the map $PX \to X \times \{x_0\}$ from the based path-space of $X$ to $X$ is a Hurewicz fibration. 
 \end{example}
 
-\begin{theorem}
+\begin{theorem} \label{thm:serre-les}
 If $p : E \to X$ is a Serre fibration, then there is a long exact sequence of homotopy groups
 $$ \cdots \to \pi_{n+1} E \to \pi_{n+1} X \to \pi_n F \to \pi_n E \to \pi_n X \to \cdots$$
 where $F$ is the fiber.
@@ -485,9 +489,11 @@ where $F$ is the fiber.
 We will need the following lemma.
 
 \begin{lemma}
-If $p : E \to X$ is a Serre fibration with fiber $F$, then the map
-$$F \to E \times_X PX, \quad  f \mapsto (f,const_{x_0})$$
-is a weak homotopy equivalence. 
+  If $p : E \to X$ is a Serre fibration with fiber $F = p^{-1}(x_0)$,
+  then the map
+  $$F \to E \times_X PX, \quad  f \mapsto (f,const_{x_0})$$
+  is a weak homotopy equivalence, where $PX$ is the space of paths in
+  $X$ ending at $x_0$. 
 \end{lemma}
 
 \begin{proof}[Proof of Theorem]
@@ -511,20 +517,141 @@ The exactness of each vertical sequence of homotopy groups follows from Lemma ~\
 \end{proof}
 
 \begin{proof}[Proof of Lemma]
-Suppose we have produced a lift
+We will use the lifting criterion for checking that a map is a weak
+equivalence. Suppose we have a commuting square
 \[
 \begin{tikzcd}
-\partial D^n \arrow[r] \arrow[d] & F \arrow[d] \\
-D^n \arrow[r] \arrow[dashed, ur] & E \times_X PX.
+\partial D^n \arrow[r] \arrow[hookrightarrow]{d} & F \arrow[d] \\
+D^n \arrow[r,"f"] & E \times_X PX.
 \end{tikzcd}
 \]
+We are interested in filling in the commutative diagram
+\begin{equation}\label{di:techlem1}
+\begin{tikzcd}
+  \partial D^n \arrow[rr] \arrow[hookrightarrow]{d}
+  \arrow[hookrightarrow, bend right=40]{ddd} 
+  & 
+  & F \arrow[ddd] \\
+  D^n \arrow[ddrr,bend left=20,"f"] \arrow["id\times\{0\}"]{ddr} 
+  &
+  & \\
+  &
+  & \\
+  D^n \arrow["id\times\{1\}"]{r} \arrow[dashed, bend left=20,"\sigma"]{uuurr}
+  &D^n\times I \arrow[dashed,"\tau"]{r} 
+  & E \times_X PX
+\end{tikzcd}
+\end{equation}
+so that $\tau$ is constant on $\partial D^n \times I$. This will
+satisfy the conditions of \ref{def:weak-equiv}.
 
-%I didn't quite follow this argument, but maybe it will be repeated Monday?
+The map $f: D^n\to E\times_X PX$ consists of a pair of maps
+$(\alpha, \beta)$ where $\alpha : D^n\to E$ and
+$\beta: D^n\times I \to X$ such that
+$\beta( D^n \times \{1\}) = \{x_0\}$ and the following diagram
+commutes
+\[
+\begin{tikzcd}
+D^n \arrow[r,"\alpha"] \arrow[hookrightarrow,swap,"id\times \{0\}"]{d} 
+& E \arrow[d] 
+\\
+D^n\times I \arrow[r,"\beta"] 
+& X.
+\end{tikzcd}
+\]
+By commutativity of~\eqref{di:techlem1}, we know moreover that
+$\beta( \partial D^n \times I ) = \{x_0\}$. Since $E\to X$ is a Serre
+fibration, there is a map $\ell : D^n\times I \to E$ making the above
+commute. Note that $\ell( \partial D^n\times I \cup D^n\times \{1\})
+\subseteq F$.
 
-Note that a map $D^n \to PX$ is equivalent to a map $D^n \times I \to X$. Therefore a map $D^n \to E \times_X \to PX$ is equivalent to the non-blue data in the diagram. Since $\partial D^n$ lands in the fiber...
-
+We define $\sigma = \ell\mid_{D^n\times \{0\}}$ and take $\ell$ to be
+one of the two maps defining $\tau$. To finish defining $\tau$ we need
+to specify a map $\eta: D^n\times I \times I \to X$ such that
+$\eta\mid_{D^n\times I \times \{0\}} = \beta$ and $\eta( D^n\times I
+\times \{1\}) = \{x_0\}$. This is done by 
+\[
+\eta(d, s, t) =  
+\begin{cases}
+\beta(d,s+t) & s+t\leq 1
+\\ x_0 & s+t\geq 1.
+\end{cases}
+\]
+These maps $\sigma$ and $\tau$ make~\eqref{di:techlem1} commute, hence
+complete the proof.
 \end{proof}
 
+We will prove one more homotopical lemma before turning to the
+H-principle. Suppose $p: E_1\to B_1$ is a Serre fibration and let
+$F = p^{-1}(b_1)$ be the fiber over some basepoint $b_1$. Given a map
+$f: (B_2,b_2) \to (B_1,b_1)$ let $E_2 = E_1\times_{B_1} B_2$ be the
+fiber product. Then the map $E_2 \to B_2$ is a Serre fibration with
+fiber $F$ over $b_2$, so that there is a commuting diagram
+\[
+\begin{tikzcd}
+E_2 \arrow[r] \arrow[d,two heads] \arrow[dr, phantom, "\ulcorner", very near start]
+& E_1 \arrow[d, two heads] 
+\\
+B_2 \arrow[r]
+& B_1.
+\end{tikzcd}
+\]
+The horizontal arrows induce a map of the long exact sequences of
+homotopy groups given by \ref{thm:serre-les}.
+
+\begin{lemma}[Cube lemma] Consider the following commutative diagram with
+  indicated pullback squares and Serre fibrations:
+  \[
+    \begin{tikzcd}[row sep=scriptsize, column sep=scriptsize]
+      & X_2 \arrow[dl,"4"] \arrow[rr] \arrow[dd, two heads] \arrow[dr,
+      phantom, "\ulcorner", very near start] & & X_1 \arrow[dl,"3"]
+      \arrow[dd, two heads] \\
+      E_2 \arrow[rr, crossing over] \arrow[dd, two heads] \arrow[dr,
+      phantom, "\ulcorner", very near start] & & E_1 \\
+      & Y_2 \arrow[dl,"1"] \arrow[rr] & & Y_1 \arrow[dl,"2"] \\
+      B_2 \arrow[rr] & & B_1 \arrow[from=uu, crossing over, two heads]\\
+    \end{tikzcd}
+  \]
+  If maps 1, 2, and 3 are weak equivalences, then so is 4.
+\end{lemma}
+
+\begin{proof}[Sketch of proof]
+  There are four long exact sequences of homotopy groups, with a
+  square of maps between them. Let $F$ and $Z$ be the fibers of the
+  front and back of a cube, respectively. Considering the right side
+  of the square, the induced maps $\pi_*(Z)\to \pi_*(F)$ are
+  isomorphisms by the five lemma. But now the five lemma applies to
+  the left side of the cube to show that 4 is a weak equivalence.
+\end{proof}
+
+\subsection{Preview of application}
+
+We are interested in spaces $\CF(M)$ such as the space of
+\begin{itemize}
+  \item metrics of positive sectional curvature on $M$, or
+  \item immersions into some manifold $W$, or
+  \item Morse functions on $M$, or 
+  \item configurations of points on $M$.
+\end{itemize}
+We will have a comparison map $\CF(M) \to \CFh(M)$, where $\CFh(M)$ is
+the space of sections of some bundle over $M$.
+
+For an open cover $M = U_1 \cup U_2$, the sheaf property will give a
+commutative diagram with pullback squares
+  \[
+    \begin{tikzcd}[row sep=scriptsize, column sep=scriptsize]
+      & \CF(M) \arrow[dl] \arrow[rr] \arrow[dd] \arrow[dr,
+      phantom, "\ulcorner", very near start] & & \CF(U_1) \arrow[dl]
+      \arrow[dd] \\
+      \CFh(M) \arrow[rr, crossing over] \arrow[dd] \arrow[dr,
+      phantom, "\ulcorner", very near start] & & \CFh(U_1) \\
+      & \CF(U_2) \arrow[dl] \arrow[rr] & & \CF(U_1\cap U_2) \arrow[dl] \\
+      \CFh(U_2) \arrow[rr] & & \CFh(U_1\cap U_2) \arrow[from=uu, crossing over]\\
+    \end{tikzcd}
+  \]
+  If we know the vertical arrows are Serre fibrations, then we will
+  have the H-principle by the cube lemma.
+  
 \printbibliography
 
 \end{document}
