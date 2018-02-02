@@ -1,4 +1,3 @@
-
 \documentclass{article}
 \setcounter{tocdepth}{2} % 2 = subsections
 \usepackage{hyperref}
@@ -652,6 +651,58 @@ commutative diagram with pullback squares
   If we know the vertical arrows are Serre fibrations, then we will
   have the H-principle by the cube lemma.
   
+\section{Jet Bundles}
+
+For any fiber bundle $E \to M$ and positive integer $k$, there is associated a bundle $J^k(E)$ over $E$ known as the k-jets of sections of $E$.  When $E=M \times Y$ is a trivial bundle then we write $J^k(M, Y)$ for $J^k(E)$.
+
+\begin{example}{\underline{Tangent Bundle}}
+
+$J^1_0(\R, M)$ is defined as the equivalence classes of curves $(f, B_{\epsilon}(0))$ where $(-\epsilon, \epsilon) \xrightarrow{f} M$.  Two different curves $(0,f, B_{\epsilon_1}(0))$ and $(g, B_{\epsilon_2}(0))$ are equivalent if $f(0)=g(0)$ and $f'(0)=g'(0)$.  This is recognizably the tangent bundle $TM$ of $M$.
+
+\end{example}
+
+Alternatively $TM=J^1_0(\R,M)$ can be viewed as the equivalence classes of curves $f:B_\epsilon(0) \to \R$ that give rise to the same derivation; i.e. they give rise to the same map
+
+\[ \_{C^\infty_{  x  }(M)}{\text{germ of functions at }x \in M} \xrightarrow{\,\,\,\,\,\,f^*\,\,\,\,\,\,} C^\infty_0(\R) \to C^\infty_0(\R)/  \_{\mathfrak{m}_0^2}{\text{unique maximal ideal}} .\]
+
+I.e. $TM=\cup_x T_xM$ where we identify $T_x M = Hom(C^\infty_x(M),  \C^\infty_0(\R)/\mathfrak{m}_0^2)$.  Here  $Hom$ refers to $\mathbb{C}$- algebra homomorphisms.
+
+\begin{example}
+$J^k_0(\R, M)$ is defined as the equivalence classes of curves $(0, f, B_{\epsilon})$ where two curves $f$ and $g$ are equivalent if all derivatives up to degree $k$ agree at the point $0 \in \R$.
+
+Alternatively these curves are equivalent if they give rise to the same map.
+
+\[C^\infty_x(M) \xrightarrow{f^*} C^\infty_0(\R) \to C^\infty_0(\R)/\mathfrak{m}^{k+1} \]
+\end{example}
+
+More generally for $X^n$ and $Y^m$ manifolds, $J^k(X,Y)$ is defined as the equivalence classes $(x,f, \_{U}{ \ni x})$ where equivalence classes are the same if $f_1=f_2$ up to order $k$.  $J^k_x(X,Y)_y$ will denote equivalence classes represented by $(x,f, U)$ with $f(x)=y$.  If you liked our alternative viewpoints, then $J^k_x(X,Y)_y$ is just the vector space $Hom(C^\infty_x(X), C^\infty_y(Y)/\mathfrak{m}_y^{k+1}$.  These equivalence classes are called jets.
+
+Observe that $J^k(X,X)$ is a category with objects the points of $X$ and morphisms given by composition of the representing maps.  Hence the one object category $J^k_x(X,X)_x$ is a monoid and the invertible morphisms of $J^k_x(X,X)_x\cong J^k_0(\R^n, \R^n)_0$ form a group called $G^k_n$.  These groups are familiar:
+
+Noting that the morphisms of $J^k_0(\R^n, \R^n)_0$ are all represented by $n$ tuples of polynomials on $\R^n$ with no constant term, we have that, for instance, $J^1_0(\R^n,\R^n)$ is the monoid of $n$ by $n$ matrices and $G^1_n=Gl_n$.
+
+Moreover $G^k_n$ is a semidirect product of the form $B_n^k \rtimes Gl_n$,  where $B_n^k$ is a contractible nilpotent lie group.  These groups form the structure groups of the bundle $J(X,Y)=J_x(X,Y)_y$ over $X\times Y$.
+
+\begin{example}{\underline{Bundle structure on $TY$}}
+
+ The frame bundle of the tangent bundle of $Y$, denoted $P(Y)$, consists of the equivalence classes $(x,f, U)  \in  J^1_0(\R^m,Y)$ with $f$ a local diffeomorphism at $x$.  It has an a right action by $G^1_m=Gl_m$ via precomposition.  By the local diffeomorphism condition, the action is free; this implies that $P(Y) \to P(Y)/G^1_m$ is a principle $G^1_m=Gl_m$ bundle.  The tangent bundle can written as $ P(Y)  \times_{G^1_m} J^1_0(\R, \R^m)$(which gives another proof that it is a vector bundle).
+
+\end{example}
+
+More generally the $k$th order frame bundle $P^k(Y) \subset J_0^k(\R^m,Y)$ consist of jets represented by local diffeomorphisms.  It has a free right action by $G^k_m$ so its a $G^k_m$ principle bundle
+
+ And the $k-th$ order coframe bundle $P^{k*}(X) \subset J_0(X,\R^n)$ consists of jets represented by local diffeomorphisms and has a free left action by $G^k_n$. \footnote{This is canonically isomorphic as a $G^k_n$ principle bundle to $P^k(X)$ by locally inverting the local diffeomorphisms and by turning the left action into a right action by inversion in $G^k_n$.  It is also canonically isomorphic to the frame bundle of the cotangent bundle of $X$.}
+
+$J(X,Y)$ is given the structure of a bundle over $X \times Y$ by writing the projection map as the composition  $J(X,Y)=P^k(Y) \times_{G^m_k} J_0(\R^n,\R^m) \times_{\G^n_k} P^{k^*}(X) \to P^k(Y) \times_{G^m_k} pt \times_{\G^n_k} P^{k^*}(X)   \to  P^k(Y)/G^k_m \times P^k(X)/G^k_n=Y \times X$.
+
+
+Given $f: X \to Y$ one gets an induced section $j^kf: X \to J^k(X,Y)$, $x \mapsto (x,f, X)$. And any section that arises from a function is called holonomic.
+
+A differential relation (or condition) of order $k$ is a subset $R \subset J^k(X,Y)$ and a function $f:X \to Y$ is said to satisfy $R$ if $j^k f(x) \in R \forall x \in X$. \footnote{note that if there is such a function, it is unique}
+
+One can define the bundle structure on the space of k-jets of sections $J^k(E)$ for any fiber bundle $E \to M$ by looking at trivializing neighborhoods of $M$, define differential relations, and more (see [Michor: Topics in Differential Geometry]).
+
+
 \printbibliography
 
 \end{document}
