@@ -102,6 +102,7 @@
 \DeclareMathOperator{\CF}{\mathcal F}
 \DeclareMathOperator{\CFh}{\mathcal{F}^{h}} % Not sure why the `h'
                                 % doesn't look mathy in the output
+\DeclareMathOperator{\Hom}{Hom}
 
 \def\bDelta{\mathbf \Delta}
 
@@ -653,12 +654,12 @@ commutative diagram with pullback squares
   
 \section{Jet Bundles}
 
-For any smooth fiber bundle $E \to M$ and positive integer $k$, there is an associated bundle $J^k(E)\to E$ called the k-jets of sections of $E$. When $E=M \times Y$ is a trivial bundle then we write $J^k(M, Y)$ for $J^k(E)$. As motivation, we recall two definitions of the tangent bundle, which we will see is a special case $TM=J^1_0(\R, M)$.
+For any smooth manifold $X,Y$ and positive integer $k$, there is an associated bundle $J^k(X,Y)\to X\times Y$ called the k-jets from $X$ to $Y$. As motivation, we recall two definitions of the tangent bundle, which we will see is a special case $TM=J^1_0(\R, M)$.
 
 %$J^1_0(\R, M)$ 
-For $M$ a smooth manifold, $TM$ can be defined as the equivalence classes of curves $(\alpha, B_{\epsilon}(0))$ where $(-\epsilon, \epsilon) \xrightarrow{\alpha} M$. Then there are two ways to define the equivalence relation on these curves. Suppose $(\alpha, B_{\epsilon_1}(0))$ and $(\beta, B_{\epsilon_2}(0))$ have $\alpha(0)=\beta(0)$. These two are equivalent if, for some coordinate chard $X: \R^n\to M$, we have $(X^{-1}\circ \alpha)'(0) = (X^{-1}\circ \beta)'(0) \in \R^n$. With an eye towards coordinate independence, we can instead view $\alpha$ as defining a derivation
+For $M$ a smooth manifold, $TM$ can be defined as the equivalence classes of curves $(\alpha, B_{\epsilon}(0))$ where $(-\epsilon, \epsilon) \xrightarrow{\alpha} M$. Then there are multiple ways to define the equivalence relation on these curves. Suppose $(\alpha, B_{\epsilon_1}(0))$ and $(\beta, B_{\epsilon_2}(0))$ have $\alpha(0)=\beta(0)$. These two are equivalent if, for some coordinate chart $X: \R^n\to M$, we have $(X^{-1}\circ \alpha)'(0) = (X^{-1}\circ \beta)'(0) \in \R^n$. With an eye towards coordinate independence, we can instead view $\alpha$ as defining derivation on $C^\infty_x(M)$ of germs of smooth function near $x=\alpha(0)\in M$ as
 \[
-  D_\alpha: C^\infty(M) \to \R
+  D_\alpha: C^\infty_x(M) \to \R
 \]
 \[
   f \mapsto \left.\frac{d(f\circ\alpha)}{dt}\right|_{t=0}
@@ -707,13 +708,38 @@ P^k(Y) \times_{G^m_k} J_0(\R^n,\R^m) \times_{\G^n_k} P^{k^*}(X) &\to P^k(Y) \tim
 \end{align*}
 
 
-Given $f: X \to Y$ one gets an induced section $j^kf: X \to J^k(X,Y)$, $x \mapsto (x,f, X)$. And any section that arises from a function is called holonomic.
+\begin{remark}
+One can define extend the definition of k-jets to any smooth fiber bundle $E\to X$ with fiber $Y$, such that sections $J^k(X\times Y)=J^k(X,Y)$. (See [Michor: Topics in Differential Geometry]).
+\end{remark}
 
-A differential relation (or condition) of order $k$ is a subset $R \subset J^k(X,Y)$ and a function $f:X \to Y$ is said to satisfy $R$ if $j^k f(x) \in R \forall x \in X$. \footnote{note that if there is such a function, it is unique}
-
-One can define the bundle structure on the space of k-jets of sections $J^k(E)$ for any fiber bundle $E \to M$ by looking at trivializing neighborhoods of $M$, define differential relations, and more (see [Michor: Topics in Differential Geometry]).
+\subsection{Differential Relations}
 
 
+\begin{definition}
+Given $f: X \to Y$, there is an induced section $j^kf: X \to J^k(X,Y)$, given by $x \mapsto (x,f, X)$ called the \textit{$k$-th jet prolongation} of $f$.
+\end{definition}
+\begin{definition}
+A section $s: X\to J^k(X,Y)$ is called \textit{holonomic} if $s=j^kf$ for some $f:x\to Y$. 
+\end{definition}
+In other words, a section is holonomic if the various higher derivatives are compatible and combine to an actual function. But in general, the space of sections $X\to J^k(X,Y)$ is much bigger than the space of functions $X\to Y$.
+
+Many different kinds of maps $X\to Y$ of interest, such as immersions, submersions, and Morse functions, can be defined by partial differential equations. These equations can be encapsulated in terms of jets by putting conditions on the derivatives.
+\begin{definition}
+A \textit{partial differential relation} or sometimes \textit{differential relation} of order $k$ is a subset $R \subset J^k(X,Y)$.
+A function $f:X \to Y$ is said to be a \textit{solution} to $R$ or satisfy $R$ if $j^k f(x) \in R$ for all $x \in X$.
+\end{definition}
+Now we will give explicit relations for a few types of maps $X\to Y$. First, we need to understand the $k=1$ jet bundle more explicity. First note that the fiber of the bundle $J^1(X,Y)\to X\times Y$ over the point $(x,Y)$ is equal to $\Hom(T_xX, T_yY)$, where $f:X\to Y$ maps to $df: T_xX\to T_yY$. These fibers piece together as
+\[
+J^1(X,Y) = T^*X\otimes TY
+\]
+as bundles over $X\times Y$. Thus we can statify $J^1(X,Y)$ as
+\[
+J^1(X,Y) = S_0\cup S_1\cup\ldots \cup S_r
+\]
+where $r=\min(\dim X,\dim Y)$ and
+\[
+S_i = \{[x,U,f] \mid df_x\text{ has corank }i\text{, that is, has rank r-i}\}.
+\]
 \printbibliography
 
 \end{document}
