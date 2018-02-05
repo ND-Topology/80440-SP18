@@ -660,7 +660,7 @@ commutative diagram with pullback squares
   
 \section{Jet Bundles}
 
-For any smooth manifold $X,Y$ and positive integer $k$, there is an associated bundle $J^k(X,Y)\to X\times Y$ called the $k$-jets from $X$ to $Y$. As motivation, we recall two definitions of the tangent bundle, which we will see is a special case $TM=J^1_0(\R, M)$.
+For any smooth manifold $X,Y$ and positive integer $k$, there is a fiber bundle $J^k(X,Y)\to X\times Y$ called the $k$-jets from $X$ to $Y$. As motivation, we recall two definitions of the tangent bundle, which we will see is a special case $TM=J^1_0(\R, M)$.
 
 %$J^1_0(\R, M)$ 
 For $M$ a smooth manifold, $TM$ can be defined as the equivalence classes of curves $(\alpha, B_{\epsilon}(0))$ where $(-\epsilon, \epsilon) \xrightarrow{\alpha} M$. Then there are two ways to define the equivalence relation on these curves. Suppose $(\alpha, B_{\epsilon_1}(0))$ and $(\beta, B_{\epsilon_2}(0))$ have $\alpha(0)=\beta(0)$. These two are equivalent if, for some coordinate chart $X: \R^n\to M$, we have $(X^{-1}\circ \alpha)'(0) = (X^{-1}\circ \beta)'(0) \in \R^n$. With an eye towards coordinate independence, we can instead view $\alpha$ as defining derivation on $C^\infty_x(M)$ of germs of smooth function near $x=\alpha(0)\in M$ as
@@ -676,7 +676,10 @@ To generalize to higher orders, we rephrase the derivation as follows. Our chose
 \[
   {C^\infty_{  x  }(M)} \xrightarrow{\,\,\,\,\,\,\alpha^*\,\,\,\,\,\,} C^\infty_0(\R) \to C^\infty_0(\R)/  {\mathfrak{m}_0^2}
 \]
-where $C^\infty_x(M)$ is the ring of germs of functions at $x \in M$ and $\mathfrak{m}_0$ is the unique maximal ideal of $C^\infty_0(\R)$, which consists of functions vanishing at 0. Then $\alpha\sim\beta$ if these induced maps are the same. These three definitions are all representations of the idea of germs of maps $\R \to M$ at $0\in\R$ which agree up to first order, which is captured in the notation $J^1_0(\R, M)$
+where $C^\infty_x(M)$ is the ring of germs of functions at $x \in M$ and $\mathfrak{m}_0$ is the unique maximal ideal of $C^\infty_0(\R)$, which consists of functions vanishing at 0. Then $\alpha\sim\beta$ if these induced maps are the same. Under the isomorphism
+\[C_0^\infty(\R)/\mathfrak{m}_0^2\to \R[t]/(t^2)\]
+\[f\mapsto f(0)+f'(0)t,\]
+we recover $D_\alpha$ as projection onto the linear term. These definitions all represent of the idea of germs of maps $\R \to M$ at $0\in\R$ which agree up to first order, which is captured in the notation $J^1_0(\R, M)$
 
 %I.e. $TM=\cup_x T_xM$ where we identify $T_x M = Hom(C^\infty_x(M),  \C^\infty_0(\R)/\mathfrak{m}_0^2)\equiv \R[t]/(t^2)$.  Here  $Hom$ refers to $\mathbb{C}$- algebra homomorphisms.
 
@@ -707,7 +710,7 @@ More generally, the $k$th order frame bundle $P^k(Y) \subset J_0^k(\R^m,Y)$ of a
 
 $J^k(X,Y)$ is isomorphic as a bundle over $X \times Y$ to
 \begin{align*}
-P^k(Y) \times_{G^m_k} J_0(\R^n,\R^m) \times_{\G^n_k} P^{k^*}(X) &\to P^k(Y) \times_{G^m_k} pt \times_{\G^n_k} P^{k^*}(X)   \\&=  P^k(Y)/G^k_m \times P^k(X)/G^k_n=Y \times X
+P^k(Y) \times_{G^m_k} J_0(\R^n,\R^m) \times_{\G^n_k} P^{k*}(X) &\to P^k(Y) \times_{G^m_k} pt \times_{\G^n_k} P^{k*}(X)   \\&=  P^k(Y)/G^k_m \times P^k(X)/G^k_n=Y \times X
 \end{align*}
 
 
@@ -732,10 +735,10 @@ In other words, a section is holonomic if the various higher derivatives are com
 
 Many different kinds of maps $X\to Y$ of interest, such as immersions, submersions, and Morse functions, can be defined by partial differential equations. These equations can be encapsulated in terms of jets by putting conditions on the derivatives.
 \begin{definition}
-A \textit{partial differential relation}, or briefly just \textit{differential relation}, of order $k$ is a subset $R \subset J^k(X,Y)$.
+A \textit{partial differential relation}, or \textit{differential relation} for short, of order $k$ is a subset $R \subset J^k(X,Y)$.
 A function $f:X \to Y$ is said to be a \textit{solution} to $R$ or satisfy $R$ if $j^k f(x) \in R$ for all $x \in X$.
 \end{definition}
-Now we will give explicit relations for a few types of maps $X\to Y$. First, we need to understand the $k=1$ jet bundle more explicitly. First note that the fiber of the bundle $J^1(X,Y)\to X\times Y$ over the point $(x,y)$ is equal to $\Hom(T_xX, T_yY)$, where $f:X\to Y$ maps to $df: T_xX\to T_yY$. These fibers piece together to give an isomorphism
+Now we will give explicit relations for a few types of maps $X\to Y$. First, we need to understand the $k=1$ jet bundle more explicitly. First note that the fiber of the bundle $J^1(X,Y)\to X\times Y$ over the point $(x,y)$ is isomorphic to $\Hom(T_xX, T_yY)$, where $f:X\to Y$ maps to $df: T_xX\to T_yY$. These fibers piece together to give an isomorphism
 \[
 J^1(X,Y) \cong T^*X\otimes TY
 \]
@@ -776,7 +779,7 @@ Next, we give Morse functions $X\to \R$ as a differential relation, this time of
 \begin{definition}
   A smooth function $f: X\to \R$ is a \textit{Morse function} if, for all $x\in X$, either $df_x\neq 0$, or $df_x=0$ and the Hessian of $f$ is non-degenerate at $x$.
 \end{definition}
-Recall that the Hessian $\Hess_x(f)$ is the matrix of 2nd derivatives of $f$. It is not coordinate invariant, and as the next example shows, even its degeneracy is not coordinate independent. However, at a critical point, its degeneracy is in fact independent of coordinates.
+Recall that the Hessian, $\Hess_x(f)$, is the matrix of 2nd derivatives of $f$. It is not coordinate invariant, and as the next example shows, even its degeneracy is not coordinate independent. However, at a critical point, whether or not it is degenerate is in independent.
 \begin{example}
   Suppose $f:\R \to \R$ is defined by $f(x)=x+x^2$. The critical point of $f$ is $x=-\frac12$, and in these coordinates, $\Hess(f)=(2)$ everywhere. Near $x=0$, we can make a coordinate change $x=y-y^2$, so that $f(y)=y-2y^3+y^4$. Now, however, $\Hess(f)_{y=0}=(0)$
 \end{example}
@@ -787,7 +790,7 @@ Intuitively, both $d(j^kf)$ and $j^{k+1}f$ are objects with information about fi
 \[
   J^2(X,\R) = S_1^{(2)} \cup S_0^{(2)}
 \]
-where $S_i^{(2)}$ is the preimage of $S_i\subset J^1(X, \R)$ under the projection map $J^2(X, \R)\to J^1(x, \R)$. Here, $r= \dim\R = 1$, and $S_0$ corresponds to the non-critical points and $S_1$ corresponds to the critical points. We have maps
+where $S_i^{(2)}$ is the preimage of $S_i\subset J^1(X, \R)$ under the projection map $J^2(X, \R)\to J^1(X, \R)$. Here, $r= \dim\R = 1$, and $S_0$ corresponds to the non-critical points and $S_1$ corresponds to the critical points. We have maps
 \begin{align*}
   S^{(2)}_1\to \Hom(TX, TJ^1(X, \R))\to \Hom(TX, \nu S_1) &= \Hom(TX,\Hom(TX,T\R))\\
                                                           &= \Hom(TX\otimes TX, T\R)
