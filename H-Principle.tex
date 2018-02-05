@@ -103,6 +103,12 @@
 \DeclareMathOperator{\CFh}{\mathcal{F}^{h}} % Not sure why the `h'
                                 % doesn't look mathy in the output
 \DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Hes}{Hess}
+\DeclareMathOperator{\Imm}{Imm}
+\DeclareMathOperator{\Sub}{Sub}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\image}{im}
+\DeclareMathOperator{\Hess}{Hess}
 
 \def\bDelta{\mathbf \Delta}
 
@@ -222,7 +228,7 @@ abstract
 To be added by Chris at a some point in the future. 
 
 \section{Homotopy Theory}
-Let $M$ be a manifold, and let $\CF(M)$ be some space related to the geometry of $M$, e.g., the space of Riemanian metrics on $M$ with positive sectional curvature, or the space of immersions or submersions into some fixed manifold $W$. The goal of the course is trying to understand $\CF(M)$. This will be done by constructing some other space $\CFh(M)$ that is the space of sections of some fiber bundle (and therefore more amenable to homotopical methods), which also possesses a comparison map $\CF(M)\to \CFh(M)$. Under certain nice conditions this map is a weak homotopy equivalence, for some class of manifolds $\{M\}$, e.g., Gromonov's theorem.
+Let $M$ be a manifold, and let $\CF(M)$ be some space related to the geometry of $M$, e.g., the space of Riemannian metrics on $M$ with positive sectional curvature, or the space of immersions or submersions into some fixed manifold $W$. The goal of the course is trying to understand $\CF(M)$. This will be done by constructing some other space $\CFh(M)$ that is the space of sections of some fiber bundle (and therefore more amenable to homotopical methods), which also possesses a comparison map $\CF(M)\to \CFh(M)$. Under certain nice conditions this map is a weak homotopy equivalence, for some class of manifolds $\{M\}$, e.g., Gromov's theorem.
 
 To carry out this program we have some questions that need answering:
 \begin{itemize}
@@ -263,7 +269,7 @@ where $\text{const}_*$ is the map that sends everything to the basepoint. This s
 
 \emph{if}: Given a commuting square of the form (\ref{LiftSquare}), we want to produce a lift with the correct properties. Note $[\alpha]\in\pi_{n-1} X$ with $[f\circ \alpha]=0$ in $\pi_{n-1} Y$. Because $f_*$ is an isomorphism, we see that $[\alpha]=0$, so there exists a map $\tilde{\beta}:D^n\to X$ such that the diagram
 \xymat{\partial D^n \ar@{^{(}->}[d] \ar[r]^\alpha & X \\ D^n\ar[ur]_{\tilde{\beta}}}
-commutes. Unfortunately $f\circ \tilde{\beta}$ need not be homotopic to $\beta$, so we need to rectify this. By construction $\beta$ and $f\circ \tilde{\beta}$ agree along the boundry so we can glue them together to get a map $\gamma: S^{n+1}\to Y$, given by $\beta$ on the Northern hemisphere $N=D^n$, $f\circ \tilde{\beta}$ on the other, and $f\circ \alpha$ on the equator $S^n$; by assumption there is unique $[\tilde{\gamma}]\in \pi_{n+1}X$ with $f_*[\tilde{\gamma}]=[\gamma]$. So we have that $f\circ \tilde{\gamma}\simeq \gamma$, so by restricting to the equator $S^n\hookrightarrow S^{n+1}$ we get
+commutes. Unfortunately $f\circ \tilde{\beta}$ need not be homotopic to $\beta$, so we need to rectify this. By construction $\beta$ and $f\circ \tilde{\beta}$ agree along the boundary so we can glue them together to get a map $\gamma: S^{n+1}\to Y$, given by $\beta$ on the Northern hemisphere $N=D^n$, $f\circ \tilde{\beta}$ on the other, and $f\circ \alpha$ on the equator $S^n$; by assumption there is unique $[\tilde{\gamma}]\in \pi_{n+1}X$ with $f_*[\tilde{\gamma}]=[\gamma]$. So we have that $f\circ \tilde{\gamma}\simeq \gamma$, so by restricting to the equator $S^n\hookrightarrow S^{n+1}$ we get
 that $f\circ \tilde{\gamma}|_{S^n}\simeq \gamma|_{S^n}= f\circ \alpha$, so by $f_*:\pi_nX \to \pi_nY$ injective $\tilde{\gamma}|_{S^n}\simeq \alpha$, pick such a homotopy $H:S^n\times I \to X$, such that $H(-,0)=\alpha$, and $H(-,1)=\tilde{\gamma}|_{S^n}$. 
 So we can construct $\overline{\beta}: D^n\to X$, where when $|x|>\frac{1}{2}$ we use $H(\frac{x}{|x|}, 1-2|x|)$. When $|x| \leq \frac{1}{2}$, recall that $\gamma|_N=\beta$, and therefore we use $\tilde{\gamma}|_N(2x)$.
  It is easy to check that this satisfies the desired properties for the lift.
@@ -460,7 +466,7 @@ If $A \hookrightarrow B$ is a relative CW pair, then $p : X^B \to X^A$ is a Hure
 \end{proposition}
 
 \begin{proof}
-As above, induction on the cells reduces us to the case where $B = D^n$ and $A = \partial D^n$. We saw above that it suffices to produce a retration 
+As above, induction on the cells reduces us to the case where $B = D^n$ and $A = \partial D^n$. We saw above that it suffices to produce a retraction 
 $$D^n \times [0,1] \to S^n \times [0,1] \cup_{S^n \times \{0\}} D^n \times \{0\}.$$
 The desired deformation retraction is the usual by radial retraction. 
 \end{proof}
@@ -654,10 +660,10 @@ commutative diagram with pullback squares
   
 \section{Jet Bundles}
 
-For any smooth manifold $X,Y$ and positive integer $k$, there is an associated bundle $J^k(X,Y)\to X\times Y$ called the k-jets from $X$ to $Y$. As motivation, we recall two definitions of the tangent bundle, which we will see is a special case $TM=J^1_0(\R, M)$.
+For any smooth manifold $X,Y$ and positive integer $k$, there is an associated bundle $J^k(X,Y)\to X\times Y$ called the $k$-jets from $X$ to $Y$. As motivation, we recall two definitions of the tangent bundle, which we will see is a special case $TM=J^1_0(\R, M)$.
 
 %$J^1_0(\R, M)$ 
-For $M$ a smooth manifold, $TM$ can be defined as the equivalence classes of curves $(\alpha, B_{\epsilon}(0))$ where $(-\epsilon, \epsilon) \xrightarrow{\alpha} M$. Then there are multiple ways to define the equivalence relation on these curves. Suppose $(\alpha, B_{\epsilon_1}(0))$ and $(\beta, B_{\epsilon_2}(0))$ have $\alpha(0)=\beta(0)$. These two are equivalent if, for some coordinate chart $X: \R^n\to M$, we have $(X^{-1}\circ \alpha)'(0) = (X^{-1}\circ \beta)'(0) \in \R^n$. With an eye towards coordinate independence, we can instead view $\alpha$ as defining derivation on $C^\infty_x(M)$ of germs of smooth function near $x=\alpha(0)\in M$ as
+For $M$ a smooth manifold, $TM$ can be defined as the equivalence classes of curves $(\alpha, B_{\epsilon}(0))$ where $(-\epsilon, \epsilon) \xrightarrow{\alpha} M$. Then there are two ways to define the equivalence relation on these curves. Suppose $(\alpha, B_{\epsilon_1}(0))$ and $(\beta, B_{\epsilon_2}(0))$ have $\alpha(0)=\beta(0)$. These two are equivalent if, for some coordinate chart $X: \R^n\to M$, we have $(X^{-1}\circ \alpha)'(0) = (X^{-1}\circ \beta)'(0) \in \R^n$. With an eye towards coordinate independence, we can instead view $\alpha$ as defining derivation on $C^\infty_x(M)$ of germs of smooth function near $x=\alpha(0)\in M$ as
 \[
   D_\alpha: C^\infty_x(M) \to \R
 \]
@@ -666,33 +672,30 @@ For $M$ a smooth manifold, $TM$ can be defined as the equivalence classes of cur
 \]
 Then, $\alpha_1\sim \alpha_2$ if $D_{\alpha_1}=D_{\alpha_2}$.
 
-Alternate, $(\alpha, B_{\epsilon}(0))$ defines a map
+To generalize to higher orders, we rephrase the derivation as follows. Our chosen $(\alpha, B_{\epsilon}(0))$ defines a map
 \[
   {C^\infty_{  x  }(M)} \xrightarrow{\,\,\,\,\,\,\alpha^*\,\,\,\,\,\,} C^\infty_0(\R) \to C^\infty_0(\R)/  {\mathfrak{m}_0^2}
 \]
-where $C^\infty_x(M)$ is the ring of germs of functions at $x \in M$ and $\mathfrak{m}_0$ is the unique maximal ideal of $C^\infty_0(\R)$, which consists of functions vanishing at 0. Then $\alpha\sim\beta$ if these induced maps are the same. These three definitions are all representations of the idea of germs of maps $\R \to M$ at 0 which agree up to first order, which is captured in the notation $J^1_0(\R, M)$
+where $C^\infty_x(M)$ is the ring of germs of functions at $x \in M$ and $\mathfrak{m}_0$ is the unique maximal ideal of $C^\infty_0(\R)$, which consists of functions vanishing at 0. Then $\alpha\sim\beta$ if these induced maps are the same. These three definitions are all representations of the idea of germs of maps $\R \to M$ at $0\in\R$ which agree up to first order, which is captured in the notation $J^1_0(\R, M)$
 
 %I.e. $TM=\cup_x T_xM$ where we identify $T_x M = Hom(C^\infty_x(M),  \C^\infty_0(\R)/\mathfrak{m}_0^2)\equiv \R[t]/(t^2)$.  Here  $Hom$ refers to $\mathbb{C}$- algebra homomorphisms.
 
 \begin{definition}
-For $X^n$ and $Y^m$ manifolds, $J^k(X,Y)$ is defined as the equivalence classes $\{[x,f, U] \mid x\in U\subset X, f:U\to Y\}$ 
-where $[x_1, \alpha, U]\sim [x_2, \beta, V]$ if $x_1=x_2$ and $\alpha$ and $\beta$ agree up to order $k$ at $x_1$, including $\alpha(x_1)=\beta(x_2)$.
+For $X^n$ and $Y^m$ manifolds, $J^k(X,Y)$ is defined as the equivalence classes $\{[x,f, U] \mid x\in U\subseteq X, f:U\to Y\}$ 
+where $[x_1, \alpha, U]\sim [x_2, \beta, V]$ if $x_1=x_2$ and $\alpha(x_1)=\beta(x_2)$ and the derivatives of $\alpha$ and $\beta$ agree up to order $k$ at $x_1$.
 $J^k(X,Y)$ is equipped with a source map to $X$ and a target map to $Y$.
 We define $J^k_x(X,Y)_y$, $J^k_x(X,Y)$, and $J^k(X,Y)_y$ as the preimages of $(x,y)\in X\times Y$, $x\in X$, and $y\in Y$ respectively.
-If you liked our alternative viewpoints, then $J^k_x(X,Y)_y$ is just the vector space $Hom(C^\infty_y(Y), C^\infty_x(X)/\mathfrak{m}_x^{k+1})$.
+The fiber $J^k_x(X,Y)_y$ is the vector space $Hom(C^\infty_y(Y), C^\infty_x(X)/\mathfrak{m}_x^{k+1})$.
 These equivalence classes are called jets.
 \end{definition}
 
 Observe that $J^k(X,X)$ is a category with objects the points of $X\times X$ and morphisms given by composition of the representing maps.  Hence the one object category $J^k_x(X,X)_x$ is a monoid which is isomorphic to $J^k_0(\R^n,\R^n)_0$, where $n=\dim X$. The invertible morphisms of $J^k_0(\R^n, \R^n)_0$ form a group called $G^k_n$.
 
-By Taylor expansion, $J^k_0(\R^m, \R^n)_0$ is isomorphic to $n$-tuples of polynomials in $m$ variables with no constant term (since they should map to 0 to 0) and degree at most $k$. Specializing to to $n=m$, we can identify $G^k_n$ as those $n$-tuples of polynomials in $n$-variables whose $n\times n$ matrix of linear terms is invertible. For instance, $J^1_0(\R^n,\R^n)$ is the monoid of $n$ by $n$ matrices and $G^1_n=Gl_n$.
-
-
-Moreover, there is a short exact sequence
+By Taylor expansion, $J^k_0(\R^m, \R^n)_0$ is isomorphic to $n$-tuples of polynomials in $m$ variables with no constant term (since they should map to 0 to 0) and degree at most $k$. Specializing to to $n=m$, we can identify $G^k_n$ as those $n$-tuples of polynomials in $n$-variables whose $n\times n$ matrix of linear terms is invertible. For instance, $J^1_0(\R^n,\R^n)$ is the monoid of $n$ by $n$ matrices and $G^1_n=Gl_n$. Moreover, there is a short exact sequence
 \[
   1\to B_n^k\to G^k_n\to Gl_n\to 1
 \]
-giving $G^k_n$ as semidirect product of the form $B_n^k \rtimes Gl_n$,  where $B_n^k$ is a contractible nilpotent lie group. These groups form the structure groups of the bundle $J(X,Y)=J_x(X,Y)_y$ over $X\times Y$.
+giving $G^k_n$ as a semidirect product of the form $B_n^k \rtimes Gl_n$,  where $B_n^k$ is a contractible nilpotent Lie group. These groups form the structure groups of the bundle $J^k(X,Y)$ over $X\times Y$.
 
 \begin{example}{\underline{Bundle structure on $TY$}}
 
@@ -700,7 +703,7 @@ giving $G^k_n$ as semidirect product of the form $B_n^k \rtimes Gl_n$,  where $B
 
 \end{example}
 
-More generally, the $k$th order frame bundle $P^k(Y) \subset J_0^k(\R^m,Y)$ of an $m$-dimensional manifold $Y$ consist of jets represented by local diffeomorphisms. It has a free right action by $G^k_m$ so it is a $G^k_m$ principle bundle. The $k$th order coframe bundle $P^{k*}(X) \subset J^k(X,\R^n)_0$ of an $n$-dimensional manifold $X$ consists of jets represented by local diffeomorphisms and has a free left action by $G^k_n$. \footnote{This is canonically isomorphic as a $G^k_n$ principle bundle to $P^k(X)$ by locally inverting the local diffeomorphisms and by turning the left action into a right action by inversion in $G^k_n$.  It is also canonically isomorphic to the frame bundle of the cotangent bundle of $X$.} Note, however, that for $k>1$, even though the jet bundles are vector bundles, these actions are \textbf{not} linear.
+More generally, the $k$th order frame bundle $P^k(Y) \subset J_0^k(\R^m,Y)$ of an $m$-dimensional manifold $Y$ consist of jets represented by local diffeomorphisms. It has a free right action by $G^k_m$ so it is a $G^k_m$ principle bundle. The $k$th order coframe bundle $P^{k*}(X) \subset J^k(X,\R^n)_0$ of an $n$-dimensional manifold $X$ consists of jets represented by local diffeomorphisms and has a free left action by $G^k_n$.\footnote{This is canonically isomorphic as a $G^k_n$ principle bundle to $P^k(X)$ by locally inverting the local diffeomorphisms and by turning the left action into a right action by inversion in $G^k_n$.  It is also canonically isomorphic to the frame bundle of the cotangent bundle of $X$.} Note, however, that for $k>1$, even though the jet bundles are vector bundles, these actions are \textbf{not} linear.
 
 $J^k(X,Y)$ is isomorphic as a bundle over $X \times Y$ to
 \begin{align*}
@@ -709,36 +712,99 @@ P^k(Y) \times_{G^m_k} J_0(\R^n,\R^m) \times_{\G^n_k} P^{k^*}(X) &\to P^k(Y) \tim
 
 
 \begin{remark}
-One can define extend the definition of k-jets to any smooth fiber bundle $E\to X$ with fiber $Y$, such that sections $J^k(X\times Y)=J^k(X,Y)$. (See [Michor: Topics in Differential Geometry]).
+One can define extend the definition of k-jets to any smooth fiber bundle $E\to X$ with fiber $Y$, such that $J^k(X\times Y\to X)=J^k(X,Y)$. (See [Michor: Topics in Differential Geometry]).
 \end{remark}
 
 \subsection{Differential Relations}
 
 
 \begin{definition}
-Given $f: X \to Y$, there is an induced section $j^kf: X \to J^k(X,Y)$, given by $x \mapsto (x,f, X)$ called the \textit{$k$-th jet prolongation} of $f$.
+Given $f: X \to Y$, there is an induced section 
+\[
+j^kf: X \to J^k(X,Y)
+\]
+given by $x \mapsto [x, X, f]$ which is called the \textit{$k$-th jet prolongation} of $f$.
 \end{definition}
 \begin{definition}
-A section $s: X\to J^k(X,Y)$ is called \textit{holonomic} if $s=j^kf$ for some $f:x\to Y$. 
+A section $s: X\to J^k(X,Y)$ is called \textit{holonomic} if $s=j^kf$ for some $f:X\to Y$.\footnote{Note that if a section is holonomic, then it arises from a unique function: for any section $s$ take the composition $X \xrightarrow{s} J^k(X,Y) \to J^0(X,Y)$.  Since $G^0_m$ is the trivial group this is the same data as a function from $X$ to $Y$.}
 \end{definition}
-In other words, a section is holonomic if the various higher derivatives are compatible and combine to an actual function. But in general, the space of sections $X\to J^k(X,Y)$ is much bigger than the space of functions $X\to Y$.
+In other words, a section is holonomic if the various higher derivatives are compatible and combine to an actual function. In general, however, the space of sections $X\to J^k(X,Y)$ is much bigger than the space of functions $X\to Y$.
 
 Many different kinds of maps $X\to Y$ of interest, such as immersions, submersions, and Morse functions, can be defined by partial differential equations. These equations can be encapsulated in terms of jets by putting conditions on the derivatives.
 \begin{definition}
-A \textit{partial differential relation} or sometimes \textit{differential relation} of order $k$ is a subset $R \subset J^k(X,Y)$.
+A \textit{partial differential relation}, or briefly just \textit{differential relation}, of order $k$ is a subset $R \subset J^k(X,Y)$.
 A function $f:X \to Y$ is said to be a \textit{solution} to $R$ or satisfy $R$ if $j^k f(x) \in R$ for all $x \in X$.
 \end{definition}
-Now we will give explicit relations for a few types of maps $X\to Y$. First, we need to understand the $k=1$ jet bundle more explicity. First note that the fiber of the bundle $J^1(X,Y)\to X\times Y$ over the point $(x,Y)$ is equal to $\Hom(T_xX, T_yY)$, where $f:X\to Y$ maps to $df: T_xX\to T_yY$. These fibers piece together as
+Now we will give explicit relations for a few types of maps $X\to Y$. First, we need to understand the $k=1$ jet bundle more explicitly. First note that the fiber of the bundle $J^1(X,Y)\to X\times Y$ over the point $(x,y)$ is equal to $\Hom(T_xX, T_yY)$, where $f:X\to Y$ maps to $df: T_xX\to T_yY$. These fibers piece together to give an isomorphism
 \[
-J^1(X,Y) = T^*X\otimes TY
+J^1(X,Y) \cong T^*X\otimes TY
 \]
-as bundles over $X\times Y$. Thus we can statify $J^1(X,Y)$ as
+as bundles over $X\times Y$. Thus we can stratify $J^1(X,Y)$ as
 \[
 J^1(X,Y) = S_0\cup S_1\cup\ldots \cup S_r
 \]
 where $r=\min(\dim X,\dim Y)$ and
 \[
-S_i = \{[x,U,f] \mid df_x\text{ has corank }i\text{, that is, has rank r-i}\}.
+S_i = \{[x,U,f] \mid df_x\text{ has corank }i\text{, that is, has rank }r-i\}.
+\]
+Now suppose $\dim X\ge \dim Y$, so that $r=\dim Y$. Then, 
+\[
+S_0 = \{[x,U,f] \mid df_x\text{ is surjective}\}.
+\]
+Thus, if $R=S_0$, then $f$ is a solution to $R$ if and only if $f$ is a submersion. $R$ is a subbundle of $J^1(X)$ over $X$, so we have a comparison map
+$$\Sub(X,Y)\xrightarrow{j^1}\Gamma(R\to X)$$
+
+Similarly, suppose now that $\dim X\le \dim Y$. This time, we have a map
+\[\Imm(X,Y)\xrightarrow{j^1}\Gamma(S_0\to X)\]
+from immersions of $X$ in $Y$ to sections of a bundle. Furthermore, still supposing $m=\dim X\le \dim Y$, we can define a map
+\begin{align*}
+  S_0&\xrightarrow{f} \Gr_m(TY)\\
+       [x,U,f]&\mapsto \image(df_x)
+\end{align*}
+from $S_0$ to the Grassmannian bundle of $m$-planes in $TY$. If $Y$ is a symplectic manifold of dimension $2m$, then there is a subbundle $\Lambda(TY)\subseteq \Gr_m(TY)$ of Lagrangian subspaces. Setting
+\[
+R = S_0^{\text{Lag}}:= f^{-1}(\Lambda(TY)),
+\]
+then solution to $R$ are Lagrangian immersions, and there is a comparison map
+\[
+\Imm^\text{Lag}(X,Y)\xrightarrow{j^1}\Gamma(S^\text{Lag}_0\to X)
+\]
+\begin{exercise}
+  If $X$ and $Y$ are complex manifold, the holomorphic maps $X\to Y$ are also solutions to a differential relation.
+\end{exercise}
+Next, we give Morse functions $X\to \R$ as a differential relation, this time of order 2.
+\begin{definition}
+  A smooth function $f: X\to \R$ is a \textit{Morse function} if, for all $x\in X$, either $df_x\neq 0$, or $df_x=0$ and the Hessian of $f$ is non-degenerate at $x$.
+\end{definition}
+Recall that the Hessian $\Hess_x(f)$ is the matrix of 2nd derivatives of $f$. It is not coordinate invariant, and as the next example shows, even its degeneracy is not coordinate independent. However, at a critical point, its degeneracy is in fact independent of coordinates.
+\begin{example}
+  Suppose $f:\R \to \R$ is defined by $f(x)=x+x^2$. The critical point of $f$ is $x=-\frac12$, and in these coordinates, $\Hess(f)=(2)$ everywhere. Near $x=0$, we can make a coordinate change $x=y-y^2$, so that $f(y)=y-2y^3+y^4$. Now, however, $\Hess(f)_{y=0}=(0)$
+\end{example}
+\begin{fact}
+Suppose $f:X\to Y$ is a smooth map. Then $d(j^kf)_x: T_xX\to T_{j^kf(x)}J^k(X,Y)$ is determined by $j^{k+1}f(x)$. In other words, if $g$ is another map such that $j^{k+1}g(x)=j^{k+1}f(x)$, then $d(j^kf)_x=d(j^kg)_x$.
+\end{fact}
+Intuitively, both $d(j^kf)$ and $j^{k+1}f$ are objects with information about first $k+1$ derivatives of $f$, so it should make sense that they are related. So we set
+\[
+  J^2(X,\R) = S_1^{(2)} \cup S_0^{(2)}
+\]
+where $S_i^{(2)}$ is the preimage of $S_i\subset J^1(X, \R)$ under the projection map $J^2(X, \R)\to J^1(x, \R)$. Here, $r= \dim\R = 1$, and $S_0$ corresponds to the non-critical points and $S_1$ corresponds to the critical points. We have maps
+\begin{align*}
+  S^{(2)}_1\to \Hom(TX, TJ^1(X, \R))\to \Hom(TX, \nu S_1) &= \Hom(TX,\Hom(TX,T\R))\\
+                                                          &= \Hom(TX\otimes TX, T\R)
+\end{align*}
+where $\nu S_1$ is the normal bundle corresponding to the submanifold $S_1\subseteq J^1(X,\R)$ and that map is projection.
+\footnote{\textbf{N.B. (Taylor)} I'm not actually sure what the map/identification with target $\Hom(TX, \Hom(TX,T\R))$ is, I will try to figure it out and update this.}
+Furthermore, this image of this map is symmetric: it gives a map
+\[
+  S^{(2)}_1\to\Hom(\operatorname{Sym}^2(TX), T\R).
+\]
+An element $[x, U, f]\in S^{(2)}_1$ is already a critical point, and the rank of its image under this map is 0 if and and only if the Hessian is degenerate. Thus we set $S_{1,0}\subset S^{(2)}_1$ as those points whose corank under this map is $0$ -- that is, whose Hessian is non-degenerate. So with
+\[
+R = S_{1,0}\cup S_0^{(2)},
+\]
+solutions to $R$ are at each point either a critical point with non-degenerate Hessian, or not critical points That is, solutions to $R$ are exactly Morse functions, and we have a comparison map
+\[
+  \operatorname{Morse}(X)\to \Gamma(R\to X).
 \]
 \printbibliography
 
