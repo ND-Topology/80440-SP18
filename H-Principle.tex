@@ -243,7 +243,7 @@ Most of this section should be considered review, and can be found in more detai
 
 Recall that given a based space $(X,x_0)$, we can define its homotopy groups $\pi_n(X,x_0)$ by $\{\text{based maps }f:(S^n,s_0)\to (X,x_0)\}/\text{based homotopy}$, for some fixed basepoint $s_0\in S^n$. 
 \begin{definition}
-A based map $f:(X,x_0)\to (Y,y_0)$ is a weak homotopy equivalence if $f_*:\pi_n(X,x_0)\to \pi_n(Y,y_0)$ for all $n$.
+A based map $f:(X,x_0)\to (Y,y_0)$ is a weak homotopy equivalence if $f_*:\pi_n(X,x_0)\to \pi_n(Y,y_0)$ is an isomorphism for all $n$.
 \end{definition}
 We will from now drop the base points from our notations to avoid clutter. A more complete treatment can be found in \cite{may1999concise}.
 
@@ -805,10 +805,82 @@ An element $[x, U, f]\in S^{(2)}_1$ is already a critical point, and the rank of
 \[
 R = S_{1,0}\cup S_0^{(2)},
 \]
-solutions to $R$ are at each point either a critical point with non-degenerate Hessian, or not critical points That is, solutions to $R$ are exactly Morse functions, and we have a comparison map
+solutions to $R$ are at each point either a critical point with non-degenerate Hessian, or not critical points; that is, solutions to $R$ are exactly Morse functions, and we have a comparison map
 \[
   \operatorname{Morse}(X)\to \Gamma(R\to X).
 \]
-\printbibliography
 
+\textbf{Tim's notes go here and hopefully give context so that mine make sense.}
+\newline
+
+We can also succinctly represent immersions $X \looparrowright Y$ as genuine solutions to a particular differential relation, namely $S_0 \subset J^1(X,Y)$, as they are those functions from $X$ to $Y$ with minimal nullity everywhere. 
+Before we give our first example of an H-Principle, which will be in terms of immersions, we might ask about the existence of such maps in general. Therefore we state the following theorem.
+
+\begin{theorem}[Thom's Jet Transversality Theorem]\label{thm:thomJT}
+Given $\{\omega_\alpha \subseteq J^k(X,Y)\}_{\alpha \in \N}$, then the set $\{f \in C^\infty(X,Y) \mid j^kf \pitchfork \omega_\alpha, \forall \alpha \in \N\}$ is dense and residual in $C^\infty(X,Y)$.
+\end{theorem}
+
+This then gives rise to the simple corollary:
+
+\begin{corollary}
+The set $\{f \in C^\infty(X,Y) \mid j^1f \pitchfork S_r, \forall r \in \N\}$ is nonempty.
+\end{corollary}
+
+In particular, should one have dim$Y \ge $ 2dim$X$, then by above arguments we observe codim $S_r > $ dim$X$, so in fact the set mentioned in the corollary would be precisely the immersions $f:X \looparrowright Y$. Therefore, immersions always exist given these dimensional prerequisites, and the density statement further guarantees there are an abundance of them. We have a similar result for our the Morse functions.
+
+\begin{corollary}
+The set $\{f \in C^\infty(X) \mid j^2f \pitchfork S_{1,r}, \forall r \in \N\} = \{f \in C^\infty(X) \mid (j^2f \in S^{(2)}_0) \vee (j^2f \in S_{1,0})\wedge(j^2f \notin S_{1,r>0}) \} \neq \emptyset$, so Morse functions always exist.
+\end{corollary}
+
+Now recall our comparison map via $J^k$ prolongation from genuine solutions to a differential relation to the formal solutions which are given merely as sections $\text{Sol}(R) \rightarrow \Gamma(X,R)$. What we desire is a way to make inferences about the existence and properties of genuine solutions from the formal ones. In particular, when are formal solutions homotopic to holonomic ones, and what structure can we impose on those homotopies? Since our relations actual come with a subbundle structure, they are in particular Serre fibrations. We are essentially trying to solve a lifting problem, so one could hope that knowing information about the fibre would shed light on what sort of lifts are possible.
+
+As a more general model for the type of lifting problem we have on our hands, consider
+\[
+\begin{tikzcd}
+A \arrow[r] \arrow[hookrightarrow]{d}
+& R \arrow[d]
+\\
+Z \arrow[r] \arrow[dashed,ur,"?"]
+& X.
+\end{tikzcd}
+\]
+
+It is clear that if $(Z,A)$ is a relative CW-Pair, then we can actually reduce to the simpler case of $(D^k,\partial D^k)$.
+
+\begin{lemma}
+Let $R \rightarrow X$ be a Serre fibration with fiber $F$ so that $\pi_{k-1}F = 0$. Then there always exists a lift $\phi$ such that the following diagram commutes:
+\[
+\begin{tikzcd}
+\partial D^k \arrow[r] \arrow[hookrightarrow]{d}
+& R \arrow[d]
+\\
+D^k \arrow[r] \arrow[dashed,ur,"\phi"]
+& X.
+\end{tikzcd}
+\]
+\end{lemma}
+
+\begin{corollary}
+If the fiber $F$ is $(k-1)$-connected, then we can solve the relative CW-pair $(Z,A)$ lifting problem so long as we only use cells of dimensions at most $k$.
+\end{corollary}
+
+\begin{proof}[Proof of lemma:]
+Starting with the initial diagram in the statement, we can factor the inclusion map as
+\begin{equation*}
+\partial D^k \hookrightarrow \partial D^k \times I \twoheadrightarrow \partial D^k \times I/(\partial D^k \times \{1\}) = D^k.
+\end{equation*}
+Now $\partial D^k \times I$ can be lifted via the Serre fibration property, and assuming WLOG that $\partial D^k \times \{1\}$ maps to $x_0 \in X$, the restriction of the lift to this sphere therefore lands entirely in $F$. Yet $F$ is $(k-1)$-connected, so this is nullhomotopic in $F$. Hence thus far we have a lift $\textit{up to a homotopy}$, say $H$. To rectify this, we then construct the diagram
+\[
+\begin{tikzcd}
+D^k \times \{0\} \arrow[r] \arrow[hookrightarrow]{d}
+& R \arrow[d]
+\\
+D^k \times I \arrow[r,"H"] \arrow[dashed,ur]
+& X.
+\end{tikzcd}
+\]
+Here we use the Serre fibration structure a final time to lift the homotopy, allowing us to build the genuine lift $\phi$ of our original map.
+\end{proof}
+
+\printbibliography
 \end{document}
