@@ -9,3 +9,6 @@
 *.toc
 *.gz
 auto/*
+*.bbl
+*.blg
+*.DS_Store

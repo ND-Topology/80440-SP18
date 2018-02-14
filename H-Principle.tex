@@ -32,6 +32,14 @@
 \addbibresource{HPrin.bib}
 
 
+% Graphics
+\usepackage{graphicx}
+\graphicspath{ {figures/}}
+
+% Margin notes
+\usepackage{marginnote}
+
+
 
 %%%%%% Tikz  %%%%%%%%%%%%%
 \usepackage{tikz}
@@ -109,6 +117,7 @@
 \DeclareMathOperator{\Gr}{Gr}
 \DeclareMathOperator{\image}{im}
 \DeclareMathOperator{\Hess}{Hess}
+\DeclareMathOperator{\GL}{GL}
 
 \def\bDelta{\mathbf \Delta}
 
@@ -298,7 +307,7 @@ Another class of maps that we'll be talking about are fibrations.
 A map $p:E\to B$ is a Hurewicz (Serre, respectively) fibration if for each commuting square
 \xymat{A\times \lbrace 0\rbrace \ar[r] \ar@{^{(}->}[d] & E \ar[d]^p \\ A\times [0,1] \ar[r] & B} 
 there exists a lift such that the following diagram commutes (strictly)
-\xymat{\partial A\times \lbrace 0\rbrace \ar[r] \ar@{^{(}->}[d] & E \ar[d]^p \\ A\times [0,1] \ar[r]\ar@{.>}[ur] & B,}
+\xymat{A\times \lbrace 0\rbrace \ar[r] \ar@{^{(}->}[d] & E \ar[d]^p \\ A\times [0,1] \ar[r]\ar@{.>}[ur] & B,}
 where $A$ ranges over all spaces (all disks $D^n$, respectively).
 \end{definition}
 We say that $p$ has the \textit{right lifting property} with respect to the set of maps $\lbrace A\times \lbrace 0\rbrace\hookrightarrow A\times [0,1]\rbrace$.
@@ -861,6 +870,7 @@ D^k \arrow[r] \arrow[dashed,ur,"\phi"]
 \end{lemma}
 
 \begin{corollary}
+\label{lifting_cor}
 If the fiber $F$ is $(k-1)$-connected, then we can solve the relative CW-pair $(Z,A)$ lifting problem so long as we only use cells of dimensions at most $k$.
 \end{corollary}
 
@@ -882,5 +892,124 @@ D^k \times I \arrow[r,"H"] \arrow[dashed,ur]
 Here we use the Serre fibration structure a final time to lift the homotopy, allowing us to build the genuine lift $\phi$ of our original map.
 \end{proof}
 
+\marginnote{\textbf{2/12/2018}}
+
+Given a Serre fibration $R \to X$, another class of maps we can lift is the ``acyclic cellular inclusion'':
+\begin{equation*}
+D^l\times\{0\} \hookrightarrow D^l\times I
+\end{equation*}
+for any $l$. This simply follows from the definition of a Serre fibration. Note that we can replace $I$ by the half interval $[0,\infty)$ by doing the lift interval by interval consecutively. This simple fact and the lemma above motivate the following definition.
+
+\begin{definition}
+A pair of spaces $(Z,A)$ is said to be $k$-admissible if $Z$ is obtained from $A$ by a sequence of pushouts along
+\begin{itemize}
+\item CW cells of dimension up to $k$
+\item arbitrary acyclic cells.
+\end{itemize}
+If $A=\emptyset$, we simply say $Z$ is $k$-admissible.
+\end{definition}
+
+\begin{example}
+A simple example is $(Z,A) = (M\times\R,M\times\{0\})$, where $M$ is a CW complex. Given any CW cell $D^l$ of $M$, we glue $D^l\times [0,\infty)$ and $D^l\times\times (-\infty,0]$ along $M\times \{0\}$. Since in this case $Z$ is not obtained from $A$ by gluing CW cells, $(Z,A)$ is $(-1)$-admissible.
+\end{example}
+
+\begin{example}
+Another example is a $3$-punctured sphere $Z$. $Z$ is diffeomorphic to an open disk in $\R^2$ with two smaller closed disks removed. From the picture below, it is clear that $Z$ is obtained from gluing six $D^1\times [0,\infty)$ to the $1$-complex inside. So $Z$ is $1$-admissible.
+\begin{figure}[h]
+\includegraphics[scale=0.3]{3punctured}
+\centering
+\end{figure}
+\end{example}
+
+Following Corollary \ref{lifting_cor}, we have the lifting lemma for $k$-admissible pairs.
+
+\begin{lemma}
+\label{admissible_lift}
+Let $R\to X$ be a Serre fibration with fiber $F$ $(k-1)$-connected. Then it has the relative lifting property with respect to all $k$-admissible pairs $(Z, A)$:
+
+\begin{equation*}
+\begin{tikzcd}
+A \arrow[r] \arrow[hookrightarrow]{d}
+& R \arrow[d]
+\\
+Z \arrow[r] \arrow[dashed,ur,"\exists"]
+& X.
+\end{tikzcd}
+\end{equation*}
+\end{lemma}
+
+\begin{example}
+Consider a $3$-punctured sphere as in the last example. Since it is $1$-admissible, we can solve the lifting problem
+\begin{equation*}
+\begin{tikzcd}
+\emptyset \arrow[r] \arrow[hookrightarrow]{d}
+& R \arrow[d]
+\\
+S^2\setminus\{0,1,\infty\} \arrow[r] \arrow[dashed,ur,"\exists"]
+& X
+\end{tikzcd}
+\end{equation*}
+for all Serre fibration $R\to X$ with $0$-connected (i.e. connected) fiber.
+\end{example}
+
+Given the results above, we can understand the space of formal solutions, i.e. sections of the partial differential relation $R\to X$, as a lifting problem. Let's look at the space of formal immersions of a $m$-dimensional manifold $X$ into $\R^n$. Let $R^{\Imm} \subset J^1(X,\R^n)$ denote the partial differential relation corresponding to immersions $X\looparrowright \R^n$. Let $F^{\Imm}$ be the fiber of $R^{\Imm}\to X$ over $x \in X$. Then
+\begin{equation*}
+F^{\Imm} = \R^n \times \Hom^{\mathrm{Inj}}(T_xX,\R^n) \simeq \Hom^{\mathrm{Inj}}(T_xX,\R^n),
+\end{equation*}
+where $\Hom^{\mathrm{Inj}}(T_xX,\R^n)$ denotes the set of injective homomorphisms. Note that we have identified a tangent space of $\R^n$ with $\R^n$ itself. Fix a basis for $T_xX$ so $\Hom^{\mathrm{Inj}}(T_xX,\R^n) \cong \Hom^{\mathrm{Inj}}(\R^m,\R^n)$. Then $F^{\Imm}$ is homotopically equivalent to $\GL_n(\R)/GL_{n-m}(\R)$ (specifying $m$ linearly independent vectors in $\R^n$). Recall that $\GL_n(\R)$ deformation retracts onto $O(n)$ by Gram-Schmidt process. It follows that
+\begin{equation*}
+F^{\Imm} \simeq O(n)/O(n-m).
+\end{equation*}
+We now want to know the connectedness of $F^{\Imm}$. The key observation is the following fibration
+\begin{equation*}
+O(k)\to O(k+1) \to O(k+1)/O(k) \cong S^k.
+\end{equation*}
+Recall that $\pi_i(S^k) = 0$ for all $i <k$ and $\pi_k(S^k) = \Z$. Combining this with the homotopy exact sequence, we have
+\begin{equation*}
+\pi_k O(k) \to \pi_k O(k+1)
+\end{equation*}
+is surjective and
+\begin{equation*}
+\pi_i O(k) \to \pi_i O(k+1)
+\end{equation*}
+is isomorphic for all $i < k$.
+
+Now $F^{\Imm}$ fits into the fibration
+\begin{equation*}
+O(n-m)\to O(n) \to O(n)/O(n-m) \simeq F^{\Imm}.
+\end{equation*}
+The key fact above shows that
+\begin{equation*}
+\pi_{n-m-1}O(n-m)\to\pi_{n-m-1}O(n)
+\end{equation*}
+is surjective and
+\begin{equation*}
+\pi_{i}O(n-m)\to\pi_{i}O(n)
+\end{equation*}
+is isomorphic for $i < n-m-1$. Thus from homotopy exact sequence we have
+\begin{equation*}
+\pi_iF^{\Imm} = 0
+\end{equation*}
+for $i \le n-m-1$. Assume $n=2m$. So $F^{\Imm}$ is $(m-1)$-connected. Since $X$ is an $m$-manifold, it is $m$-admissible. By Lemma \ref{admissible_lift}, it follows a formal solution to the immersion problem exists. This is not too satisfying, because we already knew a genuine solution exists.
+
+Assume now that $X$ is $(m-1)$-admissible obtained from an $(m-1)$-complex $A \subset X$. This includes many cases when $X$ is noncompact. Consider the pair $(X\times I, X\times \partial I)$. Then $X\times I$ can be obtained from $X\times\partial I$ by gluing acyclic cells (think of the case when $X=\R$ and $A$ is a point). So $(X\times I, X\times \partial I)$ is $m$-admissible.
+
+\begin{theorem}
+$\Imm(X,\R^n)$ satisfies the $0$-parametric H-principle provided that $n=2\dim X$ and $X$ is $(m-1)$-admissible. In particular, every formal solution is homotopic to a genuine solution.
+\end{theorem}
+
+\begin{proof}
+Since the pair $(X\times I, X\times \partial I)$ is $m$-admissible, we can solve the lifting problem
+\begin{equation*}
+\begin{tikzcd}
+X\times\partial I \arrow[r] \arrow[hookrightarrow]{d}
+& R \arrow[d]
+\\
+X \times I \arrow[r] \arrow[dashed,ur]
+& X
+\end{tikzcd}
+\end{equation*}
+\end{proof}
+Note that this does not show that the space of genuine solutions is connected. Here the condition being $k$-admissible is rather superficial. Later on we will introduce more powerful methods to remove this condition.
 \printbibliography
 \end{document}
