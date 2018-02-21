@@ -831,13 +831,13 @@ Given $\{\omega_\alpha \subseteq J^k(X,Y)\}_{\alpha \in \N}$, then the set $\{f 
 
 This then gives rise to the simple corollary:
 
-\begin{corollary}
+\begin{corollary}\label{thm:jettransimm}
 The set $\{f \in C^\infty(X,Y) \mid j^1f \pitchfork S_r, \forall r \in \N\}$ is nonempty.
 \end{corollary}
 
 In particular, should one have dim$Y \ge $ 2dim$X$, then by above arguments we observe codim $S_r > $ dim$X$, so in fact the set mentioned in the corollary would be precisely the immersions $f:X \looparrowright Y$. Therefore, immersions always exist given these dimensional prerequisites, and the density statement further guarantees there are an abundance of them. We have a similar result for our the Morse functions.
 
-\begin{corollary}
+\begin{corollary}\label{thm:jettransmorse}
 The set $\{f \in C^\infty(X) \mid j^2f \pitchfork S_{1,r}, \forall r \in \N\} = \{f \in C^\infty(X) \mid (j^2f \in S^{(2)}_0) \vee (j^2f \in S_{1,0})\wedge(j^2f \notin S_{1,r>0}) \} \neq \emptyset$, so Morse functions always exist.
 \end{corollary}
 
@@ -1009,7 +1009,7 @@ X \times I \arrow[r] \arrow[dashed,ur]
 & X
 \end{tikzcd}
 \end{equation*}
-Since we already have a genuine solution by jet transversality, the theorem follows.
+This shows that the space of formal solutions, i.e. sections of the bundle $R \to X$, is connected.  Since a genuine solution is a formal solution, and there are genuine solutions by Corollary \ref{thm:jettransimm}, this implies that there is a path from any formal solution to a genuine solution.
 \end{proof}
 Note that this does not show that the space of genuine solutions is connected. Here the condition being $k$-substratal is rather superficial. Later on we will introduce more powerful methods to remove this condition.
 \printbibliography
