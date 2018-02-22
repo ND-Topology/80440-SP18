@@ -823,22 +823,44 @@ solutions to $R$ are at each point either a critical point with non-degenerate H
 \newline
 
 We can also succinctly represent immersions $X \looparrowright Y$ as genuine solutions to a particular differential relation, namely $S_0 \subset J^1(X,Y)$, as they are those functions from $X$ to $Y$ with minimal nullity everywhere. 
-Before we give our first example of an H-Principle, which will be in terms of immersions, we might ask about the existence of such maps in general. Therefore we state the following theorem.
+Before we give our first example of an H-Principle, which will be in terms of immersions, we might ask about the existence of such maps in general. Therefore we state the following theorem.  We recall the definition of a transverse map:
 
-\begin{theorem}[Thom's Jet Transversality Theorem]\label{thm:thomJT}
+\begin{definition}\label{thm: transverse}
+Given a map between manifolds $A \xrightarrow{f} B$ and a submanifold $C \subset B$, then $f \pitchfork C$($f$ is transverse to $C$) if $df(T_p(A))+T_{f(p)}C=T_{f(p)}B$ whenever $f(p) \in C$, $ p \in A$.
+\end{definition}
+
+One can show in these circumstances(using the implicit function theorem) that $f^{-1}(C)$ will then be a manifold of codimension equal to the codimension of $C$.  This implies the following
+
+\begin{observation}\label{thm: dimensioncounting}
+In the setting of definition \ref{thm: transverse}
+\begin{enumerate}
+\item If $codim C > dim A $, then $f^{-1}(C)$ is -1 dimensional, i.e. $f^{-1}(C)= \emptyset$
+\item If $codim C  = dim A$ then $f^{-1}(C)$ is $0$ dimensional, i.e. $f^{-1}(C)$ is a discrete set.
+\end{enumerate}
+\end{observation}
+
+\begin{theorem}[Thom's Jet Transversality Theorem]\label{thm: thomJT}
 Given $\{\omega_\alpha \subseteq J^k(X,Y)\}_{\alpha \in \N}$, then the set $\{f \in C^\infty(X,Y) \mid j^kf \pitchfork \omega_\alpha, \forall \alpha \in \N\}$ is dense and residual in $C^\infty(X,Y)$.
 \end{theorem}
 
-This then gives rise to the simple corollary:
+
+As a direct consequence of observation \ref{thm: dimensioncounting} and Thom's transversality theorem( \ref{thm: thomJT}), we have the simple corollary:
 
 \begin{corollary}\label{thm:jettransimm}
-The set $\{f \in C^\infty(X,Y) \mid j^1f \pitchfork S_r, \forall r \in \N\}$ is nonempty.
-\end{corollary}
+The set $\{f \in C^\infty(X,Y) \mid j^1f(p) \notin  S_r, \forall r>0, p \in X \}$ is nonempty whenever $codim(S_r) > dim(X)$ for all $r>0$. 
+\begin{proof}
+By Thom's transversality, the set $\{ f \in C^\infty(X,Y) \mid j^1f  \pitchfork S_r \}$ is nonempty.  The condition $codim(S_r) > dim(X)$ allows us to apply observation \ref{thm: dimensioncounting}, to get that this is the set of $\{f \in C^\infty(X,Y) \mid j^1f(p) \notin  S_r, \forall r>0, p \in X \}$, which is therefore nonempty.
+\end{proof}
 
-In particular, should one have dim$Y \ge $ 2dim$X$, then by above arguments we observe codim $S_r > $ dim$X$, so in fact the set mentioned in the corollary would be precisely the immersions $f:X \looparrowright Y$. Therefore, immersions always exist given these dimensional prerequisites, and the density statement further guarantees there are an abundance of them. We have a similar result for our the Morse functions.
+\end{corollary}
+Note that this set of functions is the immersions from $X$ to $Y$.  The condition that $codim(S_r) > dim(X)$ for all $r>0$ is satisfied when $m \geq 2n$:
+The codimension of $S_i$ can be computed by computing the dimension of the space of linear maps from $\R^n \to \R^m$ multiplied by the dimension of $X \times Y$, where $n=dim(X)$, $m=dim(Y)$ and $r=min(m,n)$.  The result is that $codim S_i=(n-r+i)(m-r+i)$. Under the additional assumption that $m \geq 2n$, the $codim S_i \geq n+1> dim(X)$.  Thus we recover the Whitney embedding theorem.
+
+
+We can show the existence of Morse functions in a similar way: Morse functions are the functions that are of full rank or have a nondegenerate Hessian whenever the rank drops by one, i.e. they are the $\{f \in C^\infty(X) \mid j^2f(p) \notin S_{1,i} i>0 \}$. One can compute that $dim(S_{1,i})>dim(X)$ whenever $i>0$. 
 
 \begin{corollary}\label{thm:jettransmorse}
-The set $\{f \in C^\infty(X) \mid j^2f \pitchfork S_{1,r}, \forall r \in \N\} = \{f \in C^\infty(X) \mid (j^2f \in S^{(2)}_0) \vee (j^2f \in S_{1,0})\wedge(j^2f \notin S_{1,r>0}) \} \neq \emptyset$, so Morse functions always exist.
+The set of morse functions on $X$=$ \{f \in C^\infty(X) \mid j^2f(p) \notin S_{1,i} \, i>0 , p \in X \}= \{f \in C^\infty(X) \mid j^2 f  \pitchfork  S_{1,i} \, i>0  \} \neq \emptyset$ by Thom transversality theorem ( \ref{thm: thomJT}), so Morse functions always exist.
 \end{corollary}
 
 Now recall our comparison map via $J^k$ prolongation from genuine solutions to a differential relation to the formal solutions which are given merely as sections $\text{Sol}(R) \rightarrow \Gamma(X,R)$. What we desire is a way to make inferences about the existence and properties of genuine solutions from the formal ones. In particular, when are formal solutions homotopic to holonomic ones, and what structure can we impose on those homotopies? Since our relations actual come with a subbundle structure, they are in particular Serre fibrations. We are essentially trying to solve a lifting problem, so one could hope that knowing information about the fibre would shed light on what sort of lifts are possible.
