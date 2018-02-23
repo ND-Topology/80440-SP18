@@ -854,7 +854,7 @@ By Thom's transversality, the set $\{ f \in C^\infty(X,Y) \mid j^1f  \pitchfork 
 
 \end{corollary}
 Note that this set of functions is the immersions from $X$ to $Y$.  The condition that $codim(S_r) > dim(X)$ for all $r>0$ is satisfied when $m \geq 2n$:
-The codimension of $S_i$ can be computed by computing the dimension of the space of linear maps from $\R^n \to \R^m$ multiplied by the dimension of $X \times Y$, where $n=dim(X)$, $m=dim(Y)$ and $r=min(m,n)$.  The result is that $codim S_i=(n-r+i)(m-r+i)$. Under the additional assumption that $m \geq 2n$, the $codim S_i \geq n+1> dim(X)$.  Thus we recover the Whitney embedding theorem.
+The codimension of $S_i$ can be computed by computing the dimension of the space of linear maps \label{howcomputedimension} from $\R^n \to \R^m$ multiplied by the dimension of $X \times Y$, where $n=dim(X)$, $m=dim(Y)$ and $r=min(m,n)$.  The result is that $codim S_i=(n-r+i)(m-r+i)$. Under the additional assumption that $m \geq 2n$, the $codim S_i \geq n+1> dim(X)$.  Thus we recover the Whitney embedding theorem.
 
 
 We can show the existence of Morse functions in a similar way: Morse functions are the functions that are of full rank or have a nondegenerate Hessian whenever the rank drops by one, i.e. they are the $\{f \in C^\infty(X) \mid j^2f(p) \notin S_{1,i} i>0 \}$. One can compute that $dim(S_{1,i})>dim(X)$ whenever $i>0$. 
@@ -1031,8 +1031,63 @@ X \times I \arrow[r] \arrow[dashed,ur]
 & X
 \end{tikzcd}
 \end{equation*}
-This shows that the space of formal solutions, i.e. sections of the bundle $R \to X$, is connected.  Since a genuine solution is a formal solution, and there are genuine solutions by Corollary \ref{thm:jettransimm}, this implies that there is a path from any formal solution to a genuine solution.
+This shows that the space of formal solutions, i.e. sections of the bundle $R \to X$, is connected.  Since a genuine solution is a formal solution, and there are genuine solutions by Corollary \ref{thm:jettransimm}, this implies that there is a path from any formal solution to any genuine solution, going through formal solutions.
 \end{proof}
 Note that this does not show that the space of genuine solutions is connected. Here the condition being $k$-substratal is rather superficial. Later on we will introduce more powerful methods to remove this condition.
+
+\section{}
+
+We refocus our attention to the Morse differential relation $R=S^{(2)}_0 \cup S_{1,0} \subset J^2(X,\R)$ and its genuine solutions.  As it was for immersions, it turns out that the space of genuine solutions is not connected.  But in the case of Morse functions, we can do something close.  To do this we will need to allow for functions that have nondegenerate Hessians in our paths of functions. Thus we recall the definition of the higher analogues of the Hessian.
+
+The Hessian of a function $f \in C^\infty(X)$ at a critical point $p \in X$ has the following coordinate invariant description.  It is a billinear form defined by sending the vectors $\xi_1, \xi_2 \in T_pX$ to $\Xi_1(\Xi_2(f))(p)$ where $\Xi_i$ is an extension of $\xi_i$ to a vector field on $X$.  One can check that this doesn't depend on the choice of extension of the vector fields, precisely because $p$ is a critical point, i.e. $\xi$ is in the null space of $df_p$.  One could have also defined the quadratic form by sending a single vector $\xi \in T_pX$ to $\Xi(\Xi(f))_p$.
+
+If this billinear form is of corank 1, then one can define a cubic form on a one dimensional vector space, namely the null space of the Hessian.  The form sends $\xi$ to $\Xi(\Xi(\Xi(f)))$.  If this form is nondegenerate, (since the form is one dimensional this just means that the form is nonzero), then we say that $j^3f(p) \in S_{1,1,0}\subset J^3(X,\R)$.  This defines the stratum $S_{1,1,0} \subset J^3(X,\R)$.   \footnote{ For more information about these so called "Thom-Boardman Strata", and definitions of $S_{1,j,k}$ etc, see page 156 of \cite{strata}}
+
+\begin{definition}
+The generalized morse function $f \in C^\infty(X)$ is a function taking $S_0$, $S_{1,0}$ or $S_{1,1,0}$ singularities.  i.e. these are the $f$ such that at any $p$, $j^1f \in S_0$, $j^2f(p) \in S_{1,0}$, or $j^3f(p) \in S_{1,1,0}$.
+\end{definition}
+
+Morse functions have a nice local coordinate description, and generalized morse functions have a similar local coordinate description:
+
+\begin{fact}[Morse Lemma]
+
+If $p$ is a $S_{1,0}$ singularity of $f$, then there are coordinates $(x_1,...x_n)$ centered at $p$, such that $f(x_1....x_n)=f(p)+ \sum_{i=1}^{n-k} x_i^2- \sum_{j=n-k+1}^m x_j^2$.  $k$ is called the index of the critical point $p$.
+
+\begin{proof}
+See \cite{strata} page 65 or Milnor's Morse Theory.
+\end{proof}
+\end{fact}
+
+\begin{fact}[Generalized Morse Lemma]
+If $p$ is a $S_{1,1,0}$ singularity then there are coordinates $(x_1,...x_n)$ centered at $p$ such that $f(x_1,...x_n)=f(p)+x_1^3+\sum_{i=2}^{m-k} x_i^2 -\sum_{j=m-k+1}^m x_j^2$.
+\begin{proof}
+See \cite{strata} page 177.  
+\end{proof}
+
+\end{fact}
+
+The space of Morse functions is not path connected:  Let $X$ be any space that admits two morse functions that have different number of critical points.  One can take $X=S_1$ and $f$ given by two different height functions for instance.  It is a good exercise to prove using \ref{thm: thomJT} that for any homotopy $h_t$ such that $h_t$ is a Morse function for each time, $h_t$ has the same number of critical points (and in fact has the same number of critical points of a given index).
+
+The following example illustrates what happens when trying to connect two Morse functions with differing number of critical points.  
+\begin{example}
+Consider the homotopy $h_t(x)=x^3+tx$.  \[d(h_t)=3x^2+t\]
+The critical points are  $x=\pm  \sqrt{-t/3}$ when $t<0$ of index 1 and -1 respectively,  a critical point with degenerate hessian at $x=0$ at $t=0$ and there are no critical points for $t>0$.  $h_t$ is a Morse function when $t \neq 0$.  One can read off the indexes /degeneracies of the critical points from the shape of the graph ( you can look to see if around the critical point $f$ looks locally like parabola , upside down parabola,... or in higher dimensions you can look to see if $f$ looks like a paraboloid, a hyperbolic saddle or an upside down parabola), or from direct computation.  Note that in the transition between $t<0$ and $t>0$, 2 critical points had to "die".  This intuitively explains why one cannot connect two arbitrary Morse functions through Morse functions. For more information on birth or death critical points, see Igusa's paper on $C_1$ local parametrized Morse Theory.
+
+\end{example}
+
+We will now show that arbitrary Morse functions can be connected through generalized Morse functions, and we will prove it using observation \ref{thm: transverse} and the Thom transversality theorem (\ref{thm: thomJT}).  Take the map $J^2(M \times I, \R) \xrightarrow{\pi}  J^2(M,\R)$ induced from the map $M \times I  \to M$. For any $R \subset J^(M, \R)$, we can consider the relation $\pi^{-1}(R) \subset J^2(M \times I, \R)$.  For instance we could take $\pi^{-1}( S_{1,0}) \subset J^2(M \times I, \R)$.  Note that for a homotopy $h: M \times I \to \R$, $j^2 h \in \pi^{-1}(S_{1,0}) \iff j^2(h_t)(x) \in S_{1,0}$.  An analagous statement holds for an arbitrary relation $R$. Thus a homotopy through a generalized morse function is a $h \in C^\infty(M \times I)$ such that for all $p$,  $j^2 h(p) \notin \pi^{-1}(S_{1,i})$ $\forall i>1$, and $j^3 h(p) \notin \pi^{-1}(S_{1,1,i}) \forall i>0$.
+
+One can compute in a method analagous to \ref{howcomputedimension} that 
+\[codim (\pi^{-1}(S_{0}))=0 \]
+\[codim (\pi^{-1}(S_{1,0}))=dim M \]
+\[codim (\pi^{-1}(S_{1,1,0}))=dim M+1=dim(M \times I) \]
+ 
+And the codimension of the spaces
+$\pi^{-1}(S_{1,i}) i>1$, and $ \pi^{-1}(S_{1,1,i}) i>0$ is greater than $dim(M \times I)$.  Thom transversality implies that for generic $h$ $j^1h, j^2h, j^3h$ are transverse to all of these spaces.   $j^2h$, $j^3h$ being transverse to the spaces $\pi^{-1}(S_{1,i}) i>1$, and $ \pi^{-1}(S_{1,1,i}) i>0$  implies by part $(i)$ of \ref{thm: transverse}, that $j^2 h(p) \notin \pi^{-1}(S_{1,i})$ $\forall i>1$, and $j^3 h(p) \notin \pi^{-1}(S_{1,1,i}) \forall i>0$ - i.e that $h_t$ is a generalized Morse function for all $t$.   Moreover $j^2(h(x,t))$ transverse to $\pi^{-1}(S_{1,1,0})$ implies by part $(ii)$ of  \ref{thm: transverse} that $j^2(h(x,t))$ only intersects $\pi^{-1}(S_{1,1,0})$ in a discrete set.  Thus $j^2(h_t)$ only intersects $S_{1,1,0}$ for finitely many $t$.
+
+
+
+
+
 \printbibliography
 \end{document}
