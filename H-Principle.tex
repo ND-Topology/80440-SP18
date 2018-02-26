@@ -1114,15 +1114,15 @@ We now look at the different parts of the decomposition of the fiber. We have th
 \node [dot=$v_2$] at (1,1) {};
 \node [dot=$v_3$] at (4,1) {};
 
-\node [dot=l] at (0,0) {};
-\node [dot=$l_2$] at (1,0) {};
-\node [dot=$0$] at (2,0) {};
-\node [dot=b] at (4,0) {};
+\draw[<->] (-1,0) -- (5,0) node[right]{$\R$};
 
-\draw [extended line=0.5cm] (l) -- (b);
+\foreach \x/\testosopra/\testosotto in {0/\lambda_1/, 1/\lambda_2/, 3/0/, 4/\beta/}{
+ \draw(\x,0.1)--(\x,-0.1);
+ \node[above,font=\scriptsize]at (\x,0.1) (\x) {$\testosopra$};
+ \node[below,font=\scriptsize]at (\x,-0.1) {$\testosotto$};
+}
 \end{tikzpicture}
 \end{center}
-(Here the $v_i$ correspond to the $\lambda_i\in \R$.)
 
 The $F_{1,1}$ fiber consists of the Hessians with one-dimensional kernel. For $i>1, F_{1,i}$ are the Hessians with kernel of dimension greater than 1. \\
 
