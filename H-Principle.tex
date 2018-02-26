@@ -1085,7 +1085,103 @@ One can compute in a method analagous to \ref{howcomputedimension} that
 And the codimension of the spaces
 $\pi^{-1}(S_{1,i}) i>1$, and $ \pi^{-1}(S_{1,1,i}) i>0$ is greater than $dim(M \times I)$.  Thom transversality implies that for generic $h$ $j^1h, j^2h, j^3h$ are transverse to all of these spaces.   $j^2h$, $j^3h$ being transverse to the spaces $\pi^{-1}(S_{1,i}) i>1$, and $ \pi^{-1}(S_{1,1,i}) i>0$  implies by part $(i)$ of \ref{thm: transverse}, that $j^2 h(p) \notin \pi^{-1}(S_{1,i})$ $\forall i>1$, and $j^3 h(p) \notin \pi^{-1}(S_{1,1,i}) \forall i>0$ - i.e that $h_t$ is a generalized Morse function for all $t$.   Moreover $j^2(h(x,t))$ transverse to $\pi^{-1}(S_{1,1,0})$ implies by part $(ii)$ of  \ref{thm: transverse} that $j^2(h(x,t))$ only intersects $\pi^{-1}(S_{1,1,0})$ in a discrete set.  Thus $j^2(h_t)$ only intersects $S_{1,1,0}$ for finitely many $t$.
 
+\subsection{(Lecture on 2/23) Fibers of generalized Morse PDR}
+A generalized Morse PDR breaks down as:
+$$ R^{g,M}=S_0^{(3)}\cup S_{1,0}^{(3)}\cup S_{1,1,0}\subseteq J^3(M, \mathbb{R}$$
 
+We now want to look at the fiber $F^{g,M}$ of $R^{g,M}\to M$. We have the following maps:
+\begin{equation*}
+\begin{tikzcd}
+J^3(M,\R)\arrow[d]\\
+J^2(M,\R)\arrow[d]\\
+J^1(M,\R)\arrow[d]\\
+J^0(M,\R)=M\times \R
+\end{tikzcd}
+\end{equation*}
+
+We now look at the different parts of the decomposition of the fiber. We have that $F_{1,0}\cong \bigsqcup\limits_{k \text{index}} Gr_k(\R^m)=\bigsqcup\limits_{k}O(m)/(O(k)\times O(m-k))$. This gives us a spectral decomposition of the Hessian; i.e. a configuration space of points in $\R$ which satisfy three conditions:
+\begin{enumerate}
+\item $\lambda_i\neq 0$ (non-degeneracy condition)
+\item $v_i\perp v_j, \forall i\neq j$
+\item $\bigoplus v_i=T_xX$
+\end{enumerate}
+\begin{center}
+\begin{tikzpicture}[dot/.style={circle,inner sep=1pt,fill,label={#1},name=#1},
+  extended line/.style={shorten >=-#1,shorten <=-#1},
+  extended line/.default=1cm]
+
+\node [dot=$v_1$] at (0,1) {};
+\node [dot=$v_2$] at (1,1) {};
+\node [dot=$v_3$] at (4,1) {};
+
+\node [dot=l] at (0,0) {};
+\node [dot=$l_2$] at (1,0) {};
+\node [dot=$0$] at (2,0) {};
+\node [dot=b] at (4,0) {};
+
+\draw [extended line=0.5cm] (l) -- (b);
+\end{tikzpicture}
+\end{center}
+(Here the $v_i$ correspond to the $\lambda_i\in \R$.)
+
+The $F_{1,1}$ fiber consists of the Hessians with one-dimensional kernel. For $i>1, F_{1,i}$ are the Hessians with kernel of dimension greater than 1. \\
+
+In the third jet space, we get everything above $S_0, S_{1,0}$, and also everything above $S_{1,1,0}$. What are these last fibers? They are 1-dimensional cubic forms on $V_0$: 
+$$q:V_0\to \R \text{ such that } q(rx)=r^3q(x)$$
+If $q$ is non-degenerate (i.e. $q\neq 0$), then there exists an element $x\in V_0$ with $q(x)=1$. So the non-degenerate cubic forms on $V_0$ are the same as framings of $V_0$ (i.e. a non-zero vector in $V_0$).\\
+
+We can think of these parts of the fiber through the following schematic (but note that this is just a schematic; really this whole thing like over the origin):\\
+(will insert image here)\\
+
+What is the homotopy type of $F_{1,0}\cup F_{1,1}$? We know that this fiber is a configuration space of points satisfying the three conditions listed above.\\
+
+\begin{proposition}
+$\CF_{1,0}\cup\CF_{1,1}$ is homotopy equivalent to the homotopy colimit (iterated homotopy pushout) of the following diagram:\\
+\begin{center}
+	\begin{tikzcd}
+	&\frac{O(m)}{O(0)\times O(1)\times O(m-1)}\arrow[dl]\arrow[dr]&
+	& \frac{O(m)}{O(1)\times O(1)\times O(m-2)}\arrow[dl]\arrow[dr]&\cdots\\
+	
+	\frac{O(m)}{O(0)\times O(m)} & &\frac{O(m)}{O(1)\times O(m-1)}
+	&& \frac{O(m)}{O(2)\times O(m-2)}\\
+	
+		&\cdots \frac{O(m)}{O(m-1)\times O(1)\times O(0)}\arrow[dl]\arrow[dr]&&&\\
+	\cdots & &\frac{O(m)}{O(m)\times O(0)}
+	\end{tikzcd}
+	\end{center}
+\end{proposition}
+
+\subsubsection{Homotopy Colimits}
+Suppose we have the following diagram:
+\begin{center}
+\begin{tikzcd}
+A\arrow[d]\arrow[r] & C\\
+B
+\end{tikzcd}
+\end{center}
+
+The homotopy colimit of this diagram is the double mapping cylinder: $B\cup A\times I \cup C$. We can see this by considering $U\simeq B\sqcup C$ and $V\cong A\times (0,1)\simeq A$. Then $U\cup V=A\times (0,\frac{1}{2}\cup A\times (-\frac{1}{2},1)\simeq A\sqcup A$.\\
+
+\begin{proposition}
+Let $k$ be the dimension of the strictly negative eigenspace. Then $\CF_{1,0}^{(k+1)}\cup \CF_{1,1}^{(k)}\cup \CF_{1,0}^{(k)}$ is homotopy equivalent to the pushout of the following diagram
+	\begin{center}
+	\begin{tikzcd}
+	&\frac{O(m)}{O(k)\times O(1)\times O(m-k-1)}\arrow[dl]\arrow[dr]&\\
+	\frac{O(m)}{O(k+1)\times O(m-k-1)} & &\frac{O(m)}{O(k)\times O(m-k)}
+	\end{tikzcd}
+	\end{center}
+\end{proposition}
+
+Sketch of proof: Take $U=\CF_{1,0}^{(k+1)}\sqcup \CF_{1,0}^{(k)}$ and $V=\lbrace$all configuration spaces where there exists a unique eigenvalue closest to the origin which has a 1-dimensional eigenspace$\rbrace$. This gives an open cover of $\CF_{1,0}^{(k+1)}\cup \CF_{1,1}^{(k)}\cup \CF_{1,0}^{(k)}$.\\
+
+Notice that: 
+\begin{align*}
+U &\simeq \frac{O(m)}{O(k+1)\times O(m-k-1)}\sqcup \frac{O(m)}{O(k)\times O(m-k)}\\
+V &\simeq \frac{O(m)}{O(k)\times O(1)\times O(m-k-1)}\\
+\Rightarrow U\cup V &\simeq \frac{O(m)}{O(k)\times O(1)\times O(m-k-1)}\sqcup \frac{O(m)}{O(k)\times O(1)\times O(m-k-1)}\\
+\end{align*}
+
+Claim: there exists a map from the homotopy pushout of the diagram listed in the proposition to $\CF_{1,0}^{(k+1)}\cup \CF_{1,1}^{(k)}\cup \CF_{1,0}^{(k)}$, which is compatible with the open cover listed above. 
 
 
 
