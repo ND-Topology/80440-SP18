@@ -1087,9 +1087,9 @@ $\pi^{-1}(S_{1,i}) i>1$, and $ \pi^{-1}(S_{1,1,i}) i>0$ is greater than $dim(M \
 
 \subsection{(Lecture on 2/23) Fibers of generalized Morse PDR}
 A generalized Morse PDR breaks down as:
-$$ R^{g,M}=S_0^{(3)}\cup S_{1,0}^{(3)}\cup S_{1,1,0}\subseteq J^3(M, \mathbb{R}$$
+$$ R^{gMorse}=S_0^{(3)}\cup S_{1,0}^{(3)}\cup S_{1,1,0}\subseteq J^3(M, \mathbb{R})$$
 
-We now want to look at the fiber $F^{g,M}$ of $R^{g,M}\to M$. We have the following maps:
+We now want to look at the fiber $F^{gMorse}$ of $R^{gMorse}\to M$. We have the following maps:
 \begin{equation*}
 \begin{tikzcd}
 J^3(M,\R)\arrow[d]\\
@@ -1137,8 +1137,8 @@ We can think of these parts of the fiber through the following schematic (but no
 
 What is the homotopy type of $F_{1,0}\cup F_{1,1}$? We know that this fiber is a configuration space of points satisfying the three conditions listed above.\\
 
-\begin{proposition}
-$\CF_{1,0}\cup\CF_{1,1}$ is homotopy equivalent to the homotopy colimit (iterated homotopy pushout) of the following diagram:\\
+\begin{proposition}\label{F10_F11}
+$F_{1,0}\cup F_{1,1}$ is homotopy equivalent to the homotopy colimit (iterated homotopy pushout) of the following diagram:\\
 \begin{center}
 	\begin{tikzcd}
 	&\frac{O(m)}{O(0)\times O(1)\times O(m-1)}\arrow[dl]\arrow[dr]&
@@ -1165,7 +1165,7 @@ B
 The homotopy colimit of this diagram is the double mapping cylinder: $B\cup A\times I \cup C$. We can see this by considering $U\simeq B\sqcup C$ and $V\cong A\times (0,1)\simeq A$. Then $U\cup V=A\times (0,\frac{1}{2}\cup A\times (-\frac{1}{2},1)\simeq A\sqcup A$.\\
 
 \begin{proposition}
-Let $k$ be the dimension of the strictly negative eigenspace. Then $\CF_{1,0}^{(k+1)}\cup \CF_{1,1}^{(k)}\cup \CF_{1,0}^{(k)}$ is homotopy equivalent to the pushout of the following diagram
+Let $k$ be the dimension of the strictly negative eigenspace. Then $F_{1,0}^{(k+1)}\cup F_{1,1}^{(k)}\cup F_{1,0}^{(k)}$ is homotopy equivalent to the pushout of the following diagram
 	\begin{center}
 	\begin{tikzcd}
 	&\frac{O(m)}{O(k)\times O(1)\times O(m-k-1)}\arrow[dl]\arrow[dr]&\\
@@ -1174,7 +1174,7 @@ Let $k$ be the dimension of the strictly negative eigenspace. Then $\CF_{1,0}^{(
 	\end{center}
 \end{proposition}
 
-Sketch of proof: Take $U=\CF_{1,0}^{(k+1)}\sqcup \CF_{1,0}^{(k)}$ and $V=\lbrace$all configuration spaces where there exists a unique eigenvalue closest to the origin which has a 1-dimensional eigenspace$\rbrace$. This gives an open cover of $\CF_{1,0}^{(k+1)}\cup \CF_{1,1}^{(k)}\cup \CF_{1,0}^{(k)}$.\\
+Sketch of proof: Take $U=F_{1,0}^{(k+1)}\sqcup F_{1,0}^{(k)}$ and $V=\lbrace$all configuration spaces where there exists a unique eigenvalue closest to the origin which has a 1-dimensional eigenspace$\rbrace$. This gives an open cover of $F_{1,0}^{(k+1)}\cup F_{1,1}^{(k)}\cup F_{1,0}^{(k)}$.\\
 
 Notice that: 
 \begin{align*}
@@ -1183,9 +1183,92 @@ V &\simeq \frac{O(m)}{O(k)\times O(1)\times O(m-k-1)}\\
 \Rightarrow U\cup V &\simeq \frac{O(m)}{O(k)\times O(1)\times O(m-k-1)}\sqcup \frac{O(m)}{O(k)\times O(1)\times O(m-k-1)}\\
 \end{align*}
 
-Claim: there exists a map from the homotopy pushout of the diagram listed in the proposition to $\CF_{1,0}^{(k+1)}\cup \CF_{1,1}^{(k)}\cup \CF_{1,0}^{(k)}$, which is compatible with the open cover listed above. 
+Claim: there exists a map from the homotopy pushout of the diagram listed in the proposition to $F_{1,0}^{(k+1)}\cup F_{1,1}^{(k)}\cup F_{1,0}^{(k)}$, which is compatible with the open cover listed above. 
 
 
+\begin{proposition}
+$F^{gMorse}$ is homotopy equivalent to the join of $S^{m-1}$ with  the homotopy colimit of:\\
+\begin{center}
+	\begin{tikzcd}
+	&\frac{O(m)}{O(0)\times O(m-1)}\arrow[dl]\arrow[dr]&
+	& \frac{O(m)}{O(1)\times O(m-2)}\arrow[dl]\arrow[dr]&\cdots\\
+	
+	\frac{O(m)}{O(0)\times O(m)} & &\frac{O(m)}{O(1)\times O(m-1)}
+	&& \frac{O(m)}{O(2)\times O(m-2)}\\
+	
+		&\cdots \frac{O(m)}{O(m-1)\times O(0)}\arrow[dl]\arrow[dr]&&&\\
+	\cdots & &\frac{O(m)}{O(m)\times O(0)}
+	\end{tikzcd}
+	\end{center}
+\end{proposition}
+This follows from Proposition \ref{F10_F11} above, and the fact that $V_0$ sits as a linebundle over $\frac{O(m)}{O(k)\times O(1)\times O(m-k-1)}$ corresponding to $O(1)$ with framembundle, $Fr(V_0)=\frac{O(m)}{O(k)\times O(m-k-1)}$. The sphere comes from $F_{1,0}^{(3)}\cup F_{1,1,0}$, and can be viewed as the unit sphere of $T_x^*M$.
 
+We see that the homotopy colimit of the diagram directly above is connected, and therefore we get the following:
+\begin{corollary}
+The fiber of $R^{gMorse}\to M$ is $m$-connected.
+\end{corollary}
+and therefore by Lemma \ref{substratal_lift} we get
+\begin{corollary}
+The map $R^{gMorse}\to M$ has the right lifting property for all pairs $(Z,A)$ $(m+1)$-substratal.
+\end{corollary}
+In particular this implies that it has the lifting property with respect to $(M,\emptyset)$, and $\big((M\times I),(M\times \partial I) \big)$. The latter implies that any two sections of $R^{gMorse}$ are connected, due to the following diagram:
+\xymat{M\times \partial I \ar[r]^{\alpha \sqcup \beta} \ar[d] & R^{gMorse}  \ar[d] \\
+M\times I \ar[r]_\pi \ar@{-->}[ur]^{\exists}& M}
+By letting $M\times \partial I=M\sqcup M$, $\alpha$ and $\beta$ any two sections, and $\pi$ the projection.
+
+\subsection{Morse functions and Handle decomposition}
+Why did we in the previous section spend a lot of energy specifically on Morse functions? Not only is this an interesting example in its own right, it will also help us to prove the $h$-principle in other cases. Assume we have a sheaf of interest $\CF$, and an object we are interested in $X$, with a decomposition $X=U\cup V$, then $\CF (X)$ can be recovered from $\CF (U)$, $\CF (V)$, and $\CF (U\cap V)$ by a pullback diagram. Our approach was then to construct a new sheaf $\CF^h$ with a map $\alpha: \CF\to \CF^h$, which was homotopically easier, and we wish to show that $\CF(X)\simeq \CF^h(X)$. Well by studying the following cube:
+\xymat{\CF(X) \ar[rr] \ar[dd] \ar[dr]^{\alpha_X} && \CF(U) \ar[dd]|\hole \ar[dr]^{\alpha_U} & \\
+&\CF^h(X) \ar[rr] \ar[dd] && \CF^h(U) \ar[dd] \\
+\CF(X) \ar[rr]|\hole \ar[dr]^{\alpha_V} && \CF(U\cap V)  \ar[dr]^{\alpha_{U\cap V}} & \\
+&\CF^h(X) \ar[rr] && \CF^h(U\cap V)   }
+Now if we can show that $\alpha_U$, $\alpha_{V}$, and $\alpha_{U\cup V}$ are weak equivalences, then since the front and the back square are pullbacks it follows that $\alpha_X$ is a weak equivalence. So our goal is to be able to subdivide our manifolds in to parts that play well with our various sheafs of interests, and here handle decomposition will be our primary tool
+
+We here follow \cite{milnor2016morse}, an actual complete treatment of the subject can be found there.
+\subsubsection{Handle Decomposition}
+For all $0\leq k \leq m$, we have a homeomorphism $D^m\cong D^k\times D^{m-k}$, that gives a description of the boundary as $\partial D^m = \partial(D^k) \times D^{m-k} \cup D^k\times \partial(D^{m-k})$, we call the $\partial(D^k) \times D^{m-k}$-part the base of the $(k-)$handle. 
+
+Let $M$ be a $m$ manifold, potentially with boundary. Given a smooth map from the base of a $k$-handle to $\partial M$, $f:\partial(D^k) \times D^{m-k}\to \partial M\subset M$, we can take the pushout of the diagram
+\xymat{\partial(D^k) \times D^{m-k} \ar[r]^f \ar@{^{(}->}[d] & M \\ D^k\times D^{m-k} &}
+This might give us a manifold with corners. We smooth out all corners to give us a new $m$-manifold, $M'$, potentially with boundary. 
+\begin{figure}[h]
+\includegraphics[width=8cm]{attach1handle.pdf}
+\caption{Attaching a 1-handle to a 2-disk along the blue line, and then smoothing corners\label{attach1handle}}
+\end{figure}
+We say that $M'$ was obtained from $M$ by attaching a $k$-handle along $f$. This should be thought of as the smooth analogue of attaching a CW-cell in the topologically case.
+
+\subsubsection{Morse Functions}
+\begin{figure}[h]
+\includegraphics[width=8cm]{torusmorse.pdf}
+\caption{A Morse function of the torus given by the height. \label{TorusMorse}}
+\end{figure}
+A Morse function can be use to obtain a handle decomposition. Let $f: M\to \mathbb{R}$ be a morse function. For each critical point, $p$, fix a coordinate chart centeret at $p$ with coordinates in standard form, i.e., $f(x_1,\ldots,x_m)=f(p)-\sum_{i=1}^k x_i^2+\sum_{j=k+1}^mx_j^2$. 
+\begin{definition}
+A gradient-like vector field, is a vector field $X$ satisfying the two following conditions:
+\begin{enumerate}
+\item Near a critical point $p$, $X=\frac{1}{2}\mathrm{grad}(f)$ in the chosen coordinates.
+\item For non-critical points $X(f)>0$.
+\end{enumerate}
+\end{definition}
+The factor of $\frac{1}{2}$ comes from the squaring in the standard coordinates. These exists, since we can define them locally, near critical points by the formula above, and away from critical points by choosing a local metric. We can then glue these together by using a partition function.
+
+Suppose $f$ has no critical points on $(a,b)\subset \mathbb{R}$, and fix $b\in (a,b)$, clearly $b$ is a regular value for $f$. Let $Y=f^{-1}(b)$, which is a $(m-1)$ submanifold of $M$, then gicen a gradient-like vector field we get a canonical identification: $Y\times (a,c)\cong f^{-1}((a,c))\subset M$, given by flowing along $X/X(f)$, see figure \ref{nocritpt} for an example.
+\begin{figure}[h]
+\includegraphics[width=8cm]{nocritpt.pdf}
+\caption{Continuing the example from figure \ref{TorusMorse}, we see the identification away from critical points. \label{nocritpt}}
+\end{figure}
+
+So now what happens at critical points? Well for most points in the preimage of a critical value of $f$ flowing along $X/X(f)$ is still well defined. So we should think about what happens in a neighbourhood of a critical point. 
+Note in figure \ref{TorusMorse} we can obtain the blue part from the redpart by attaching a $0$-handle to the empty set, since the base of a $0$-handle is $\partial D^0\times D^2=\emptyset$, and hence we just get $D^2$. So now the question is how do we move from the blue part to the purple part.
+Let $\overrightarrow{x}=(x_1,\ldots, x_k)$, and $\overrightarrow{y}=(x_{k+1},\ldots, x_m)$, and assume for simplicity that $f(p)=0$. Then in coordinates we have that $f(\overrightarrow{x},\overrightarrow{y})=-|\overrightarrow{x}|^2+|\overrightarrow{y}|^2$. We draw the level curves for the value $-1$ in blue, for $+1$ in red, and the curve $|x|\cdot |y|\leq \sinh(1)\cdot \cosh(1) $ in purple in figue . The grey area defined as the interior as these curves form an $m$-disk. By gluing the tales of the level sets together, by flowing along the gradient-like vector field, we can collapse the purple part of the boundary of the disk. We can then identify the thick blue part with $\partial(D^k)\times D^{m-k}$, the base of a $k$-handle, and the thick red part with $D^k\times \partial/D^{m-k})$.
+\begin{figure}[h]
+\includegraphics[width=8cm]{lvlset.pdf}
+\caption{The levelsets of our morse function at a critical point $p$. \label{lvlset}}
+\end{figure}
+\begin{figure}[h]
+\includegraphics[width=8cm]{critptlvlset.pdf}
+\caption{Continuing out example from figure \ref{TorusMorse}, we have the local chart around a critical point $p$, with level sets.}
+\end{figure}
+We will use the identification of the thick blue part to glue on a $k$-handle. In our example from figure \ref{TorusMorse} this will look similar to the gluing in figure \ref{attach1handle}.
 \printbibliography
 \end{document}
