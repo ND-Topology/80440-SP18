@@ -17,6 +17,7 @@
 \usepackage{amssymb}       
 \usepackage{amsfonts}
 \usepackage[all]{xy}
+\usepackage{enumerate}
 %\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
 \usepackage{url}
@@ -113,6 +114,7 @@
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\Hes}{Hess}
 \DeclareMathOperator{\Imm}{Imm}
+\DeclareMathOperator{\Morse}{Morse}
 \DeclareMathOperator{\Sub}{Sub}
 \DeclareMathOperator{\Gr}{Gr}
 \DeclareMathOperator{\image}{im}
@@ -1035,6 +1037,174 @@ This shows that the space of formal solutions, i.e. sections of the bundle $R \t
 \end{proof}
 Note that this does not show that the space of genuine solutions is connected. Here the condition being $k$-substratal is rather superficial. Later on we will introduce more powerful methods to remove this condition.
 
+\marginnote{\textbf{2-16-18}}
+
+We would like to finish understanding $R^{\Morse}$. We first recall the notion of a pushout.
+
+\begin{definition}
+Given maps $i: B \to A$, $j: B \to C$, the \emph{pushout} of $i$ and $j$ consists of a space, denoted $A \cup_B C$, and maps $A \to A\cup_B C$, $C \to A\cup_B C$ satisfying the property that, for any space $Z$ and maps $A \to Z$, $C \to Z$ making the following diagram commute:
+\begin{equation*}
+\begin{tikzcd}
+B \arrow[r, "j"] \arrow[d,"i"] & C \arrow[d] \arrow[ddr, bend left=10] \\
+A \arrow[r] \arrow[drr, bend right=10] & A \cup_B C \arrow[dashed, "\exists!", dr] \\
+& & Z
+\end{tikzcd}
+\end{equation*}
+there exists a unique map $A \cup_B C \to Z$ which again makes the diagram commute.
+\end{definition}
+
+An important property of the pushout is that it is not homotopy invariant; that is, there exist spaces fitting into the commutative diagram
+\begin{equation*}
+\begin{tikzcd}
+A \arrow[d,swap, "\simeq"] & B \arrow[l, "i"] \arrow[r, "j"] \arrow[d, "\simeq"]& C \arrow[d, "\simeq"] \\
+A' & B' \arrow[l,swap, "i'"] \arrow[r, "j'"] & C'
+\end{tikzcd}
+\end{equation*}
+such that $A \cup_B C \not\simeq A' \cup_{B'} C'$. Consider the following examples.
+\begin{example}
+The following two diagrams are pushout diagrams.
+\begin{equation*}
+\begin{tikzcd}
+S^1 \arrow[r,hook] \arrow[d,hook] \arrow[dr, phantom, "\ulcorner", very near start] & D^2 \arrow[d] \\
+D^2 \arrow[r] & D^2 \cup_{S^1} D^2 \approx S^1
+\end{tikzcd} \qquad
+\begin{tikzcd}
+S^1 \arrow[r,hook] \arrow[d,hook] \arrow[dr, phantom, "\ulcorner", very near start] & pt \arrow[d] \\
+pt \arrow[r]& D^2 \cup_{S^1} D^2 \approx pt
+\end{tikzcd}
+\end{equation*}
+However, $S^1 \not\simeq pt$. 
+\end{example}
+
+For this reason, we will instead consider the notion of a \emph{homotopy pushout}.
+
+\begin{definition}
+Given maps $i : B \to A$, $j: B \to C$, the \emph{homotopy pushout} of $i$ and $j$ consists of a space, denoted by either $A \cup_B^H C$ (or more simply by $M(i,j)$), and maps $A \to A \cup_B^H C$, $C \to A \cup_B^H C$ satisfying the property that, for any space $Z$ and maps $A \to Z$, $C \to Z$ making the following diagram commute:
+\begin{equation*}
+\begin{tikzcd}
+B \arrow[r, "j"] \arrow[d,"i"] & C \arrow[d] \arrow[ddr, bend left=10] \\
+A \arrow[r] \arrow[drr, bend right=10] & A \cup_B C \arrow[dashed, "\simeq", dr] \\
+& & Z
+\end{tikzcd}
+\end{equation*}
+there exists a map $A \cup_B C \to Z$ which makes the diagram commute up to homotopy.
+\end{definition}
+
+We note that $M(i,j)$ can be constructed explicitly by taking
+\begin{equation*}
+M(i,j) = A \cup_{B \times \{0\}} (B \times [0,1]) \cup_{B \times \{1\}} C.
+\end{equation*}
+We will soon show that the homotopy pushout is homotopy invariant. But first, we revisit the previous example. 
+
+\begin{example}
+For the maps $i,j: S^1 \hookrightarrow D^2$, we have
+\begin{align*}
+M(i,j) &= D^2 \cup_{S^1 \times \{0\}} (S^1 \times [0,1]) \cup_{S^1 \times \{1\}} D^2 \\
+&\cong S^2,
+\end{align*}
+
+and for the maps $i', j': S^1 \to pt$, we have
+\begin{align*}
+M(i',j') &= pt \cup_{S^1 \times \{0\}} (S^1 \times [0,1]) \cup_{S^1 \times \{1\}} pt \\
+&\cong S^2.
+\end{align*}
+So, in this case, the homotopy pushout is homotopy invariant. 
+\end{example}
+
+We now show that this is always the case.
+
+\begin{lemma}\label{hompoinvar}
+The homotopy pushout is homotopy invariant, i.e., if there is a commutative diagram
+\begin{equation*}
+\begin{tikzcd}
+A \arrow[d,swap, "\simeq"] & B \arrow[l, "i"] \arrow[r, "j"] \arrow[d, "\simeq"]& C \arrow[d, "\simeq"] \\
+A' & B' \arrow[l,swap, "i'"] \arrow[r, "j'"] & C'
+\end{tikzcd}
+\end{equation*}
+then the map $M(i,j) \to M(i',j')$ is a homotopy equivalence. 
+\end{lemma}
+
+\begin{proof}
+Let 
+\begin{align*}
+U &= A \cup_{B \times \{0\}} (B \times [0,1)) \simeq A\\
+V &= (B \times (0,1]) \cup_{B \times\{1\}} C \simeq C,
+\end{align*}
+and similarly define $U', V'$. Then $U \cap V \cong B \times (0,1) \simeq B$ and $U' \cap V' \simeq B'$. These spaces fit into the commutative diagram
+\begin{equation*}
+\begin{tikzcd}
+U \arrow[d, "\simeq"] & U \cap V \arrow[l, hook'] \arrow[r, hook] \arrow[d, "\simeq"] & V \arrow[d, "\simeq"] \\
+U' & U' \cap V' \arrow[l, hook'] \arrow[r,hook] & V'
+\end{tikzcd}
+\end{equation*}
+So, the map $M(i,j) = U \cup V \to U' \cup V' = M(i',j')$ is a homotopy equivalence.
+\end{proof}
+
+\begin{example}[Join of Spaces]
+Consider the case of a Cartesian product $X \times Y$ with projections $p_1: X \times Y \to X$ and $p_2: X \times Y \to Y$. Then $M(p_1, p_2)$ is called the \emph{join} of $X$ and $Y$, and is denoted $X \star Y$. 
+\end{example}
+
+\begin{example}
+The join of two intervals, $[0,1] \star [0,1]$ is homeomorphic to a $3$-simplex. 
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{joinint}
+\caption{The join of two intervals is a $3$-simplex}
+\end{figure}
+\end{example}
+
+\begin{example}
+\begin{enumerate}[(i)]
+\item $X \star pt \cong C(X)$, the cone on $X$.
+\item $X \star S^0 \cong S(X)$, the suspension of $X$.
+\item $S^m \star S^n \cong S^{m+n+1}$
+\end{enumerate}
+\end{example} 
+
+We now turn our attention the fiber bundle $F^{\Morse} \to R^{\Morse} \to X$. Recall that $R^{\Morse} = S_0^{(2)} \cup S_{1,0}$. Then we have the fibers $F_0^{(2)}$ and $F_{1,0}$ over $S_0^{(2)} \to X$ and $S_{1,0}$, respectively.
+
+\begin{proposition}
+If $\dim X = m$, then $F^{\Morse} \simeq S^{m-1} \star \left( \bigsqcup_k \Gr_k(\mathbb{R}^m) \right)$.
+\end{proposition}
+
+\begin{proof}
+Recall that by the Spectral Decomposition Theorem $F_{1,0} \simeq \bigsqcup_k \Gr_k(T_x X)$. So, it suffices to show that $F^{\Morse} \simeq S^{m-1} \star F_{1,0}$. 
+
+Let $U = F_0{(2)} =  \{ \text{jets with } df_x \neq 0\} \simeq S^{m-1}$ (this deformation retracts onto the sphere bundle $S(T_x^* X)$). Since we only care about the homotopy type of $F^{\Morse}$ and $X$ is locally Euclidean, we can assume $X = \mathbb{R}^m$. Then, after choosing coordinates, we can define $V = \{ \text{jets with non-deg Hessian} \} \simeq F_{1,0}$.  Then $U \cup V = F^{\Morse}$ and $U \cap V \simeq F_{1,0} \times \left( T_x^* X \setminus 0 \right) \simeq F_{1,0} \times S^{m-1}$. This is summarized in the following commutative diagram.
+\begin{equation*}
+\begin{tikzcd}
+S^{m-1} \arrow[d, "\simeq"] & F_{1,0} \times S^{m-1} \arrow[l,swap, "p_2"] \arrow[r, "p_1"] \arrow[d, "\simeq"] & F_{1,0} \arrow[d, "\simeq"] \\
+U & U \cap V \arrow[l, hook'] \arrow[r, hook] & V
+\end{tikzcd}
+\end{equation*}
+Thus, by Lemma \ref{hompoinvar}, 
+\begin{equation*}
+F^{\Morse} = U \cup V \simeq U \cup_{U \cap V}^H V \simeq F_{1,0} \cup_{F_{1,0} \times S^{m-1}}^H S^{m-1} \simeq F_{1,0} \star S^{m-1},
+\end{equation*}
+and so we are done.
+\end{proof}
+
+This proposition along with the Freudenthal Suspension Theorem \cite{may1999concise} immediately gives the following corollary.
+
+\begin{corollary}
+If $\dim X = m$, then $F^{\Morse}$ is $(m-1)$-connected.
+\end{corollary}
+
+\begin{proposition}
+If $X$ is $(m-1)$-substratal, the the space of formal solution to $R^{\Morse}$ is connected.
+\end{proposition}
+
+\begin{proof}
+Proposition from 2-14-18 (not added yet).
+\end{proof}
+
+\begin{corollary}
+Morse functions satisfy the $0$-parametric $h$-principle on $X$, provided that $X$ is $(m-1)$-substratal.
+\end{corollary}
+
+
+
+
 \section{}
 
 We refocus our attention to the Morse differential relation $R=S^{(2)}_0 \cup S_{1,0} \subset J^2(X,\R)$ and its genuine solutions.  As it was for immersions, it turns out that the space of genuine solutions is not connected.  But in the case of Morse functions, we can do something close.  To do this we will need to allow for functions that have nondegenerate Hessians in our paths of functions. Thus we recall the definition of the higher analogues of the Hessian.
@@ -1132,7 +1302,7 @@ If $q$ is non-degenerate (i.e. $q\neq 0$), then there exists an element $x\in V_
 
 We can think of these parts of the fiber through the following schematic (but note that this is just a schematic; really this whole thing like over the origin):\\
 \begin{center}
-\includegraphics[scale=.5]{fiber01}
+%\includegraphics[scale=.5]{fiber01}
 \end{center}
 
 What is the homotopy type of $F_{1,0}\cup F_{1,1}$? We know that this fiber is a configuration space of points satisfying the three conditions listed above.\\
