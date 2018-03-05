@@ -472,7 +472,7 @@ From this perspective, it is clear that it suffices to produce a retract
 $$B \times \{0\} \cup_{A \times \{0\}} A \times [0,1] \dashleftarrow B \times [0,1].$$
 Indeed, applying $C \times -$ to the retract and then composing with the horizontal arrow provides an extension. 
 
-\begin{proposition}
+\begin{proposition} \label{prop:mapsfromcwpair}
 If $A \hookrightarrow B$ is a relative CW pair, then $p : X^B \to X^A$ is a Hurewicz fibration.
 \end{proposition}
 
@@ -1439,6 +1439,230 @@ Let $\overrightarrow{x}=(x_1,\ldots, x_k)$, and $\overrightarrow{y}=(x_{k+1},\ld
 \includegraphics[width=8cm]{critptlvlset.pdf}
 \caption{Continuing out example from figure \ref{TorusMorse}, we have the local chart around a critical point $p$, with level sets.}
 \end{figure}
-We will use the identification of the thick blue part to glue on a $k$-handle. In our example from figure \ref{TorusMorse} this will look similar to the gluing in figure \ref{attach1handle}.
+We will use the identification of the thick blue part to glue on a
+$k$-handle. In our example from figure \ref{TorusMorse} this will look
+similar to the gluing in figure \ref{attach1handle}.
+
+
+%%%%%%%%%%
+%
+% Insert notes from Feb 28 here
+%
+%%%%%%%%%%
+
+\section{Strategy to prove h-principle}
+
+% Add some stuff from Feb 28 here
+
+\subsection{Example of $R = J^0(X,Y)$}
+\marginnote{\textbf{3/2/2018}}
+
+We will consider first applying our outline for a general proof of the
+h-principle to the toy example case of the partial differential
+relation $R = J^0(X,Y)$. The space of formal solutions is a functor
+$\CF(-) = C^\infty(- , Y)$, while the space of sections of the
+$J^0(X,Y)\to X$ defines a functor $\CFh(-) = C^0(-,Y)$. In this case
+the h-principle will say that $C^\infty(X,Y) \to C^0(X,Y)$ is a
+homotopy equivalence for any $X,Y$. %% Is it really _any_ that we get? 
+(Of course, this fact can be seen as a consequence of the classical smooth
+approximation theorem.)
+
+We've seen that if $V\subseteq U$ are open and $Y=\R$, then the maps
+$C^\infty(U)\to C^\infty(V)$ and $C^0(U)\to C^0(V)$ are not
+surjective, that is, the sheaves $C^\infty(-,\R)$ and $C^0(-, \R)$ are
+not {\em flabby} and thus cannot be Serre fibrations. On the other
+hand, these sheaves are {\em soft}; for any closed subset
+$A\subseteq X$, the map $C^\infty(X) \to C^\infty(A)$ is surjective,
+when $C^\infty(A)$ is appropriately defined. To find an appropriate
+definition, we will work with certain closed submanifolds. Let $\R_+ =
+[0,\infty)$. 
+
+\begin{definition} \label{def:neat} Let $X$ be a manifold with
+  corners. A subset $X_0\subset X$ is a {\em neat codimension zero
+    submanifold} if there is a function $u: X\to \R$ with
+  $X_0 = u^{-1}(\R_+)$ such that $u$, its restriction to $\partial X$,
+  and its restriction to positive dimensional corner strata are all
+  transverse to $0\in \R$.
+\end{definition}
+
+So if $X_0\subseteq X$ is neat and $x\in u^{-1}(0)$, then there is a
+neighborhood $V\subset X$ of $x$ with local coordinates such that
+$X_0 \subseteq X$ locally looks likes
+\[\R_+ \times \R^{m-k-1}\times \R_+^k \subseteq \R\times
+  \R^{m-k-1}\times \R_+^k,\] where $m = \dim X$ and $k$ is the
+codimension of the corner stratum to which $x$ belongs.
+
+\begin{example}
+  The submanifold $A_k = (S^{k-1}\times D^1) \times D^{m-k} \subseteq
+  D^k\times D^{m-k}$ is neat.
+\end{example}
+
+\begin{definition} \label{def:flexible}
+  $\CF$ is {\em flexible} if for every neat $X_0\subseteq X$ the
+  restriction map $\CF(X)\to \CF(X_0)$ is a Serre fibration.
+\end{definition}
+
+\begin{definition} \label{def:htpyinvt}
+  $\CF$ is {\em homotopy invariant} if $\CF(X) \to \CF(X_0)$ is a weak
+  homotopy equivalence for all neat $X_0\subseteq X$ that are homotopy
+  equivalent. 
+\end{definition}
+
+Our goal for the next two lectures is to show that $C^\infty(-,Y)$ and
+$C^0(-, Y)$ are flexible.
+
+\begin{lemma}[Key Lemma] \label{lem:compactmapstoRn}
+  If $L$ is a compact manifold then $X^\infty(L\times\R, \R^n) \to
+  C^\infty(L\times \R+, \R^n)$ admits a continuous section. 
+\end{lemma}
+
+\begin{exercise} \label{ex:vectorspacesection} Prove that any linear
+  map $V\to W$ of topological vector spaces that admits a (possibly
+  nonlinear) section is a Hurewicz fibration (and hence a Serre
+  fibration).
+\end{exercise}
+
+\begin{proposition} \label{prop:mapstoRn}
+  If $X_0\subseteq X$ is neat then $C^\infty(-, \R^n)$ is flexible.
+\end{proposition}
+
+\begin{proof}
+  By \ref{ex:vectorspacesection} it suffices to show that if
+  $X_0\subseteq X$ is neat then
+  $C^\infty(X,\R^n) \to C^\infty(X_0, \R^n)$ admits a continuous
+  section. We will perform a sequence of reductions to be able to
+  apply \ref{lem:compactmapstoRn}.
+
+  {\bf Step 1:} We may replace $X$ with any smaller open neighborhood
+  $U$ of $X_0$. Indeed, given a section $\bar s: C^\infty(X_o,
+  \R^n) \to C^\infty U, \R^n)$ choose a smooth bump function
+  $\rho: X\to [0,1]$ such that $\rho\mid_{X_0} \equiv 1$ and
+  $\operatorname{supp}(\rho)\subseteq U$, then define a section
+  $s:C^\infty(X_0, \R^n) \to C^\infty(X, \R^n)$ by
+  \[
+    s(f)(x) = \begin{cases} 0 &x\notin U\\ \rho(x) \bar s(f)(x) & x\in
+      U. 
+    \end{cases}
+  \]
+
+  {\bf Step 2:} We may delete any closed subset $A$ from the interior
+  of $X_0$. This is an application of the sheaf gluing property: given
+  a family of functions $f_t \in C^\infty(X_0, \R^n)$ with
+  restrictions $r(f_t) \in C^\infty(X_0\setminus A, \R^n)$, any family
+  of lifts $\widetilde{r(f_t)} : (U\setminus A)\to \R^n$ extends to a
+  family of lifts $\tilde f_t : U\to \R^n$.
+
+  {\bf Step 3:} Let $u:X\to \R$ be as in the definition of neat
+  manifold, so that $X_0 = u^{-1}(\R_+)$, and let $M = u^{-1}(0)$. By
+  replacing $X$ with $U = u^{-1}(-\epsilon,\infty)$ for sufficiently
+  small $\epsilon$, by Step 1 we may assume that each component of $X$
+  contains exactly one component of $X_0$. By deleting a closed subset
+  of the form $u^{-1}([N,\infty))$ for each component of $X_0$, by
+  Step 2 we may assume the pair $(X, X_0)$ is isomorphic to $(M\times
+  \R, M\times \R_+)$.
+
+  Now choose a locally finite cover $\{U_i\}$ of $M$ such that each
+  $\bar U_i$ is compact. Choose a smooth partition of unity
+  $\{\phi_i\}$ subordinate to $\{U_i\}$. Then by
+  \ref{lem:compactmapstoRn} there are sections 
+  \[ s_i : C^\infty(\bar U_i\times \R_+, \R^n) \to C^\infty(\bar
+    U_i\times \R, \R^n).\]
+  Then the desired map $s: C^\infty(X_0,\R^n) \to C^\infty(X, \R^n)$
+  is given by
+  \[
+    s(f)(x) = \sum_i \phi_i(x) s_i(f)(x).
+  \]
+\end{proof}
+
+\begin{lemma} \label{lem:c0functorisnice}
+  $C^0(-, Y)$ is homotopy invariant and flexible.
+\end{lemma}
+\begin{proof}
+  Take any manifold with corners $X$ with a neat submanifold
+  $X_0 \subset X$. Then $(X, X_0)$ is a CW-pair (and in fact an
+  NDR-pair).
+  %
+  % 
+  % Find a reference for this? ^^^
+  % 
+  %
+  Flexibility of $C^0(-,Y)$ thus follows immediately by
+  \ref{prop:mapsfromcwpair}. To see homotopy invariance of $C^0(-,Y)$,
+  define a homotopy equivalence $C^0(X_0, Y) \simeq C^0(X,Y)$ simply
+  by precomposing with a homotopy equivalence $X_o \simeq X$.
+\end{proof}
+
+\begin{proposition} \label{prop:mapstonoboundary}
+  If $Y$ is a manifold without boundary, then $C^\infty(-, Y)$ is
+  flexible. 
+\end{proposition}
+
+\begin{proof}
+  Fix a manifold with boundary $X$ and neat submanifold
+  $X_0\subseteq X$. Fix a smooth embedding $Y\to \R^n$ for
+  sufficiently large $n$, and find $N\subseteq \R^n$ a tubular
+  neighborhood of $Y$. There is a smooth retraction $r: N \to Y$, and
+  postcomposition with $r$ shows that
+  $C^\infty(X,Y)\to C^\infty(X_0, Y)$ is a retract of
+  $C^\infty(X, N) \to C^\infty(X_0, N)$. Therefore by \ref{RLPclosed}
+  it suffices to show that $C^\infty(X, N) \to ^\infty(X_0, N)$ is a
+  Serre fibration.
+
+  We need to solve the lifting problem
+  \begin{equation*}
+    \begin{tikzcd}
+      D^\ell \times \{0\} \arrow[r] \arrow[hookrightarrow]{d}
+      & C^\infty(X,N) \arrow[d] 
+      \\
+      D^\ell \times I \arrow[r] \arrow[dashed,ur] 
+      & C^\infty(X_0, N) 
+    \end{tikzcd}
+  \end{equation*}
+  Postcomposition with the inclusion $N\to \R^n$ extends this to a
+  diagram
+  \begin{equation*}
+    \begin{tikzcd}
+      D^\ell \times \{0\} \arrow[r] \arrow[hookrightarrow]{d}
+      & C^\infty(X,N) \arrow[d] \arrow[r]
+      & C^\infty(X, \R^n) \arrow[d] 
+      \\
+      D^\ell \times I \arrow[r] \arrow[dashed, urr]
+      & C^\infty(X_0, N) \arrow[r]
+      & C^\infty(X_0, \R^n)
+    \end{tikzcd}
+  \end{equation*}
+  This lifting problem has a solution
+  $h: D^\ell\times I \to C^\infty(X,\R^n)$ by \ref{prop:mapstoRn}. We
+  want to modify $h$ so that $h(a,t)(x)\in N$ for all $a\in D^\ell$,
+  $t\in I$, and $x\in X$.
+
+  We know already that $h(a,t)(x_0) \in N$ for all $x_0\in X_0$, and
+  that $h(a,0)(x)\in N$ for all $x\in X$. Therefore there is a
+  %
+  %
+  smooth %%% continuous? %%%
+  % 
+  % 
+  ``first escape'' function $\epsilon :X\to (0,1]$ such
+  that $h(a,t)(x)\in N$ for all $a\in D^\ell$ and
+  $0 < t \leq \epsilon(x)$, and such that
+  $\epsilon \mid_{X_0} \equiv 1$. Let 
+  \[
+    X\times [0,\epsilon] = \{ (x,t) \mid 0\leq t \leq \epsilon(x) \}
+  \]
+  There is a diffeomorphism
+  $\phi: X\times [0,1] \cong X\times [0,\epsilon]$. Let $\tilde h$ be
+  the composition of $\phi$ with the restriction of $h$ to $X\times
+  D^\ell \times [0,\epsilon]$. This solves the desired lifting problem.
+\end{proof}
+
+\begin{proposition} \label{prop:mapstoyinvariant}
+  $C^\infty(-,Y)$ is homotopy invariant. %%% For Y without boundary?
+\end{proposition}
+\begin{proof}
+  Next time
+\end{proof}
+
+
 \printbibliography
 \end{document}
