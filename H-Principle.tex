@@ -1465,7 +1465,7 @@ relation $R = J^0(X,Y)$. The space of formal solutions is a functor
 $\CF(-) = C^\infty(- , Y)$, while the space of sections of the
 $J^0(X,Y)\to X$ defines a functor $\CFh(-) = C^0(-,Y)$. In this case
 the h-principle will say that $C^\infty(X,Y) \to C^0(X,Y)$ is a
-homotopy equivalence for any $X,Y$. %% Is it really _any_ that we get? 
+weak equivalence for any $X,Y$. %% Is it really _any_ that we get?
 (Of course, this fact can be seen as a consequence of the classical smooth
 approximation theorem.)
 
@@ -1489,7 +1489,7 @@ definition, we will work with certain closed submanifolds. Let $\R_+ =
 
 So if $X_0\subseteq X$ is neat and $x\in u^{-1}(0)$, then there is a
 neighborhood $V\subset X$ of $x$ with local coordinates such that
-$X_0 \subseteq X$ locally looks likes
+$X_0 \subseteq X$ looks likes
 \[\R_+ \times \R^{m-k-1}\times \R_+^k \subseteq \R\times
   \R^{m-k-1}\times \R_+^k,\] where $m = \dim X$ and $k$ is the
 codimension of the corner stratum to which $x$ belongs.
@@ -1506,8 +1506,8 @@ codimension of the corner stratum to which $x$ belongs.
 
 \begin{definition} \label{def:htpyinvt}
   $\CF$ is {\em homotopy invariant} if $\CF(X) \to \CF(X_0)$ is a weak
-  homotopy equivalence for all neat $X_0\subseteq X$ that are homotopy
-  equivalent. 
+  homotopy equivalence for all neat $X_0\subseteq X$ such tha the inclusion
+  is a homotopy equivalence.
 \end{definition}
 
 Our goal for the next two lectures is to show that $C^\infty(-,Y)$ and
@@ -1515,7 +1515,7 @@ $C^0(-, Y)$ are flexible.
 
 \begin{lemma}[Key Lemma] \label{lem:compactmapstoRn}
   If $L$ is a compact manifold then $C^\infty(L\times\R, \R^n) \to
-  C^\infty(L\times \R+, \R^n)$ admits a continuous section. 
+  C^\infty(L\times \R_+, \R^n)$ admits a continuous section. 
 \end{lemma}
 
 \begin{exercise} \label{ex:vectorspacesection} Prove that any linear
@@ -1536,13 +1536,13 @@ $C^0(-, Y)$ are flexible.
   apply \ref{lem:compactmapstoRn}.
 
   {\bf Step 1:} We may replace $X$ with any smaller open neighborhood
-  $U$ of $X_0$. Indeed, given a section $\bar s: C^\infty(X_o,
-  \R^n) \to C^\infty U, \R^n)$ choose a smooth bump function
+  $U$ of $X_0$. Indeed, given a section $\overline s: C^\infty(X_0,
+  \R^n) \to C^\infty(U, \R^n)$, choose a smooth bump function
   $\rho: X\to [0,1]$ such that $\rho\mid_{X_0} \equiv 1$ and
   $\operatorname{supp}(\rho)\subseteq U$, then define a section
   $s:C^\infty(X_0, \R^n) \to C^\infty(X, \R^n)$ by
   \[
-    s(f)(x) = \begin{cases} 0 &x\notin U\\ \rho(x) \bar s(f)(x) & x\in
+    s(f)(x) = \begin{cases} 0 &x\notin U\\ \rho(x) \overline s(f)(x) & x\in
       U. 
     \end{cases}
   \]
@@ -1564,10 +1564,10 @@ $C^0(-, Y)$ are flexible.
   \R, M\times \R_+)$.
 
   Now choose a locally finite cover $\{U_i\}$ of $M$ such that each
-  $\bar U_i$ is compact. Choose a smooth partition of unity
+  $\overline U_i$ is compact. Choose a smooth partition of unity
   $\{\phi_i\}$ subordinate to $\{U_i\}$. Then by
   \ref{lem:compactmapstoRn} there are sections 
-  \[ s_i : C^\infty(\bar U_i\times \R_+, \R^n) \to C^\infty(\bar
+  \[ s_i : C^\infty(\overline U_i\times \R_+, \R^n) \to C^\infty(\overline
     U_i\times \R, \R^n).\]
   Then the desired map $s: C^\infty(X_0,\R^n) \to C^\infty(X, \R^n)$
   is given by
@@ -1591,7 +1591,7 @@ $C^0(-, Y)$ are flexible.
   Flexibility of $C^0(-,Y)$ thus follows immediately by
   \ref{prop:mapsfromcwpair}. To see homotopy invariance of $C^0(-,Y)$,
   define a homotopy equivalence $C^0(X_0, Y) \simeq C^0(X,Y)$ simply
-  by precomposing with a homotopy equivalence $X_o \simeq X$.
+  by precomposing with a homotopy equivalence $X_0 \simeq X$.
 \end{proof}
 
 \begin{proposition} \label{prop:mapstonoboundary}
@@ -1603,11 +1603,12 @@ $C^0(-, Y)$ are flexible.
   Fix a manifold with boundary $X$ and neat submanifold
   $X_0\subseteq X$. Fix a smooth embedding $Y\to \R^n$ for
   sufficiently large $n$, and find $N\subseteq \R^n$ a tubular
-  neighborhood of $Y$. There is a smooth retraction $r: N \to Y$, and
-  postcomposition with $r$ shows that
+  neighborhood of $Y$. There is a smooth retraction $r: N \to Y$
+  by regarding $N$ as the normal bundle and using scalar
+  multiplication. Postcomposition with $r$ shows that
   $C^\infty(X,Y)\to C^\infty(X_0, Y)$ is a retract of
   $C^\infty(X, N) \to C^\infty(X_0, N)$. Therefore by \ref{RLPclosed}
-  it suffices to show that $C^\infty(X, N) \to ^\infty(X_0, N)$ is a
+  it suffices to show that $C^\infty(X, N) \to C^\infty(X_0, N)$ is a
   Serre fibration.
 
   We need to solve the lifting problem
@@ -1693,9 +1694,9 @@ Note the weakening in the last condition: the map isn't required to be the ident
 
   Let $u:X\to \R$ be such that $X_0=u^{-1}(\R_+)$, and set $A=u^{-1}(0)$. $A$ is a codimension 1 submanifold, and moreover, nearby to a point of $A$, $X_0$ looks like the inclusion
   \[  
-    \R_+\times \R^{m-k-1}\times \R_+^k\subset \R\times \R^{m-k--1}\times \R^k_+
+    \R_+\times \R^{m-k-1}\times \R_+^k\subset \R\times \R^{m-k-1}\times \R^k_+.
   \]
-  and $A$ is the subset of the left-hand side with first coordinate 0. So, there exists a tubular neighborhood, which here is a smooth embedding
+  $A$ is the subset of the left-hand side with first coordinate 0. So, there exists a tubular neighborhood, which here is a smooth embedding
   \[
     A\times \R\to X.
   \]
@@ -1703,9 +1704,16 @@ Note the weakening in the last condition: the map isn't required to be the ident
 
 \noindent  \textbf{Step 2:} Build a smooth map $X\times I\to X$ which is constant outside $N$, and near the origin inside of $N$ sends $A\times\{0\}$ to $A\times\{-1\}$.
 
-  Using bump functions on $\R$, we find find a continuous family of smooth maps $\phi_t:\R \to \R$ for $t\in I$ such that $\phi_t(0)=-t$, $\phi_t$ is the identity outside of a neighborhood of $0$, and $\phi_t$ is monotonic (thus a diffeomorphism). In the future there will be a picture.\\
+  Using bump functions on $\R$, we find find a continuous family of smooth maps $\phi_t:\R \to \R$ for $t\in I$ such that $\phi_t(0)=-t$, $\phi_t$ is the identity outside of a neighborhood of $0$, and $\phi_t$ is monotonic (thus a diffeomorphism). We can extend $\phi_t$ to be a function $X\to X$ by setting $\phi_(a,r)=(a,\phi_t(r))$ on $N$, and $\phi_t$ is the identity outside of $N$, as in Figure~\ref{fig:phi_t}.
 
-  % TODO: picture
+  \begin{figure}[h]
+    
+  \centering
+\includegraphics[width=5cm]{phi_t_2}
+\includegraphics[width=7cm]{phi_t}
+\caption{Left: $\phi_t$ as a function $\R\to\R$. Right: $\phi$ shifts down $X$, pushing a neighborhood of $A$ into $X_0$.\label{fig:phi_t}}
+\end{figure}
+
 
 \noindent  \textbf{Step 3:} Combine the continuous deformation retract with the smooth translation function to set up for smooth approximation.
 
@@ -1714,9 +1722,12 @@ Note the weakening in the last condition: the map isn't required to be the ident
     H''_t = \phi_t\circ H'_t\circ \phi_t.
   \]
 
-  (TODO: Picture)
-  
-  This map is smooth on a neighborhood of $X_0$ by the construction of $\phi$, and the $H''_t(X_0)\subseteq X_0$ for all $t$. Furthermore, we can take $H'$ to be constant for small $t$ such that $H''$ is smooth on a neighborhood of $X_0\times I\cup X\times\{0\}$.\\
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=8cm]{smooth_retraction}
+    \caption{A continous homotopy on $X$ whose image is in the interior of $X_0$.\label{fig:smooth_retraction}}
+  \end{figure}
+  This map, shown in Figure~\ref{fig:smooth_retraction}, is smooth on a neighborhood of $X_0$ by the construction of $\phi$, and the $H''_t(X_0)\subseteq X_0$ for all $t$. Furthermore, we can take $H'$ to be constant for small $t$ such that $H''$ is smooth on a neighborhood of $X_0\times I\cup X\times\{0\}$.\\
 
 \noindent\textbf{Step 4:} Use relative smooth approximation.
 
@@ -1754,8 +1765,11 @@ up to homotopy rel boundary in the bottom triangle. In order to construct such a
   D^k = \partial D^k\times \left[0,\tfrac12\right]\bigcup_{\partial D^k\times\left\{\tfrac12\right\}}D^k_{\tfrac12}
 \]
 
-(TODO: Picture)
-
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4cm]{disk_s_t}
+    \caption{The disk as a union of a cylinder and a smaller disk.\label{fig:disk_s_t}}
+\end{figure}
 Write 
 \[
 S = \partial D^k\times \left[0,\frac12\right]
@@ -1764,6 +1778,7 @@ and
 \[
 T = D^k_{\tfrac12} 
 \]
+as shown in Figure~\ref{fig:disk_s_t}.
 Our outer square gives us maps $f: D^k\times X_0\to Y$ and $f_0: \partial D^k\times X\to Y$ which are smooth in the second coordinate. Since we have already proven flexibility, we can lift $f|_S$ to some
 \[
   g: S\times X \to Y
@@ -1783,14 +1798,17 @@ as
 where $t$ is the interval coordinate on $S$.
 This map for $t=0$ is exactly equal to to $f_0$ since $H_0 = \id_X$. The bottom triangle doesn't commute on the nose, but it does up to homotopy. Define a homotopy $G: I\times D^k\times X_0 \to Y$ as
 \[
-G_S(d,x_0) =   \begin{cases}
+G_s(d,x_0) =   \begin{cases}
     g(d, H(x,2ts)) & d\in S\\
     f(d, H(x,s)) & d\in T
   \end{cases}.
 \]
 Then, for $s=1$, we recover $\tilde f|_{X_0}$, and for $s=0$, we recover the original $f$.
-
-(TODO: Picture)
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=10cm]{htpy_invariant}
+  \caption{$\tilde f$ for $k=1$.}
+\end{figure}
 \end{proof}
 \printbibliography
 \end{document}
