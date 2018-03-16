@@ -1207,7 +1207,7 @@ Morse functions satisfy the $0$-parametric $h$-principle on $X$, provided that $
 
 
 
-\section{}
+\section{Morse functions and Generalized Morse functions}
 
 We refocus our attention to the Morse differential relation $R=S^{(2)}_0 \cup S_{1,0} \subset J^2(X,\R)$ and its genuine solutions.  As it was for immersions, it turns out that the space of genuine solutions is not connected.  But in the case of Morse functions, we can do something close.  To do this we will need to allow for functions that have nondegenerate Hessians in our paths of functions. Thus we recall the definition of the higher analogues of the Hessian.
 
@@ -1452,7 +1452,7 @@ similar to the gluing in figure \ref{attach1handle}.
 %
 %%%%%%%%%%
 
-\section{Strategy to prove h-principle}
+\section{The h-principle for Open Partial Differential Relations}
 
 % Add some stuff from Feb 28 here
 
@@ -1513,7 +1513,7 @@ codimension of the corner stratum to which $x$ belongs.
 Our goal for the next two lectures is to show that $C^\infty(-,Y)$ and
 $C^0(-, Y)$ are flexible.
 
-\begin{lemma}[Key Lemma] \label{lem:compactmapstoRn}
+\begin{lemma}[Key Lemma (Cor.~\ref{cor:Compact_extension_of_function} below)] \label{lem:compactmapstoRn}
   If $L$ is a compact manifold then $C^\infty(L\times\R, \R^n) \to
   C^\infty(L\times \R_+, \R^n)$ admits a continuous section. 
 \end{lemma}
@@ -1810,5 +1810,145 @@ Then, for $s=1$, we recover $\tilde f|_{X_0}$, and for $s=0$, we recover the ori
   \caption{$\tilde f$ for $k=1$.}
 \end{figure}
 \end{proof}
+
+
+\subsection{A surprising lemma of \'Emile Borel}
+
+In this section we will prove a somewhat technical lemma which is the key to proving that the sheaf $C^\infty(-,Y)$ is a flexible sheaf. The material of this section is mostly taken from Michael Weiss' excellent notes on immersion theory. 
+
+
+
+Let $V$ be a finite dimensional vector space and consider the space $C^\infty(\R, V)$ of smooth $V$-valued functions on the line. Taking derivatives at the origin gives us a map,
+\begin{equation*}
+	j^r_0: C^\infty(\R, V) \to J^r_0(\R, V) \cong \prod_{i=0}^r V,
+\end{equation*}
+and we have seen that there is a smooth section. Specifically a smooth section is provided by the polynomial equation:
+\begin{equation*}
+	(v_i)_{i=0}^{r} \mapsto \sum_{k=0}^r \frac{x^k}{k!} \cdot v_k.
+\end{equation*}
+
+In this section we will extend this idea in two directions. First we will let $r \to \infty$ and second we will replace $V$ with  (something similar to) the infinite dimensional vector space $C^\infty(L, \R)$ for some $n$-manifold $L$. 
+
+Although it seems easier, already the first generalization, letting $r \to \infty$, has most of the technical difficulties. We cannot simply use the above polynomial expression since in general this will (drastically) fail to converge to a smooth function. Specifically the behavior of the $r^\textrm{th}$-order polynomial expressions will vary erratically near the ends of $\R$. 
+
+We can try to fix this by utilizing a bump function. 
+Choose, once and for all, a smooth function $\rho: \R \to [0, \infty)$ such that $\rho \equiv 1$ in a neighborhood of $0 \in \R$, and such that $\rho$ vanishes outside the interval $[-1,+1]$. In general the naive guess $\sum \frac{x^i}{i!} \rho(x) v_i$ will still fail to converge. Instead we may look for an expression of the form:
+\begin{equation*}
+	(v_i)_{i=0}^\infty \mapsto \sum_{k=0}^\infty \frac{x^k}{k!} \rho(\mu_k x) \cdot v_k.
+\end{equation*}
+where the $\mu_k \geq 1$ are scalar factors which depend continuously on the $v_i$'s. 
+
+
+\begin{lemma}
+	There exists a continuous section of the infinite order jet prolongation map:
+	\begin{equation*}
+		j^\infty_0: C^\infty(\R, V) \to J_0^\infty(\R, V) \cong \prod_{i=0}^\infty V
+	\end{equation*}
+	(where, as usual, the right-hand-side is given the product topology).
+\end{lemma}
+
+\begin{proof}
+	As proposed above, the section will be given by an expression of the form
+	\begin{equation} \label{eqn:Section_formula_1}
+		(v_i)_{i=0}^\infty \mapsto \sum_{k=0}^\infty \frac{x^k}{k!} \rho(\mu_k x) \cdot v_k = f(x).
+	\end{equation}
+	where the $\mu_k$ depend continuously on the $v_i$'s. 
+	%Let $f_r(x)$ be defined by the partial sum
+	%\begin{equation*}
+	%	f_r(x) =  \sum_{k=0}^r \frac{x^k}{k!} \rho(\mu_k x) \cdot v_k.
+	%\end{equation*}
+	We must find continuous expressions for the $\mu_i$'s which ensure that each for each $r$, the series of functions
+	\begin{equation} \label{eqn:Partial_derivative_sequence}
+		\sum_{k=0}^\infty \frac{\partial^r}{\partial x^r} \left( \frac{x^k}{k!} \rho(\mu_k x) \cdot v_k \right)
+	\end{equation}
+	converges uniformly on $\R$. 
+	
+	Let $\psi_i(x) := (i!)^{-1} x^i \rho(x)$. Then the $i^\textrm{th}$-term of Equation (\ref{eqn:Section_formula_1}) is given by $(\mu_i)^{-i} \psi_i(\mu_ix) v_i$. Let $M_i$ be defined by
+	\begin{equation*}
+		M_i := \max_{\substack{r < i \\ x \in [-1,1]}} \left\{ \frac{\partial^r}{\partial x^r} \psi(x) v_i \right\}.
+	\end{equation*}
+	This is a continuous function of $v_i$. 
+	
+	By construction (and using the assumption that each $\mu_i \geq 1$, and that $\rho$ is identically zero outside $[-1,+1]$) we obtain that when $i \geq r$, the $i^\textrm{th}$-term of the series (\ref{eqn:Partial_derivative_sequence}) is bounded (at each point of $\R$) by 
+	\begin{equation*}
+		|i^\textrm{th}\textrm{-term of (\ref{eqn:Partial_derivative_sequence})}| \leq (\mu_i)^{-i} (\mu_i)^r M_i \leq M_i \mu_i^{-1}. 
+	\end{equation*}
+	Thus setting $\mu_i = \max \{1, 2^i M_i \}$ (which again is continuous in $v_i$) ensures that for each $r$ the series (\ref{eqn:Partial_derivative_sequence}) is uniformly bounded. Hence equation (\ref{eqn:Section_formula_1}) defines a smooth $V$-valued function $f(x)$ on $\R$. This gives us a set-theoretical section of $j^\infty_0$. 
+	
+We will now show that the assignment
+\begin{equation*}
+	s: \nu = (v_i)_{i=0}^\infty \mapsto f_\nu(x) = \sum_{k=0}^\infty \frac{x^k}{k!} \rho(\mu_k x) \cdot v_k
+\end{equation*}
+  is continuous in $\nu \in \prod_{i=0}^\infty V $. Let $U \subseteq C^\infty(\R, V)$ be an open subset and let $\nu_0 \in s^{-1}(U)$. It will suffice to show that there exists an open neighborhood of $\nu_0$ contained in $s^{-1}(U)$. Set $f_0 = s(\nu_0)$.
+
+Recall that we have a neighborhood basis of open subsets of $C^\infty(\R, V)$ for the weak $C^\infty$-topology given by
+\begin{equation*}
+	B^{(r)}_{\delta,K}(f_0) = \{ f \in C^\infty(\R, V) \; | \; \sup_{x \in K}|| j^rf(x) - j^rf_0(x) || < \delta \}
+\end{equation*} 
+where $r$ is a non-negative integer, $K \subseteq \R$ is compact, $\delta > 0$, and $f_0 \in C^\infty(\R, V)$. Thus there exists such a $B^{(r)}_{\delta, K}(f_0)$ contained in $U$. 
+
+For each fixed $p$ and each $r$ we may write the series (\ref{eqn:Partial_derivative_sequence}) as a sum of two terms:
+\begin{equation*}
+		\underbrace{\sum_{k=0}^p \frac{\partial^r}{\partial x^r} \left( \frac{x^k}{k!} \rho(\mu_k x) \cdot v_k \right)}_{S_{p,r}(\nu)}
+		+ 	\underbrace{\sum_{k=p+1}^\infty \frac{\partial^r}{\partial x^r} \left( \frac{x^k}{k!} \rho(\mu_k x) \cdot v_k \right)}_{R_{p,r}(\nu)}.
+\end{equation*}
+Because $\mu_i$ depends continuously on the single coordinate $v_i$, the first of these two terms, $S_{p,r}(\nu)$, is a continuous function in $\nu$. It follows that each $S_{p,0}^{-1}(B^r_{\epsilon, K}(f_0))$ is an open subset of $ \prod_{i=0}^\infty V $. 
+
+Moreover whenever $p>r$, the second term, $R_{p,r}(\nu)$, is bounded by
+\begin{equation*}
+	\frac{1}{2^{p+1}}+ \frac{1}{2^{p+2}}+ \frac{1}{2^{p+3}}+ \cdots = \frac{1}{2^p}.
+\end{equation*} 
+By choosing $p$ large enough, we can make this term as small as we wish. Thus it follows that there exists an open neighborhood of $\nu_0$ lying entirely within $s^{-1}(B^{(r)}_{\delta, K}(f_0))$. Hence $s$ is continuous.
+\end{proof}
+
+The next lemma is conceptually very similar with $V$ replaced by the infinite dimensional vector space $C^\infty(L)$ of smooth functions on a compact manifold $L$. However in this case we interpret `$C^\infty(\R, C^\infty(L))$' as $C^\infty(\R \times L)$. Thus in some sense we are treating $C^\infty(L)$ as a generalized smooth (vector) space. It is possible to formulate the next lemma in that generality, but we will not attempt to do so.  
+
+\begin{lemma} \label{lma:Extend_Derivatives_to_function}
+	Let $L$ be a compact manifold. The map $C^\infty(\R \times L, \R^n) \to \prod_{k=0}^\infty C^\infty(L, \R^n)$ given by
+	\begin{equation*}
+		f(x,y) \mapsto \left( \frac{\partial^k f}{\partial x^k}  |_{\{0\}\times L} \right)_{k=0}^\infty
+	\end{equation*}
+	has a continuous section. 
+\end{lemma}
+
+\begin{proof}
+	The proof is nearly identical to the previous one, with the following minor changes:
+	\begin{itemize}
+		\item The vectors $v_i$ are now smooth functions $f_i(y)$ on $L$. 
+		\item The partial derivatives $\frac{\partial^r}{\partial x^r}$ in the series (\ref{eqn:Partial_derivative_sequence}) must be replaced with multivariable partial derivatives $D^\alpha$ for every multi-index $\alpha$. In general each instance of an `$r$' will be replaced with a multi-index `$\alpha$'.
+		\item For example the number $M_i$ is the maximum value of functions involving partial derivatives $D^\alpha$ where $|\alpha| < i$. The maximum is taken over $[-1.+1] \times L$ (which is still compact).  
+	\end{itemize}
+	Otherwise the proof is essentially identical to the previous one. 
+\end{proof}
+
+\begin{corollary} \label{cor:Compact_extension_of_function}
+	Let $L$ be a compact manifold, as above. Then the restriction map 
+	\begin{equation*}
+		C^\infty(L \times \R, \R^n) \to C^\infty(L \times [0,\infty), \R^n)
+	\end{equation*}
+	admits a continuous section. In particular it is a Serre fibration. 
+\end{corollary}
+
+\begin{proof}
+	The last statement follows because any linear map of topological vector spaces which admits a (not necessarily linear) continuous section is a Serre fibration, in fact a Hurewicz fibration. We leave this part as an exercise.  
+	
+	For the rest, consider a given $f \in C^\infty(L \times [0,\infty), \R^n)$. Let $x$ denote the coordinate in the $\R$-direction of $L \times \R$. We have the sequence
+	\begin{equation*}
+		\left( \frac{\partial^k f}{\partial x^k}|_{L \times \{0}  \right)_{k=0}^\infty
+	\end{equation*}
+	which depends continuously on $f$. Applying Lemma \ref{lma:Extend_Derivatives_to_function}, there exists a smooth function $\tilde{f}: L \times \R \to \R^n$, whose $x$-derivatives agree with those of $f$ along $L \times {0}$. The construction of $\tilde{f}$ is continuous in the above sequence of partial derivatives, hence continuous in the original $f$. Moreover for each multi-partial derivative we have $D^\alpha \tilde{f}|_{L \times \{0\}} = D^\alpha f|_{L \times \{0\}}$. Thus we may define $g:L \times \R \to \R^n$ by
+	\begin{equation*}
+		g(w,x) = \begin{cases}
+			\tilde{f} (w,x) & x \leq 0 \\
+			f(w,x) & x \geq 0
+		\end{cases}
+	\end{equation*}
+Since the derivatives of $f$ and $\tilde{f}$ agree along $L \times \{0\}$, all the derivatives of $g$ exist and are continuous. Hence $g$ is a smooth function. 
+\end{proof}
+
+
+
+
+
 \printbibliography
 \end{document}
