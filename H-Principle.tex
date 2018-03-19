@@ -1206,8 +1206,98 @@ Morse functions satisfy the $0$-parametric $h$-principle on $X$, provided that $
 
 
 
+\marginnote{\textbf{2-19-18}}
 
 \section{Morse functions and Generalized Morse functions}
+
+Given a smooth manifold M and a smooth function $f\colon M \to \mathbb{R},$
+
+\begin{lemma}
+If $p_0$ is a critical point of f then;
+ \begin{align*} 
+Hess(f)_{p_0}&\colon T_{p_0}M\times T_{p_0}M\to \mathbb{R} \\
+&(v,w)\mapsto \tilde{v}_{p_0}(\tilde{w}(f)), \\
+&\text{(where $\tilde{v}$ and $\tilde{w}$ are smooth vector fields on M that evaluate at $p_0$ to v and w respectively)}
+\end{align*}
+is a well-defined symmetric bilinear map.
+\end{lemma}
+\begin{proof}
+
+
+ $p_0\in Crit(f)$, i.e. $df_{p_0}\equiv 0,$ so we get 
+\begin{align*}
+df_{p_0}([\tilde{v},\tilde{w}])&=0\\
+(\tilde{v}\tilde{w}-\tilde{w}\tilde{v})_{p_0}(f)&=0\\
+\tilde{v}_{p_0}(\tilde{w}(f))&=\tilde{w}_{p_0}(\tilde{v}(f))\hspace{4mm} \text{(Note: The left hand-side of this equation is, by definition, $Hess(f)_{p_0}(v,w)$)}\\
+v(\tilde{w}(f))&=w(\tilde{v}(f)) \hspace{7mm} (\text{follows since $\tilde{v}_{p_0}=v$ and $\tilde{w}_{p_0}=w$})
+\end{align*}
+Now observe that the left hand-side of the last line does not depend on $\tilde{v}$ and the right hand-side does not depend on $\tilde{w},$ so we get well-definedness and symmetry at the same time by realizing that the right hand-side of the last equation is $Hess(f)_{p_0}(w,v).$ Bilinearity just follows from the fact that vectors act linearly on functions. 
+\end{proof}
+
+\underline{Recall}:\newline
+1) $Hess(f)_{p_0}$ can be represented locally in coordinates $x=(x^1,...,x^n)$ centered at $p_0$ by the matrix $$\Big[\frac{\partial^2 f(x)}{\partial x^i \partial x^j}\Big|_{x=p_0}\Big]$$ and is said to be "non-degenerate" if this matrix is non-singular (at critical points, non-degeneracy is coordinate independent by the coordinate independence of the Hessian map itself, which we have demonstrated above).\newline
+2) Morse Critical points have non-degenerate Hessians.
+\newline
+\newline
+For generalized Morse functions, we allow critical points where the Hessian is degenerate, but only co-rank 1. (i.e. $rank(Hess(f)_{p_o})=dimM-1$). For such critical points we have a distinguished direction, $X\in Ker(Hess(f)_{p_0})\backslash \{0\}$ points in this direction.
+\newline
+\newline
+$\underline{Observation}:$ 
+$$XYf(p_0)=0\hspace{4mm} \forall \hspace{2mm}Y\in T_{p_0}M$$
+But from the lemma, we know $XYf(p_0)=YXf(p_0)$
+Therefore $p_0$ is also a critical point of the map $g:=(p\mapsto \tilde{X}_pf \hspace{3mm}\forall p\in M)$ where $\tilde{X}$ is any extension of $X$ to a smooth vector field on M. So by the lemma we started with, the Hessian of g is well-defined at $p_0.$
+So we can define the map \newline
+$(sX\mapsto s^3Hess(g)_{p_0}(X,X)\hspace{3mm} \forall s\in \mathbb{R})$ \hspace{4mm}(This can be thought of as a cubic form on $span(X)$)
+For a generalized Morse function, we require that this map is not the zero map.
+\newline
+\includegraphics[width=8cm]{GeneralMorse.jpg}
+
+The jet transversality theorem implies the existence of a function $f:M\mapsto \mathbb{R}$ such that $j^{k}f$ $\pitchfork$ each $S_i,S_{i,j},S_{i,j,k}...$ etc.
+\begin{corollary}
+For M a smooth manifold, Morse functions exist! 
+\end{corollary} 
+Apply Jet transversality to paths of functions $M\times I\to \mathbb{R}.$
+\newline
+$\underline{Question}:$
+Is the space of Morse functions connected?
+The answer is no because of the involvement of higher codimension singularities (namely $S_{1,1,0}$)
+\newline
+\newline
+\center
+\begin{tikzcd}
+j^3f^{-1}(S_{1,1,0}) \arrow[r] \arrow[d] \arrow[dr, phantom, , very near start]
+& S_{1,1,0}   
+ [d] \arrow[d, phantom,"\big| \bigcap" , near start] \\
+X\times I \arrow[r]
+& J^3(X,\mathbb{R})
+\end{tikzcd}
+\newline
+\newline
+\begin{align*}
+j^3f^{-1}(S_{1,1,0})&=\text{paths in $X\times I$ where we have an $S_{1,1,0}-singularity$}\\ 
+S_{1,1,0}(f)&=\{\hspace{1mm}(m,t)\in M\times I \hspace{3mm}|\hspace{3mm} j^3f_t(m_0)\in S_{1,1,0}\hspace{1mm}\}
+\end{align*}
+\newline
+\newline
+If M is compact, this is a finite zero dimensional submanifold of $M\times I$.
+
+\begin{corollary}
+Any two Morse functions are connected by a path of functions which are Morse for all but finitely many values of time, the times where we have an $S_{1,1,0}$ singularity.
+\end{corollary}
+\center $\underline{\textbf{MORSE LEMMA:}}$
+If $f\colon M \to \mathbb{R}$ is smooth, $p_0$ a Morse critical point then there exists a coordinate system $(U,x)$ centered at $p_0$ such that;
+$$f|_{U}=f(p_0)-\sum_{i=1}^{k}(x^i)^2+\sum_{i=k+1}^{m}(x^i)^2$$
+where, k:= index of f at $p_0$ which is defined to be the maximal dimension of a subspace of $T_{p_0}M$ on which the hessian of f at $p_0$ is negative definite. 
+\newline
+Note: This implies that non-degenerate critical points are isolated. 
+\newline
+\newline
+\underline{Corresponding lemma for $S_{1,1,0}$ singularities}:
+
+
+$$f|_{U}=f(p_0)+(x^1)^3-\sum_{i=2}^{k}(x^i)^2+\sum_{i=k+1}^{m}(x^i)^2.$$
+
+\marginnote{\textbf{2-21-18}}
 
 We refocus our attention to the Morse differential relation $R=S^{(2)}_0 \cup S_{1,0} \subset J^2(X,\R)$ and its genuine solutions.  As it was for immersions, it turns out that the space of genuine solutions is not connected.  But in the case of Morse functions, we can do something close.  To do this we will need to allow for functions that have nondegenerate Hessians in our paths of functions. Thus we recall the definition of the higher analogues of the Hessian.
 
