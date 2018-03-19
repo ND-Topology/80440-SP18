@@ -1943,9 +1943,100 @@ The next lemma is conceptually very similar with $V$ replaced by the infinite di
 			f(w,x) & x \geq 0
 		\end{cases}
 	\end{equation*}
-Since the derivatives of $f$ and $\tilde{f}$ agree along $L \times \{0\}$, all the derivatives of $g$ exist and are continuous. Hence $g$ is a smooth function. 
+Since the derivatives of $f$ and $\tilde{f}$ agree along $L \times \{0\}$, all the derivatives of $g$ exist and are continuous. Hence $g$ is a smooth function.
 \end{proof}
 
+\subsection{The H-principle for flexible sheaves}
+
+We are ready to prove a metatheorem from which many instances of the H-principle will flow.
+
+\begin{theorem}\label{thm:flexible-h-princ}
+Let $\mathcal{F}$ and $\mathcal{F}^h$ be sheaves of spaces on $m$-manifolds, and $\mathcal F(-) \to \mathcal F^h(-)$ a map. Suppose that
+
+\begin{enumerate}
+\item $\mathcal F, \mathcal F^h$ are flexible.
+\item $\mathcal F, \mathcal F^h$ are homotopy invariant.
+\item For all $U \cong \mathbb R^m$, the map $\mathcal F(U) \to \mathcal F^h(U)$ is a weak homotopy equivalence.
+\end{enumerate}
+
+Then the comparison map $\mathcal F(X) \to \mathcal F^h(X)$ is a weak equivalence for all manifolds $X$. That is, the h-principle is satisfied.
+\end{theorem}
+
+\begin{proof}
+
+\textbf{Observation 1:} By Morse theory, $X$ admits a filtration
+
+\[ \emptyset  = X_{-1} \subseteq X_0 \subseteq X_1 \subseteq \dots \subseteq X \]
+
+Where successive stages are obtained by
+
+\begin{enumerate}
+\item adding / smoothing corners.
+\item Attaching handles $D^k \times D^{m-k}$ along annuli $A^k = S^{k-1} \times D^1 \times D^{m-k}$ where $A^k$ is a neat submanifold of $X$.
+\end{enumerate}
+
+\textbf{Observation 2:} We have neat submanifold inclusions $D^k \times D^{m-k} \subseteq D^k \times \mathbb R^{m-k} \subseteq \mathbb R^k \times \mathbb R^{m-k} = \mathbb R^m$. By properties 2 and 3, the comparison map $\mathcal F(D^k \times D^{m-k}) \to \mathcal F^h(D^k \times D^{m-k})$ is an equivalence.
+
+Now we prove the theorem in two steps:
+
+\textbf{Step 1:} We show that $\mathcal F(A^k) \to \mathcal F^h(A^k)$ is an equivalence. This is easy for $k=0,1$ simply by the sheaf property: for $k=0$ this is the map $\mathcal F(\emptyset) \to \mathcal F^h(\emptyset)$ which is an equivalence for any sheaf, and for $k=1$, it's the map $\mathcal F(D^m \amalg D^m) \to \mathcal F^h(D^m \amalg D^m)$, which is also an equivalence for any sheaf.
+
+\textbf{Observation 3:} We have $A^k = (D^{k-1} \times D^{m-k+1}) \cup_{A^{k-1}} (D^{k-1} \times D^{m-k+1})$. So we get a cube:
+
+\begin{tikzcd}[column sep=small,row sep=small]
+\mathcal F(A^k) \ar[r] \ar[dd,two heads] \ar[drr,"\sim (\ast)",near end,swap] \ar[ddr,phantom,"\lrcorner",very near start] & \mathcal F(D^{k-1} \times D^{m-k+1}) \ar[dd, two heads] \ar[drr,"\sim (2)"] \\
+ & & \mathcal F^h(A^k) \ar[r] \ar[dd, two heads] \ar[ddr,phantom,"\lrcorner",very near start] & \mathcal F^h(D^{k-1} \times D^{m-k+1}) \ar[dd, two heads] \\
+\mathcal F(D^{k-1} \times D^{m-k+1}) \ar[r] \ar[drr,"\sim (2)",swap] & \mathcal F(A^{k-1}) \ar[drr,"\sim (1)",near start] \\
+& & \mathcal F^h(D^{k-1} \times D^{m-k+1}) \ar[r] & \mathcal F^h(A^{k-1})
+\end{tikzcd}
+
+By the sheaf condition, the front and back faces are pullback squares. By (1), the vertical maps are Serre fibrations. By induction, the map marked (1) is a weak equivalence. By Observation (2), the maps marked (2) are weak equivalences. By the cube lemma (Lemma \ref{lem:?????}), the map marked $(\ast)$ is a weak equivalence, completing the induction and hence the proof of Step 1.
+
+\textbf{Step 2:} Now we will induct through the filtration of Observation (1) to get the result.
+
+Base case: $X_{-1} = \emptyset$: we use that $\mathcal F(\emptyset \cong \mathcal F^h(\emptyset) = \mathrm{pt}$.
+
+Inductive step: Assume that $\mathcal F(X_n) \to \mathcal F^h(X_n)$ is a weak equivalence. By (2), this is still true after smoothing or adding corners, so we may assume that $X_{n+1}$ is obtained by attaching a handle $X_{n+1} - X_n \cup_{A^k} D^k \times D^{m-k}$. We get another cube:
+
+\begin{tikzcd}[row sep=small]
+\mathcal F(X_{n+1}) \ar[r] \ar[dd,two heads] \ar[drr,"\sim (\ast)",near end,swap] \ar[ddr,phantom,"\lrcorner",very near start] & \mathcal F(D^k \times D^{m-k}) \ar[dd, two heads] \ar[drr,"\sim (1)"] \\
+ & & \mathcal F^h(X_{n+1}) \ar[r] \ar[dd, two heads] \ar[ddr,phantom,"\lrcorner",very near start] & \mathcal F^h(D^k \times D^{m-k}) \ar[dd, two heads] \\
+\mathcal F(X_n) \ar[r] \ar[drr,"\sim (2)",swap] & \mathcal F(A^k) \ar[drr,"\sim (1)",near start] \\
+& & \mathcal F^h(X_n) \ar[r] & \mathcal F^h(A^k)
+\end{tikzcd}
+
+
+Again, this is a map of pullbacks of Serre fibrations.  By Step 1, we know the maps labeled (1) are equivalences, and by induction, the map on labeled (2) is an equivalence, and. So by the cube lemma again (Lemma \ref{lem:????}) the pullback $\mathcal F(X_{n+1}) \to \mathcal F^h(X_{n+1})$ is also a weak equivalence.
+
+By induction, this holds for $X$ as well, completing the proof.
+\end{proof}
+
+
+This meta-theorem will be useful to us because our spaces of formal solutions will always be flexible and homotopy-invariant, so we just need to show that the space of actual solutions also has these properties, and then prove a base case.
+
+We also didn't need the full strength of flexibility: We only need the restriction maps $\mathcal F(D^k \times D^{m-k} \to \mathcal F(A^k)$ to be Serre fibrations (but we do need homotopy invariance to hold generally). In fact, we will see later in the proof of Gromov's theorem that for any open partial differential relation, flexibility will hold for all handles except for the top-dimensional one, yielding a theorem for noncompact manifolds -- those whose handle decomposition doesn't use any top-dimensional handles.
+
+\begin{example}
+In the trivial PDR ($R = J^0(X,Y)$) we have $\mathcal F(-) = C^\infty(-,Y)$ and $\mathcal F^h(-) = C^0(-,Y)$, with the jet prolongation map being the obvious inclusion $C^\infty(X,Y) \to C^0(X,Y)$. Previously, we've seen that $C^\infty(-,Y)$ and $C^0(-,Y)$ are both flexible (Proposition \ref{prop:????}) and homotopy invariant (Proposition \ref{prop:????}). We observe that $\mathbb R^m$ smoothly deformation retracts onto a point. By precomposing with this smooth deformation retraction, we get a deformation retraction $C^\infty(\mathbb R^m, Y) \simeq C^\infty(\mathrm{pt},Y) = Y = C^0(\mathrm{pt},Y) \simeq C^0(\mathbb R^m,Y)$, which establishes (3) in Theorem \ref{thm:flexible-h-princ}. So the theorem implies that $C^\infty(X,Y) \to C^0(X,Y)$ is an equivalence for all $X$. This is without appealing to the smooth approximation theorem -- although we did use one particular instance of smooth approximation, which could probably be done some other way. This gives us some hope that we can approach other problems without appealing to big hammers like jet transversality.
+\end{example}
+
+Next we will prove these properties for various sheaves we're interested in, in order to apply this theorem.
+
+In order to do that, we will use some lifting properties:
+
+\begin{lemma}
+Suppose that $E \to B$ is a Serre fibration and a weak equivalence, then it has the right lifting property for the inclusion $\partial D^k \to D^k$.
+\end{lemma}
+\begin{proof}
+The weak equivalence property gives a lift which commutes up to homotopy $H$ rel the boundary by Lemma \ref{lem:???}, which we want to improve to commuting on the nose. We construct a new lifting problem:
+
+\begin{tikzcd}
+D^k \times \{1\} \ar[r] \ar[d] & E \ar[d] \\
+D^k \times [0,1] \ar[r,"H"] \ar[ur,dashed,"K"] & B
+\end{tikzcd}
+
+We can solve this lifting problem because $E \to B$ is a Serre fibration. Then $K|_{D^k \times \{0}$ an on-the-nose lift of the original diagram.
+\end{proof}
 
 
 
