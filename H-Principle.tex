@@ -823,8 +823,6 @@ solutions to $R$ are at each point either a critical point with non-degenerate H
   \operatorname{Morse}(X)\to \Gamma(R\to X).
 \]
 
-\textbf{Tim's notes go here and hopefully give context so that mine make sense.}
-\newline
 
 We can also succinctly represent immersions $X \looparrowright Y$ as genuine solutions to a particular differential relation, namely $S_0 \subset J^1(X,Y)$, as they are those functions from $X$ to $Y$ with minimal nullity everywhere. 
 Before we give our first example of an H-Principle, which will be in terms of immersions, we might ask about the existence of such maps in general. Therefore we state the following theorem.  We recall the definition of a transverse map:
@@ -942,7 +940,7 @@ A simple example is $(Z,A) = (M\times\R,M\times\{0\})$, where $M$ is a CW comple
 \begin{example}
 Another example is a $3$-punctured sphere $Z$. $Z$ is diffeomorphic to an open disk in $\R^2$ with two smaller closed disks removed. From the picture below, it is clear that $Z$ is obtained from gluing six $D^1\times [0,\infty)$ to the $1$-complex inside. So $Z$ is $1$-substratal.
 \begin{figure}[h]
-\includegraphics[scale=0.3]{3punctured}
+%s\includegraphics[scale=0.3]{3punctured}
 \centering
 \end{figure}
 \end{example}
@@ -2069,13 +2067,13 @@ Where successive stages are obtained by
 
 Now we prove the theorem in two steps:
 
-\textbf{Step 1:} We show that $\mathcal F(A^k) \to \mathcal F^h(A^k)$ is an equivalence. This is easy for $k=0,1$ simply by the sheaf property: for $k=0$ this is the map $\mathcal F(\emptyset) \to \mathcal F^h(\emptyset)$ which is an equivalence for any sheaf, and for $k=1$, it's the map $\mathcal F(D^m \amalg D^m) \to \mathcal F^h(D^m \amalg D^m)$, which is also an equivalence for any sheaf.
+\textbf{Step 1:} We show that $\mathcal F(A^k) \to \mathcal F^h(A^k)$ is an equivalence. This is easy for $k=0,1$ simply by the sheaf property: for $k=0$ this is the map $\mathcal F(\emptyset) \to \mathcal F^h(\emptyset)$, which is an equivalence for any sheaf, and for $k=1$, it is the map $\mathcal F(D^m \amalg D^m) \to \mathcal F^h(D^m \amalg D^m)$, which is also an equivalence for any sheaf.
 
 \textbf{Observation 3:} We have $A^k = (D^{k-1} \times D^{m-k+1}) \cup_{A^{k-1}} (D^{k-1} \times D^{m-k+1})$. So we get a cube:
 
 \begin{tikzcd}[column sep=small,row sep=small]
-\mathcal F(A^k) \ar[r] \ar[dd,two heads] \ar[drr,"\sim (\ast)",near end,swap] \ar[ddr,phantom,"\lrcorner",very near start] & \mathcal F(D^{k-1} \times D^{m-k+1}) \ar[dd, two heads] \ar[drr,"\sim (2)"] \\
- & & \mathcal F^h(A^k) \ar[r] \ar[dd, two heads] \ar[ddr,phantom,"\lrcorner",very near start] & \mathcal F^h(D^{k-1} \times D^{m-k+1}) \ar[dd, two heads] \\
+\mathcal F(A^k) \ar[r] \ar[dd,two heads] \ar[drr,"\sim (\ast)",near end,swap] \ar[ddr,phantom,"\ulcorner",very near start] & \mathcal F(D^{k-1} \times D^{m-k+1}) \ar[dd, two heads] \ar[drr,"\sim (2)"] \\
+ & & \mathcal F^h(A^k) \ar[r] \ar[dd, two heads] \ar[ddr,phantom,"\ulcorner",very near start] & \mathcal F^h(D^{k-1} \times D^{m-k+1}) \ar[dd, two heads] \\
 \mathcal F(D^{k-1} \times D^{m-k+1}) \ar[r] \ar[drr,"\sim (2)",swap] & \mathcal F(A^{k-1}) \ar[drr,"\sim (1)",near start] \\
 & & \mathcal F^h(D^{k-1} \times D^{m-k+1}) \ar[r] & \mathcal F^h(A^{k-1})
 \end{tikzcd}
@@ -2089,8 +2087,8 @@ Base case: $X_{-1} = \emptyset$: we use that $\mathcal F(\emptyset \cong \mathca
 Inductive step: Assume that $\mathcal F(X_n) \to \mathcal F^h(X_n)$ is a weak equivalence. By (2), this is still true after smoothing or adding corners, so we may assume that $X_{n+1}$ is obtained by attaching a handle $X_{n+1} - X_n \cup_{A^k} D^k \times D^{m-k}$. We get another cube:
 
 \begin{tikzcd}[row sep=small]
-\mathcal F(X_{n+1}) \ar[r] \ar[dd,two heads] \ar[drr,"\sim (\ast)",near end,swap] \ar[ddr,phantom,"\lrcorner",very near start] & \mathcal F(D^k \times D^{m-k}) \ar[dd, two heads] \ar[drr,"\sim (1)"] \\
- & & \mathcal F^h(X_{n+1}) \ar[r] \ar[dd, two heads] \ar[ddr,phantom,"\lrcorner",very near start] & \mathcal F^h(D^k \times D^{m-k}) \ar[dd, two heads] \\
+\mathcal F(X_{n+1}) \ar[r] \ar[dd,two heads] \ar[drr,"\sim (\ast)",near end,swap] \ar[ddr,phantom,"\ulcorner",very near start] & \mathcal F(D^k \times D^{m-k}) \ar[dd, two heads] \ar[drr,"\sim (1)"] \\
+ & & \mathcal F^h(X_{n+1}) \ar[r] \ar[dd, two heads] \ar[ddr,phantom,"\ulcorner",very near start] & \mathcal F^h(D^k \times D^{m-k}) \ar[dd, two heads] \\
 \mathcal F(X_n) \ar[r] \ar[drr,"\sim (2)",swap] & \mathcal F(A^k) \ar[drr,"\sim (1)",near start] \\
 & & \mathcal F^h(X_n) \ar[r] & \mathcal F^h(A^k)
 \end{tikzcd}
@@ -2104,30 +2102,63 @@ By induction, this holds for $X$ as well, completing the proof.
 
 This meta-theorem will be useful to us because our spaces of formal solutions will always be flexible and homotopy-invariant, so we just need to show that the space of actual solutions also has these properties, and then prove a base case.
 
-We also didn't need the full strength of flexibility: We only need the restriction maps $\mathcal F(D^k \times D^{m-k} \to \mathcal F(A^k)$ to be Serre fibrations (but we do need homotopy invariance to hold generally). In fact, we will see later in the proof of Gromov's theorem that for any open partial differential relation, flexibility will hold for all handles except for the top-dimensional one, yielding a theorem for noncompact manifolds -- those whose handle decomposition doesn't use any top-dimensional handles.
+We also didn't need the full strength of flexibility: We only need the restriction maps $\mathcal F(D^k \times D^{m-k}) \to \mathcal F(A^k)$ to be Serre fibrations (however, we do need homotopy invariance to hold generally). In fact, we will see later in the proof of Gromov's theorem that for any open partial differential relation, flexibility will hold for all handles except for the top-dimensional one, yielding a theorem for noncompact manifolds -- those whose handle decomposition doesn't use any top-dimensional handles.
 
 \begin{example}
-In the trivial PDR ($R = J^0(X,Y)$) we have $\mathcal F(-) = C^\infty(-,Y)$ and $\mathcal F^h(-) = C^0(-,Y)$, with the jet prolongation map being the obvious inclusion $C^\infty(X,Y) \to C^0(X,Y)$. Previously, we've seen that $C^\infty(-,Y)$ and $C^0(-,Y)$ are both flexible (Proposition \ref{prop:????}) and homotopy invariant (Proposition \ref{prop:????}). We observe that $\mathbb R^m$ smoothly deformation retracts onto a point. By precomposing with this smooth deformation retraction, we get a deformation retraction $C^\infty(\mathbb R^m, Y) \simeq C^\infty(\mathrm{pt},Y) = Y = C^0(\mathrm{pt},Y) \simeq C^0(\mathbb R^m,Y)$, which establishes (3) in Theorem \ref{thm:flexible-h-princ}. So the theorem implies that $C^\infty(X,Y) \to C^0(X,Y)$ is an equivalence for all $X$. This is without appealing to the smooth approximation theorem -- although we did use one particular instance of smooth approximation, which could probably be done some other way. This gives us some hope that we can approach other problems without appealing to big hammers like jet transversality.
+In the trivial PDR ($R = J^0(X,Y)$) we have $\mathcal F(-) = C^\infty(-,Y)$ and $\mathcal F^h(-) = C^0(-,Y)$, with the jet prolongation map being the obvious inclusion $C^\infty(X,Y) \to C^0(X,Y)$. Previously, we've seen that $C^\infty(-,Y)$ and $C^0(-,Y)$ are both flexible (Proposition \ref{prop:????}) and homotopy invariant (Proposition \ref{prop:????}). We observe that $\mathbb R^m$ smoothly deformation retracts onto a point. By precomposing with this smooth deformation retraction, we get the deformation retract $C^\infty(\mathbb R^m, Y) \simeq C^\infty(\mathrm{pt},Y) = Y = C^0(\mathrm{pt},Y) \simeq C^0(\mathbb R^m,Y)$, which establishes (3) in Theorem \ref{thm:flexible-h-princ}. So the theorem implies that $C^\infty(X,Y) \to C^0(X,Y)$ is an equivalence for all $X$. This is without appealing to the smooth approximation theorem -- although we did use one particular instance of smooth approximation, which could probably be done some other way. This gives us some hope that we can approach other problems without appealing to big hammers like jet transversality.
 \end{example}
 
-Next we will prove these properties for various sheaves we're interested in, in order to apply this theorem.
+Next, we will prove these properties for various different sheaves that we're interested in, so that we can apply this theorem.
 
-In order to do that, we will use some lifting properties:
+In order to do that, we will use some additional lifting properties:
 
 \begin{lemma}
-Suppose that $E \to B$ is a Serre fibration and a weak equivalence, then it has the right lifting property for the inclusion $\partial D^k \to D^k$.
+Suppose that $E \to B$ is a Serre fibration and a weak equivalence. Then it has the right lifting property for the inclusion $\partial D^k \to D^k$.
 \end{lemma}
 \begin{proof}
-The weak equivalence property gives a lift which commutes up to homotopy $H$ rel the boundary by Lemma \ref{lem:???}, which we want to improve to commuting on the nose. We construct a new lifting problem:
-
+The weak equivalence property gives a lift which commutes up to homotopy $H$ relative to the boundary by Lemma \ref{lem:???}, which we want to improve to commuting on the nose. So we construct the new lifting problem:
+\[
 \begin{tikzcd}
 D^k \times \{1\} \ar[r] \ar[d] & E \ar[d] \\
 D^k \times [0,1] \ar[r,"H"] \ar[ur,dashed,"K"] & B
 \end{tikzcd}
-
-We can solve this lifting problem because $E \to B$ is a Serre fibration. Then $K|_{D^k \times \{0}$ an on-the-nose lift of the original diagram.
+\]
+We can solve for this lift because $E \to B$ is a Serre fibration. Then $K|_{D^k \times \{0\}}$ is an on-the-nose lift of the original diagram.
 \end{proof}
 
+Towards the hope of proving an H-principle for some of our PDRs of interest, we now introduce some additional notation and definitions. Given an $R \subseteq J^r(X,Y)$ which is in fact a subbundle, we have seen the sheaf of formal solutions $\Gamma (-,R)$ is flexible and homotopy invariant; also recall the sheaf of genuine solutions $\mathcal{C}^\infty_R(-,Y)$ has the jet prolongation map $j^r:\mathcal{C}^\infty_R(-,Y) \to \Gamma (-,R)$.
+
+\begin{definition}
+A relation $R \subseteq J^r(\mathbb{R}^m,Y)$ is called invariant under local diffeomorphisms if $\forall$ open $U,V \subseteq \mathbb{R}^m$ such that there exists a diffeomoprhism $\phi:U \cong V$ and $\forall \sigma \in J^r(V,Y) \cap R$, then $\phi^*\sigma \in J^r(U,Y) \cap R$.
+\end{definition}
+
+As this property essentially translates into coordinate invariance, by using coordinate charts, we see for all smooth manifolds $X$ any such $R$ will induce a subbundle of $J^r(X,Y)$ notated $R_X$. More explicitly,
+
+\begin{equation*}
+R_X = \{\sigma = [x,U,f]|\sigma \text{ on a chart about $x$ lies in } R\} = P(X)^{r,\bullet} \times_{G_r} R_0.
+\end{equation*}
+
+We will henceforth refer to any PDR of this flavor as diffeomorphism invariant. Some readily checked examples of such relations with which we are already familiar are immersions, submersions, and Morse functions, while certain PDRs requiring more rigid information (think isometries or holomorphic maps) are non-examples. Now we prove a proposition giving utility to this new definition.
+
+\begin{proposition}
+If $R$ is any open and diffeomorphism invariant PDR, then $\mathcal{C}^\infty_R(-,Y)$ is a homotopy invariant sheaf.
+\end{proposition}
+
+\begin{proof}
+Take $X_0 \subseteq X$ to be neat with the inclusion a weak homotopy equivalence. Recall from an earlier result that we can smoothly embed $X$ into a tubular neighborhood of $X_0$ in $X$, i.e. there exists a self-embedding isotopic to the identity. As we would like to show
+$\mathcal{C}^\infty_R(X,Y) \tilde{\to} \mathcal{C}^\infty_R(X_0),Y)$
+we need to solve for the lift $\hat{h}$ in
+\[
+\begin{tikzcd}
+\partial D^k \ar[r] \ar[d] & \mathcal{C}^\infty_R(X,Y) \ar[r] \ar[d] & C^\infty(X,Y) \ar[d,"\sim"] \\
+D^k  \ar[r] \ar[ur,dashed,"\hat{h}"] & \mathcal{C}^\infty_R(X_0,Y) \ar[r] & C^\infty(X_0,Y)
+\end{tikzcd}
+\]
+
+Yet, we already know that we can get an honest lift $h:D^k \to C^\infty(X,Y)$, which we can then think of as inducing a map (at a slight risk of abusing notation) $j^rh:D^k \times X \to J^r(X,Y)$ defined simply as taking the $r^{th}$ jet prolongation of the function defined by $h$ for each point in the disk. We see this map has the property that its image restricted to $\partial D^k \times X \cup D^k \times X_0$ actually lives in $R$ by the commutativity of the diagram, in particular in the open subset of $R$.
+
+Therefore, there exists an open $U \subseteq D^k \times X$ where our PDR is satisfied by the lift $h$. From the existence of the tubular neighborhood embedding, we can pick a map $\phi: D^k \times X \hookrightarrow D^k \times X$ so that the following three properties are satisfied: $\phi$ commutes with the projection to the disk, the image of $\phi$ lands in $U$, and $\phi$ restricts to the identity on a neighborhood of $\partial D^k \times X \cup D^k \times X_0$. Then we see taking the adjoint of the composition of the adjoint of $h$ and $\phi$ yields our desired lift $\hat{h}:D^k \to \mathcal{C}^\infty_R(X,Y)$.
+\end{proof}
 
 
 
