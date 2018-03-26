@@ -881,6 +881,7 @@ Z \arrow[r] \arrow[dashed,ur,"?"]
 It is clear that if $(Z,A)$ is a relative CW-Pair, then we can actually reduce to the simpler case of $(D^k,\partial D^k)$.
 
 \begin{lemma}
+\label{serreweak}
 Let $R \rightarrow X$ be a Serre fibration with fiber $F$ so that $\pi_{k-1}F = 0$. Then there always exists a lift $\phi$ such that the following diagram commutes:
 \[
 \begin{tikzcd}
@@ -2162,6 +2163,220 @@ Therefore, there exists an open $U \subseteq D^k \times X$ where our PDR is sati
 \end{proof}
 
 
+\marginnote{\textbf{3/21/2018}}
 
+To establish the H-principle for the sheaf $\cC^\infty_R(\cdot,Y)$ on
+$m$-dimensional manifolds by employing the meta theorem, we prove the
+following local version:
+\begin{proposition}
+Let $R$ be an open differential invariant PDR. Then
+\begin{equation*}
+\begin{tikzcd}
+\cC^\infty_R(\R^m,Y) \ar[r, "j^r"] & \Gamma(\R^m, R)
+\end{tikzcd}
+\end{equation*}
+is a weak homotopy equivalence.
+\end{proposition}
+
+Before proceeding to the proof, we have the following observation. Let
+$R_0 = J_0^r(\R^m,Y) \cap R$ be the fiber of $R \to \R^m$ over
+$0 \in \R^m$. Then $R \cong R_0 \times \R^m \to \R^m$ is trivialized
+as a bundle. It follows that
+\begin{equation*}
+\Gamma(\R^m,R) = \cC^0(\R^m, R_0) \simeq R_0,
+\end{equation*}
+where the homotopy equivalence is induced by
+$\mathrm{ev}_0: \cC^0(\R^m, R_0) \to R_0$, the evaluation map at
+$0$. Thus it is enough to show the bottom map in the diagram
+\begin{equation*}
+\begin{tikzcd}
+\cC^\infty(\R^m,Y) \ar[r,"j^r"] & J^r(\R^m,Y) \\
+\cC^\infty(\R^m,Y) \ar[u, "\subseteq"] \ar[r, "j^r"] & R_0 \ar[u, "\subseteq"]
+\end{tikzcd}
+\end{equation*}
+is a weak equivalence.
+
+\begin{lemma}
+\label{hlocallemma1}
+\begin{equation*}
+\begin{tikzcd}
+\cC^\infty(\R^m,Y)\ar[r, "j^r"] & R_0
+\end{tikzcd}
+\end{equation*}
+is a weak equivalence.
+\end{lemma}
+
+Before proving the above lemma, we first need to establish the
+following general lemma.
+
+\begin{lemma}
+\label{hlocallemma2}
+\begin{equation*}
+\begin{tikzcd}
+\cC^\infty(\R^m,Y) \ar[r,"j^r"] & J_0^r(\R^m,Y)
+\end{tikzcd}
+\end{equation*}
+is a weak equivalence and also a Serre fibration.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma \ref{hlocallemma2}]
+We will focus on the Serre fibration part. The weak equivalence part
+will follow from this and Lemma \ref{serreweak}.
+\newline
+\noindent\underline{Case 1} $Y = \R^m$:
+\newline
+Note that $J^r_0(\R^m,\R^n)$ is just the set of $n$-tuples of
+polynomials in $m$ variables with degree at most $r$. The map
+\begin{equation*}
+\cC^\infty(\R^m,\R^n) \to  J_0^r(\R^m,\R^n)
+\end{equation*}
+has a canonical section given by the inclusion of polynomial
+functions. So it is a Serre fibration.
+\newline
+
+\noindent\underline{Case 2} $Y = U$ is an open set in $\R^m$:
+\newline
+We want to construct a lifting
+
+\begin{equation*}
+\begin{tikzcd}
+D^k\times \{0\} \ar[r] \ar[d, hook] & \cC^\infty(\R^m,U) \ar[d] \\
+D^k\times I \ar[ur, dashed]\ar[r] & J^r_0(\R^m,U)
+\end{tikzcd}
+\end{equation*}
+
+To do so, we first extend the diagram by inclusion:
+\begin{equation*}
+\begin{tikzcd}
+D^k\times \{0\} \ar[r] \ar[d, hook] & \cC^\infty(\R^m,U) \ar[d] \ar[r, hook] &
+\cC^\infty(\R^m, \R^n) \ar[d] \\
+D^k\times I \ar[r] & J^r_0(\R^m,U) \ar[r, hook] & J^r(\R^m, \R^n)
+\end{tikzcd}
+\end{equation*}
+By Case 1, there exists a lift $h: D^k\times I \to \cC^\infty(\R^m,\R^n)$. Let
+\begin{equation*}
+\tilde{h}: D^k\times I\times \R^m \to \R^n
+\end{equation*}
+denote the map adjoint to $h$. By continuity, there exists an open
+neighborhood $W$ of
+\begin{equation*}
+D^k\times\{0\}\times\R^m \cup D^k\times I \times\{0\}
+\end{equation*}
+such that
+\begin{equation*}
+\tilde{h}(W) \subseteq U.
+\end{equation*}
+
+By compactness, we can ``regularize'' $W$ as follows. Choose a smooth
+function
+\begin{equation*}
+\epsilon: I \to (0,\infty]
+\end{equation*}
+such that
+\begin{enumerate}
+\item $D^k\times\{t\}\times B_{\epsilon(t)}(0) \subseteq W$ for all
+$t \in I$ and
+\item $\epsilon(0) = \infty$.
+\end{enumerate}
+
+Now choose a smooth function
+\begin{equation*}
+\phi: D^k \times I \times \R^m \to D^k \times I \times \R^m
+\end{equation*}
+such that
+\begin{enumerate}
+\item $\phi$ commutes with the projection onto $D^k\times I$,
+\item
+$\phi(D^k \times \{t\} \times \R^m) \subseteq D^k \times \{t\} \times
+B_{\epsilon(t)}(0)$, and
+\item $\phi = \mathrm{id}$ on
+$D^k\times\{0\}\times\R^m \cup D^k\times I \times\{0\}$.
+\end{enumerate}
+
+Precomposing $\tilde{h}$ by $\phi$ gives
+\begin{equation*}
+\tilde{h} \circ \phi: D^k \times I \times \R^m \to U \subseteq \R^m.
+\end{equation*}
+The adjoint of this map is the desired lifting.
+\newline
+
+\noindent\underline{Case 3} $Y$ is a general $n$-manifold without
+boundary:
+\newline
+
+Choose an embedding of $Y$ into $\R^N$. Let $U$ be a tubular
+neighborhood of $Y$ in $\R^N$. By Case 2,
+\begin{equation*}
+\cC^\infty(\R^m, U) \to J_0^r(\R^m,U)
+\end{equation*}
+is a Serre fibration. Since Serre fibration is closed under
+retracts,
+\begin{equation*}
+\cC^\infty(\R^m, Y) \to J_0^r(\R^m,Y)
+\end{equation*}
+is also a Serre fibration.
+\end{proof}
+
+\begin{proof}[Proof of Lemma \ref{hlocallemma1}]
+The strategy is similar to the proof of Lemma \ref{hlocallemma2}. We
+want to construct a lifting
+\begin{equation*}
+\begin{tikzcd}
+\partial D^k \ar[d] \ar[r] &\cC^\infty(\R^m,Y) \ar[d] \\
+D^k \ar[r] \ar[ur, dashed] & R_0
+\end{tikzcd}
+\end{equation*}
+Extend the diagram by inclusion:
+\begin{equation*}
+\begin{tikzcd}
+\partial D^k \ar[d] \ar[r] & \cC^\infty(\R^m,Y) \ar[d] \ar[r] & \cC^\infty(\R^m,Y) \ar[d] \\
+D^k \ar[r] & R_0 \ar[r] & J^r_0(\R^m, Y)
+\end{tikzcd}
+\end{equation*}
+Since
+\begin{equation*}
+\cC^\infty(\R^m,Y) \to J^r_0(\R^m,Y)
+\end{equation*}
+is a Serre fibration by Lemma \ref{hlocallemma2}, there exists a lifting
+\begin{equation*}
+h: D^k \to \cC^\infty(\R^m,Y).
+\end{equation*}
+Let
+\begin{equation*}
+\tilde{h}: D^k \times \R^m \to Y
+\end{equation*}
+be the adjoint of $h$. We have the following diagram:
+\begin{equation*}
+\begin{tikzcd}
+{} & J^r(\R^m,Y) \ar[d] \\
+D^k\times \R^m \ar[ur, "j^rh"] \ar[r, "\tilde{h}"] & Y
+\end{tikzcd}
+\end{equation*}
+The goal is to modify $h$ so that the image of the prolongation map
+$j^rh$ lands inside the PDR $R$. By assumption,
+\begin{equation*}
+\tilde{h}(D^k\times\{0\} \cup \partial D^k \times \R^m) \subseteq R.
+\end{equation*}
+Thus by continuity and the openness of $R$, there exists a
+neighborhood $W$ of $D^k\times\{0\} \cup \partial D^k \times \R^m$ such that
+\begin{equation*}
+\tilde{h}(W) \subseteq R.
+\end{equation*}
+Now, choose a smooth function
+\begin{equation*}
+\phi: D^k \times \R^m \to D^k \times \R^m
+\end{equation*}
+such that
+\begin{enumerate}
+\item $\phi= \mathrm{id}$ on $D^k\times\{0\} \cup \partial D^k \times \R^m$ and
+\item $\phi$ compress $D^k \times \R^m$ into $W$.
+\end{enumerate}
+The prolongation $j^r$ of the adjoint of the map
+\begin{equation*}
+\tilde{h} \circ \phi: D^k \times \R^m \to Y
+\end{equation*}
+has image inside $R$. The adjoint of the map $\tilde{h} \circ \phi$
+gives the desired lifting.
+\end{proof}
 \printbibliography
 \end{document}
