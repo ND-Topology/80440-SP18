@@ -2168,7 +2168,7 @@ Therefore, there exists an open $U \subseteq D^k \times X$ where our PDR is sati
 To establish the H-principle for the sheaf $\cC^\infty_R(\cdot,Y)$ on
 $m$-dimensional manifolds by employing the meta theorem, we prove the
 following local version:
-\begin{proposition}
+\begin{proposition}\label{RdiffInvHtpyeq}
 Let $R$ be an open differential invariant PDR. Then
 \begin{equation*}
 \begin{tikzcd}
@@ -2378,5 +2378,61 @@ The prolongation $j^r$ of the adjoint of the map
 has image inside $R$. The adjoint of the map $\tilde{h} \circ \phi$
 gives the desired lifting.
 \end{proof}
+\subsection{Some incomplete notes on the lecture 04-06}
+\begin{definition}\label{HtpAssTopCat}
+A homotopy associative topological category, $\mathcal{C}$, consist of spaces $C_0$, called the objects, and $C_1$ called the morphisms together with a tail and head continuous functions $\sigma, \tau : C_1\to C_0$, and a composition $K: C_1 \times_{{}^\tau C_0^\sigma} C_1\to C_1$ over $C_0\times C_0$, and a unit $\iota: C_0\to C_1$ associative and unital only up to (unspecified) homotopy over $C_0\times C_0$. 
+\end{definition}
+
+\begin{definition}
+A module over a homotopy associative topological category $\mathcal{C}$ is a space $M$ together with an anchor map $\pi: M\to C_0$, and an action $a: M\times_{C_0} C_1 \to M$ over $C_0$, associative and unital up to fiberwise homotopy over $C_0$.
+\end{definition}
+
+\begin{example}
+If $\mathcal{C}$ is a homotopy associative topological category with $C_0=*$, then $C_1$ is an $H$-space, and a module is just a module for the $H$-space $C_1$. 
+\end{example}
+
+\begin{theorem}\label{Fib&HATCat}
+If $\mathcal{C}$ is a homotopy associative topological category with a module $M$, and the map $(\tau, \sigma): C_1\to C_0 \times C_0$ is a Serre-mircofibration, then $\pi :M\to C_0$ is a Dold-Serre fibration.
+\end{theorem}
+
+\subsection{Notes from the lecture 04-09}
+We are now ready to prove the following theorem
+\begin{theorem}[Gromov]\label{thm:Gromov} If $R$ is open, and diffeomorphism invariant PDR then $j^k: C_R^\infty(X,Y)\to \Gamma(X, R)$ is a weak equivalence for all non compact $X$.
+\end{theorem}
+The statement of non-compact is because we need $X$ to be build form $i$-handles for $i$ less than $m$. Recall that we have seen that $\Gamma(-,R)$ is a flexible sheaf, as well as homotopy invariant. Further we know that $j^k: C_R^\infty(X,Y)\to \Gamma(X, R)$ is a weak equivalence when $X=\mathbb{R}^m$ from Proposition \ref{RdiffInvHtpyeq}, and that $C^\infty_R(-,Y)$ is homotopy invariant and micro-flexible. If we knew that $C^\infty_R(-,Y)$ was Dold-Serre-flexible as well, then we would know it was flexible, and then that would show the theorem due to Theorem \ref{thm:flexible-h-princ}. So let us prove that.
+
+We will start with this seemingly unconnected lemma
+\begin{lemma}\label{lem:AnnCat}
+For $k<m$ there is a homotopy associative topological category $\mathcal{C}^\infty_R(A_k,Y)$ with $C_0=C_1=C^\infty_R(A_k,Y)$. It has a module $C^\infty_R(D^k\times D^{m-k},Y)$ with anchor map induces by the inclusion $A_k\subset D^k \times D^{m-k}$.
+\end{lemma}
+If we assume the lemma then Theorem \ref{thm:Gromov} above follows in the following way
+\begin{proof}[Proof of Theorem \ref{thm:Gromov}]
+Note that the map $(\sigma,\tau) C^\infty_R(A_k,Y)\to C^\infty_R(A_k,Y)\times C^\infty_R(A_k,Y)$ as defined in the proof of Lemma \ref{lem:AnnCat} below is a Serre-microfibration. We can therefore use Theorem \ref{Fib&HATCat} to conclude that $C^\infty_R(D^k\times D^{k-m},Y)\to C^\infty_R(A_k,Y)$ is a Dold-Serre-fibration, but as $C^\infty_R(-,Y)$ is micro-flexible it follows that $C^\infty_R(-,Y)$ is flexible, which was the remaining statement we needed to conclude the proof.
+\end{proof}
+
+\begin{proof}[Proof of Lemma \ref{lem:AnnCat}]
+Recall that $A_k=\partial D^k \times D^1 \times D^{m-k}$, and by assumption. Define $i_\sigma: D^1 \to D^1$ by $t\mapsto \frac{t}{3}$, and $i_\tau:D^1\to D^1$ by $t\mapsto \frac{2+t}{3}$. If $\mathcal{F}$ is any sheaf we can let $\sigma,\tau :\mathcal{F}(A_k)\to \mathcal{F}(A_k)$ be the obvious induced maps. By the sheaf condition of $\mathcal{F}$, we get a map:
+\begin{align*}
+\mathcal{F}(A_k)\times_{{}^\tau\mathcal{F}(A_k)^\sigma} \mathcal{F}(A_k)\to \mathcal(F)(\partial D^k\times [0,\frac{5}{3}] \times D^{m-k}) \stackrel{r}{\to}  \mathcal{F}(A_k)
+\end{align*} 
+Where the first map comes from the sheaf condition, as the last third of the first cylinder is guaranteed to coincide with the first third of the second cylinder. The map $r$ is induced by the map $i_r:D^1\to [0,\frac{5}{6}]$ by $t\mapsto \frac{5t}{6}$. It can be easily seen that this induces a composition, asssociative up to unspecified homotopy (this should remind the user of the proof that the fundamental group, $\pi_1X$, of a space $X$ is associative). Note so far we have not used anything in particular about out sheaf $\mathcal{F}=C^\infty_R(-,Y)$ nor our assumption that $k<m$.
+
+Now we need to define the unit $\iota: C^\infty_R(A_k,Y)\to C^\infty_R(A_k,Y)$. Let $U_k=\partial D^k \times \mathbb{R} \times D^{m-k}$, then the obvious inclusion $A_k\subset U_k$ induces a map $u:C^\infty_R(U_k,Y)\to C^\infty_R(A_k,Y)$. This map has a continuous section $s$, this can be seen using similar arguments to the case of $C^\infty(-, Y)$ using the fact that $R$ is open.
+
+Define $\varphi: \mathbb{R}\times D^1 \to \mathbb{R}\times D^1$, by scaling up the first third of the interval $[0,1]\subset \mathbb{R}$ to be the entire interval, then shrink the sides and loop back using $[\frac{1}{3},\frac{2}{3}]$, and then use the remaining third of the interval to run the interval again. For a graphical presentation see figure \ref{themapphi}.
+\begin{figure}[h] 
+\includegraphics[width=8cm]{TheMapphi.pdf}
+\caption{ \label{themapphi} The map $\varphi$.}
+\end{figure}
+ This is clearly an immersion. 
+
+Then since $k<m$, $m-k\geq 1$, and $\varphi$ is an immersion it induces a map $\phi: C^\infty_R(U_k,Y)\to C^\infty_R(U_k,Y)$. And we can therefore define $\iota=u\circ \phi \circ s: C^\infty_R(A_k,Y)\to C^\infty_R(A_k,Y)$. We need to check that this is in fact a unit, i.e., are $K(\iota,-)\simeq id$, and $K(-,\iota)\simeq id$? Luckily the answer is yes for $K(\iota,-)\simeq id$ is easily follows form the fact that the projection in figure \ref{snakeundo} is homotopic to the one that slides the top red part into the bottom red part, undoing the snake, as maps $\mathbb{R}\times D^1\to \mathbb{R}\times D^1$ through maps fixing the (in the top picture bottom) red part and the blue part.
+\begin{figure}[h] 
+\includegraphics[width=8cm]{Snakeundo.pdf}
+\caption{ \label{snakeundo} a projection.}
+\end{figure}
+
+\end{proof}
+
 \printbibliography
 \end{document}
