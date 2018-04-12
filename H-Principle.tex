@@ -2378,6 +2378,155 @@ The prolongation $j^r$ of the adjoint of the map
 has image inside $R$. The adjoint of the map $\tilde{h} \circ \phi$
 gives the desired lifting.
 \end{proof}
+
+\subsection{Partial notes on lecture 03-26}
+
+\begin{definition}
+A fibration $p: E \to B$ is a \emph{Serre microfibration} if there exists some $\varepsilon > 0$ such that the following lifting problem has a solution:
+\begin{equation*}
+\begin{tikzcd}
+D^k \times \{0\} \arrow[r] \arrow[d,hookrightarrow] & E \arrow[dd] \\
+D^{k} \times [0,\varepsilon] \arrow[d,hookrightarrow] \arrow[ur,dashed] & \\
+D^k \times [0,1] \arrow[r] & B.
+\end{tikzcd}
+\end{equation*}
+Intuitively, this means we may not be able to lift the whole map, but we can lift an initial piece.
+\end{definition}
+
+\begin{definition}
+A fibration $p:E \to B$ is a \emph{Dold-Serre} fibration if it has the weak homotopy lifting property with respect to $D^k$ for all $k$; that is, the lifting problem
+\begin{equation*}
+\begin{tikzcd}
+D^k \times \{0\} \arrow[r] \arrow[d, hookrightarrow] & E \arrow[d] \\
+D^k \times [0,1] \arrow[ur, dashed, "H"] \arrow[r] & B
+\end{tikzcd}
+\end{equation*}
+such that the bottom square commutes up to homotopy (i.e. $H|_{D^k \times \{0\}} \simeq_B H_0$).
+\end{definition}
+
+\subsection{Notes on lecture 03-28}
+We have been looking at an open, diffeomorphism invariant PDR $R$, and we want to know when
+\begin{equation*}
+C_R^\infty(X,Y) \overset{\sim}{\to} \Gamma(X,R).
+\end{equation*}
+We have reduced to the special case of determining when 
+\begin{equation*}
+C_R^\infty(D^k \times D^{m-k}, Y) \to C_R^\infty(A_k, Y)
+\end{equation*}
+is a Serre fibration for all $k$. We know that the map above a Serre microfibration. The strategy to show it is a Serre fibration will go as follows:
+\begin{enumerate}
+\item Prove that a map which is a Serre microfibration \emph{and} a Dold-Serre fibration is a Serre fibration. 
+
+\item Show that the fibration in question is a Dold-Serre fibration.
+\end{enumerate}
+
+To prove the first part, we first give an alternative characterization of Dold-Serre fibrations.
+
+\begin{definition}
+A \emph{delayed homotopy} is a map $X \times [0,1] \overset{H}{\to} B$ which is constant on $X \times [0,a]$ for some $a > 0$ (i.e. $H(x,t) = H(a,0)$ for $0 \leq t \leq a$).
+\end{definition}
+
+Thus, being a Dold-Serre fibration is equivalent to having the homotopy lifting property for delayed homotopies; that is, the lifting problem
+\begin{equation*}
+\begin{tikzcd}
+D^k \arrow[r] \arrow[d,hookrightarrow] & E \arrow[d] \\
+D^k \times [0,1] \arrow[r, "\text{delayed}"'] \arrow[ur, dashed] & B
+\end{tikzcd}
+\end{equation*}
+has a solution.
+
+Dold-Serre fibrations satisfy a number of nice properties:
+
+\begin{itemize}
+\item Dold-Serre fibrations are stable under pullback (and retracts).
+\begin{equation*}
+\begin{tikzcd}
+D^k \arrow[r] \arrow[d,hookrightarrow] & E \arrow[r] \arrow[d] & E' \arrow[d] \\
+D^k \times [0,1] \arrow[r] \arrow[rr, "\text{delayed}"',bend right]& B \arrow[r] & B'
+\end{tikzcd}
+\end{equation*}
+
+\item A map $p: E \to B$ is a Dold-Serre fibration if and only if $f^*(p)$ is a Dold-Serre fibration for all $f: D^\ell \to B$. 
+\end{itemize}
+
+The key to proving part 1 above is the following lemma.
+
+\begin{lemma}
+Suppose $p: E \to B$ is a Dold-Serre fibration. Then there exists a map $\widetilde{H}$ fitting into the diagram
+\begin{equation*}
+\begin{tikzcd}
+D^k \times [-1,0] \arrow[r, "H_0"] \arrow[d, hookrightarrow] & E \arrow[d] \\
+D^k \times [-1,2] \arrow[ur, dashed, "\widetilde{H}"] \arrow[r, "H"] & B
+\end{tikzcd}
+\end{equation*}
+and constant $a \in (-1,0]$ such that the lower triangle commutes and $\widetilde{H}|_{D^k \times [-1,a]} = H_0|_{D^k \times [-1,a]}$.
+\end{lemma}
+
+\begin{proof}
+The proof will come in two steps:
+
+\begin{itemize}
+\item \underline{Step 1}: Consider the following lifting problem:
+\begin{equation*}
+\begin{tikzcd}
+D^k \times \{0\} \arrow[r, "H_0|_{D^k \times \{0\}}"] \arrow[d,hookrightarrow] & E \arrow[d] \\
+D^k \times [0,2] \arrow[r,"h"] \arrow[ur,"\widetilde{h}", dashed] & B,
+\end{tikzcd}
+\end{equation*}
+where $h$ is the delayed homotopy
+\begin{equation*}
+h(x,t) = \begin{cases} x & \text{if } t \in [0,1] \\ H(x,2t-2) & \text{if } t \in [1,2]. \end{cases}
+\end{equation*}
+Intuitively, $h$ is constant on $[0,1]$ and performs $H|_{[0,2]}$ over the interval $[1,2]$. Since $p$ is a Dold-Serre fibration the lift $\widetilde{h}: D^k \times [0,2] \to E$ in the above diagram exists, and both triangles in the diagram commute.
+
+\item \underline{Step 2}: Consider the map $\psi: [-1,2] \times [-1,1] \to [-1,2]$ defined by
+\begin{equation*}
+\psi(x,t) = \begin{cases}
+x & \text{if } (x,t) \in [-1,0] \times [-1,1] \\
+2(x-1) & \text{if } (x,t) \in [1,2] \times [-1,0] \\
+2(x-1)(1-t) + xt & \text{if } 0 \leq t, 1-t \leq x \\
+0 & \text{else}.
+\end{cases}
+\end{equation*}
+The map $\psi$ can be summarized by the diagram
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\textwidth]{psipic}
+\end{figure}\\
+Using our new map $\psi$, we can construct a new lifting problem:
+\begin{equation*}
+\begin{tikzcd}
+& E \arrow[d] \\
+(D^k \times [-1,2]) \times [-1,1] \arrow[r,"H \circ (id \times \psi)"] & B.
+\end{tikzcd}
+\end{equation*}
+Now, there are many ways to embed $D^k \times [-1,2]$ in $(D^k \times [-1,2]) \times [-1,1]$. We will choose our embedding carefully to get our desired $\widetilde{H}$. Consider the map $\alpha: [-1,2] \to [-1,2] \times [-1,1]$ defined by 
+\begin{equation*}
+\alpha(x) = \begin{cases}
+(x, 2x+1) & \text{if } x \in [-1,0] \\
+(x,1) & \text{if } x \in [0,2].
+\end{cases}
+\end{equation*}
+The image of $\alpha$ is:
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.33\textwidth]{alphapic}
+\end{figure}\\
+Then, the embedding we want is
+\begin{equation*}
+\begin{tikzcd}
+D^k \times [-1,2] \arrow[r, "H_0 \cup \widetilde{h}"] \arrow[d, hookrightarrow, "id \times \alpha"] & E \arrow[d] \\
+(D^k \times [-1,2]) \times [-1,1] \arrow[r,"H_0 \circ(id \times \psi)"] \arrow[ur, dashed, "F"] & B.
+\end{tikzcd}
+\end{equation*}
+Notice that the map $H_0 \circ(id \times \psi)$ is a delayed homotopy. Therefore, the lift $F: (D^k \times [-1,2]) \times [-1,1] \to E$ exists since $p: E \to B$ is a Dold-Serre fibration. We can perturb $F$ so that it agrees with the initial lift for a small amount of time. This gives the desired map $\widetilde{H}$. 
+\end{itemize}
+\end{proof}
+
+\begin{corollary}
+If $p: E \to B$ is a Dold-Serre fibration and a Serre microfibration, then $p$ is a Serre fibration.
+\end{corollary}
+
 \subsection{Some incomplete notes on the lecture 04-06}
 \begin{definition}\label{HtpAssTopCat}
 A homotopy associative topological category, $\mathcal{C}$, consist of spaces $C_0$, called the objects, and $C_1$ called the morphisms together with a tail and head continuous functions $\sigma, \tau : C_1\to C_0$, and a composition $K: C_1 \times_{{}^\tau C_0^\sigma} C_1\to C_1$ over $C_0\times C_0$, and a unit $\iota: C_0\to C_1$ associative and unital only up to (unspecified) homotopy over $C_0\times C_0$. 
