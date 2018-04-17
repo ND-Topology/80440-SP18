@@ -50,6 +50,17 @@
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 
+
+% Got this off StackExchange for drawing action arrows in diagram
+\tikzset{%
+    symbol/.style={%
+        ,draw=none
+        ,every to/.append style={%
+            edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+    }
+}
+
+
 %%%%%%%%%%%%%%%%%%%%%% Theorem Styles and Counters %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -89,6 +100,12 @@
 \newtheorem{acknowledgement}[theorem]{Acknowledgement}
 \newtheorem{case}[theorem]{Case}
 \newtheorem{claim}[theorem]{Claim}
+
+% An example environment with nonitalicized text
+\theoremstyle{definition}
+\newtheorem{examplenonit}[theorem]{Example}
+
+
 
 
 
@@ -2582,6 +2599,433 @@ Then since $k<m$, $m-k\geq 1$, and $\varphi$ is an immersion it induces a map $\
 \end{figure}
 
 \end{proof}
+
+\section{Topological classification of foliations}
+\marginnote{{\bf 4-13-18}}
+
+
+\subsection{A short detour: Lie groupoids}
+\marginnote{\textbf{4-16-18}} % Notes by Daniel S
+\begin{definition}
+  A {\em groupoid} is a category in which every morphism is
+  invertible.
+\end{definition}
+
+\begin{examplenonit}
+  A group $G$ defines a groupoid with 1 object whose morphism set is
+  equal to $G$.
+\end{examplenonit}
+
+\begin{examplenonit}
+  For a topological space $X$, the {\em fundamental groupoid}
+  has an object for each element of $X$, and the set of morphisms from
+  $x$ to $y$ is the set of homotopy classes of paths from $x$ to $y$.
+\end{examplenonit}
+
+We write the data of a groupoid $G$ as
+$G = \left( G_1 \underset{t}{\overset{s}{\rightrightarrows}} G_0 \right)$ 
+% $
+% \begin{tikzcd}
+% G_1 \ar[r,shift left=.75ex,"s"]
+%   \ar[r,shift right=.75ex,swap,"t"]
+% &
+% G_0
+% \end{tikzcd}
+% $
+where $G_1$ is the set of morphisms and $G_0$ is the set of objects. A
+groupoid has associated data of an identity map $i: G_o \to G_1$, a
+composition map 
+\[G_1 \sideset{^s}{^t_{G_0}}{\operatorname \times} G_1 \to G_1,\] and inverse map
+$G_1 \to G_1$, satisfying the necessary diagrams.
+
+\begin{definition}
+  A {\em Lie groupoid} is a groupoid object in smooth manifolds,
+  i.e.\ a groupoid $G_1 \underset{t}{\overset{s}{\rightrightarrows}} G_0$
+  % $
+  % \begin{tikzcd}
+  %   G_1 \ar[r,shift left=.75ex,"s"]
+  %   \ar[r,shift right=.75ex,swap,"t"]
+  %   &
+  %   G_0
+  % \end{tikzcd}
+  % $
+  where $G_1, G_0$ are smooth manifolds and all associated maps are
+  smooth. In order to make sense of the fibered product in the
+  definition of composition, we require that the source and target maps
+  $s$ and $t$ be submersions. Moreover, we do not require that the
+  ``manifold'' $G_1$ be either Hausdorff or second countable.
+\end{definition}
+
+\begin{examplenonit}
+  Given a smooth manifold $M$, the {\em trivial} Lie groupoid has $G_1
+  = G_0 = M$ with all morphisms the identity.
+\end{examplenonit}
+
+\begin{examplenonit}
+  A Lie group $G$ can be considered as a Lie groupoid with $G_1 = G$
+  and $G_0$ a single point.
+\end{examplenonit}
+
+\begin{examplenonit}
+  Given a Lie group $G$ acting smoothly on a manifold $M$, the
+  associated {\em action groupoid} (or {\em transport groupoid}) has
+  $G_1 = M\times G$ and $G_0 = M$ with source map given by the
+  projection $\pi : M\times G \to M$ and target map given by action
+  $(m, g) \mapsto m\cdot g$.
+\end{examplenonit}
+
+\begin{examplenonit}
+  A manifold $M$ determines a {\em pair groupoid} 
+  \[
+  \begin{tikzcd}
+    G_1 = M\times M \ar[r,shift left=.75ex,"s"]
+    \ar[r,shift right=.75ex,swap,"t"]
+    &
+    M = G_0.
+  \end{tikzcd}
+  \]
+  Composition of morphisms is simply the rule $(m_1, m_2) \circ (m_2, m_3) =
+  (m_1, m_3)$.
+\end{examplenonit}
+
+
+There is an obvious notion of morphism of Lie groupoids given by
+smooth functors, i.e.\ functors where all associated maps are smooth.
+Under this definition of morphism, for any manifold $M$ with basepoint
+$m_0$ there is an equivalence between the pair groupoid on $M$ and the
+trivial groupoid on a point:
+\[
+  \begin{tikzcd}
+    M\times M \ar[d,shift left=.75ex]
+    \ar[d,shift right=.75ex]
+    \ar[r,shift left=.75ex,"F"]
+    &
+    \text{pt}
+    \ar[d,shift left=.75ex]
+    \ar[d,shift right=.75ex]
+    \ar[l,shift left=.75ex,"G"]
+    \\
+    M
+    \ar[r,shift left=.75ex,"F"]
+    &
+    \text{pt}
+    \ar[l,shift left=.75ex,"G"]
+  \end{tikzcd}
+\]
+where the natural transformation from the identity to $G \circ F$
+assigns to each $m\in M$ the morphism $(m,m_0)\in M\times M$. Note
+that this is a smooth map.
+
+\begin{examplenonit}
+  Generalizing the previous example, a submersion $P\to X$ determines
+  a {\em pair groupoid} 
+  \[
+  \begin{tikzcd}
+    G_1 = P\times_X P \ar[r,shift left=.75ex,"s"]
+    \ar[r,shift right=.75ex,swap,"t"]
+    &
+    P = G_0.
+  \end{tikzcd}
+  \]
+\end{examplenonit}
+As above, there is an obvious morphism from the pair groupoid of a
+submersion $P\to X$ to the trivial groupoid on the space $X$:
+\[
+  \begin{tikzcd}
+    P\times P
+    \ar[d,shift left=.75ex]
+    \ar[d,shift right=.75ex]
+    \ar[r,shift left=.75ex]
+    &
+    X
+    \ar[d,equal]
+%    \ar[l,shift left=.75ex,"G"]
+    \\
+    P
+    \ar[r,shift left=.75ex]
+    &
+    X
+%    \ar[l,shift left=.75ex,"G"]
+  \end{tikzcd}
+\]
+However, this morphism can only be an equivalence if $P\to X$ admits a
+section. We would like a notion of morphism such that the pair
+groupoid of a submersion is equivalent to a the trivial groupoid for
+any submersion.
+
+\begin{definition}
+  A {\em right principal bibundle} from
+  $H = \left( H_1 \underset{t}{\overset{s}{\rightrightarrows}} H_0
+  \right)$ to
+  ${G = \left( G_1 \underset{t}{\overset{s}{\rightrightarrows}} G_0
+  \right)}$ is a smooth manifold $P$ equipped with
+  \begin{itemize}
+    \item a smooth map $\sigma : P \to G_0$,
+    \item a surjective submersion $\tau : P \to H_0$, and
+    \item action maps over $H_0\times G_0$
+      \[
+        H_1 \sideset{^s}{^\tau_{H_0}}{\operatorname \times} P \to P \qquad \text{ and } \qquad P
+        \sideset{^\sigma}{^t_{G_0}}{\operatorname \times} G_1 \to P,
+      \]
+  \end{itemize}
+  such that the following induced map is a diffeomorphism:
+  \[
+    \begin{tikzcd}
+    P\ \sideset{^\sigma}{^t_{G_0}}{\operatorname \times} G_1 \ar[r,"\cong"] &
+    P \sideset{^\tau}{^\tau_{H_0}}{\operatorname \times} P.
+  \end{tikzcd}
+  \]
+\end{definition}
+The data of a right principal bibundle is encapsulated in the
+diagram
+\[
+  \begin{tikzcd}
+    H_1 
+    \ar[d,shift left=.75ex]
+    \ar[d,shift right=.75ex]
+    \arrow[symbol=\curvearrowright]{r}
+    &
+    P
+    \ar[dl,two heads,"\tau"]
+    \ar[dr,swap,"\sigma"]
+    \ar[r,symbol=\curvearrowleft]
+    &
+    G_1
+    \ar[d,shift left=.75ex]
+    \ar[d,shift right=.75ex]
+    \\
+    H_0
+    &
+    &
+    G_0
+  \end{tikzcd}
+\]
+A morphism of right principal bibundles consists of smooth maps
+between the associated spaces that intertwine the actions.
+
+\begin{examplenonit}
+  Consider manifolds $M,N$ as trivial Lie groupoids. Then a right
+  principal bibundle from $M$ to $N$ consists of a space $P$ with
+  a smooth map $\sigma : P\to N$ and a surjective submersion $\tau : P
+  \to M$. 
+  \[
+    \begin{tikzcd}
+      M
+      \ar[d,equal]
+      \arrow[symbol=\curvearrowright]{r}
+      &
+      P
+      \ar[dl,two heads,"\tau"]
+      \ar[dr,swap,"\sigma"]
+      \ar[r,symbol=\curvearrowleft]
+      &
+      N
+      \ar[d,equal]
+      \\
+      M
+      &
+      &
+      N
+    \end{tikzcd}
+  \]
+  The action maps must be trivial since each groupoid has only
+  identity morphisms. The ``right principal'' condition say that there
+  is an induced diffeomorphism
+  \[
+    \begin{tikzcd}
+      P = P \times_N P \ar[r,"\cong"] 
+      &
+      P \times_M P.
+    \end{tikzcd}
+  \]
+  This can only happen if $\tau : P \to M$ has trivial fibers, in
+  which case $\tau$ is a diffeomorphism $P\cong M$. So in this case
+  the data of a right principal bibundle between Lie groupoids $M$ and
+  $N$ is just that of a smooth map $M \to N$.
+\end{examplenonit}
+
+\begin{examplenonit}
+  Suppose $H \rightrightarrows \text{pt}$ and $G\rightrightarrows
+  \text{pt}$ are Lie groups. A right principal bibundle from $H$ to $G$
+  is a space $P$ equipped with actions of $H$ and $G$, and the
+  ``right principal'' condition says that the map $P\times G \to
+  P\times P$ is a diffeomorphism, i.e.\ $P$ is a $G$-torsor. Choosing
+  a basepoint $p_0 \in P$ gives an identification $P\cong G$, in which
+  case the left action of $H$ gives a homomorphism $H\to G$. Note that
+  in this case an isomorphism class of right principal bibundles
+  corresponds to a conjugation class of homomorphisms.
+\end{examplenonit}
+
+
+\begin{examplenonit}
+  Suppose $M$ is a smooth manifold and $G\rightrightarrows \text{pt}$
+  is Lie group. A right principal bibundle from the trivial groupoid
+  of $M$ to $G$ is a space $P$ equipped with a right action of $G$ and
+  a surjective submersion to $M$
+  \[
+    \begin{tikzcd}
+      M
+      \ar[d,equal]
+      \arrow[symbol=\curvearrowright]{r}
+      &
+      P
+      \ar[dl,two heads,"\tau"]
+      \ar[dr,swap,"\sigma"]
+      \ar[r,symbol=\curvearrowleft]
+      &
+      G
+      \ar[d,shift left=.75ex]
+      \ar[d,shift right=.75ex]
+      \\
+      M
+      &
+      &
+      \text{pt}
+    \end{tikzcd}
+  \]
+  such that the map $P\times G \to P\times_M P$ is a diffeomorphism,
+  i.e.\ $P$ is a principal $G$-bundle over $M$.
+\end{examplenonit}
+
+A Lie groupoid $G_1 \rightrightarrows G_0$ can be pulled back over a
+smooth map $f: M \to G_0$ to form a space $f^*G_1 = M
+\sideset{^f}{^t_{G_0}}{\operatorname \times} G_1$. The natural map $f^* G_1 \to M$
+admits a section $m \mapsto (m, i(f(m)))$, where $i:G_0 \to G_1$ is
+the identity map.
+
+There is an analogous construction for maps of Lie groupoids:
+\begin{examplenonit}
+  A smooth functor $f : H\to G$ of Lie groupoids
+  \[
+    \begin{tikzcd}
+      H_1
+      \ar[d,shift left=.75ex]
+      \ar[d,shift right=.75ex]
+      \ar[r,"f"]
+      &
+      G_1
+      \ar[d,shift left=.75ex]
+      \ar[d,shift right=.75ex]
+      \\
+      H_0
+      \ar[r,"f"]
+      &
+      G_0
+    \end{tikzcd}
+  \]
+  determines a bibundle $\langle f \rangle$ defined as
+  \[
+    \begin{tikzcd}
+      H_1
+      \ar[d,shift left=.75ex]
+      \ar[d,shift right=.75ex]
+      \arrow[symbol=\curvearrowright]{r}
+      &
+      H_0 \sideset{^f}{^t_{G_0}}{\operatorname \times} G_1
+      \ar[dl,two heads,"\tau"]
+      \ar[dr]
+      \ar[r,symbol=\curvearrowleft]
+      &
+      G_1
+      \ar[d,shift left=.75ex]
+      \ar[d,shift right=.75ex]
+      \\
+      H_0
+      &
+      &
+      G_0
+    \end{tikzcd}
+  \]
+  As in the remark before this example, the map $\tau$ admits a section.
+\end{examplenonit}
+
+\begin{proposition}
+  A right principal bibundle is of the form $\langle f \rangle$ if and
+  only if it admits a section.
+\end{proposition}
+
+Right principal bibundles from trivial bundles satisfy a form of
+descent. Consider a bibundle
+\[
+  \begin{tikzcd}
+    M
+    \ar[d,equal]
+%    \arrow[symbol=\curvearrowright]{r}
+    &
+    P
+    \ar[dl,two heads,"\tau"]
+    \ar[dr]
+    \ar[r,symbol=\curvearrowleft]
+    &
+    G_1
+    \ar[d,shift left=.75ex]
+    \ar[d,shift right=.75ex]
+    \\
+    M
+    &
+    &
+    G_0
+  \end{tikzcd}
+\]
+For an open cover $\mathcal{U}$ of $M$ with local sections, let $U$ be
+the disjoint union of all $U_i \in \mathcal{U}$. Then $U\times_M U$ is
+the disjoint union of pairwise intersections $U_{ij}$, and there is an
+obvious groupoid structure $U\times_M U \rightrightarrows U$. The
+bibundle data induces a functor of groupoids
+\[
+  \begin{tikzcd}
+    U\times_M U
+    \ar[r,"\phi_{ij}"]
+    \ar[d,shift left=.75ex]
+    \ar[d,shift right=.75ex]
+    &
+    G_1 
+    \ar[d,shift left=.75ex]
+    \ar[d,shift right=.75ex]
+    \\
+    U
+    \ar[r]
+    &
+    G_0
+  \end{tikzcd}
+\]
+which is a cocycle. Conversely, such a cocycle determines the right
+principal bibundle.
+
+\begin{examplenonit}
+  If $G_1 = G$ and $G_0 = \text{pt}$ above, then the maps $\phi_{ij} :
+  U_{ij} \to G$ satisfy the cocycle condition $\phi_{ij} \circ
+  \phi_{jk} = \phi_{ik}$.
+\end{examplenonit}
+
+\begin{examplenonit}
+  If $G_1 = G\times N$ and $G_0 = N$ above, where $G$ is a Lie group
+  and $N$ a smooth manifold, then a right principal bibundle from $M$
+  to $G_1 \rightrightarrows G_0$ is
+  \[
+    \begin{tikzcd}
+      M
+      \ar[d,equal]
+      % \arrow[symbol=\curvearrowright]{r}
+      &
+      P
+      \ar[dl,two heads]
+      \ar[dr,swap,"\sigma"]
+      \ar[r,symbol=\curvearrowleft]
+      &
+      G\times N
+      \ar[d,shift left=.75ex]
+      \ar[d,shift right=.75ex]
+      \\
+      M
+      &
+      &
+      N
+    \end{tikzcd}
+  \]
+  Then $P$ is a $G$-bundle over $M$, and $\sigma$ is $G$-equivariant.
+\end{examplenonit}
+
 
 \printbibliography
 \end{document}
