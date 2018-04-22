@@ -141,7 +141,7 @@
 \DeclareMathOperator{\Int}{Int}
 
 \def\bDelta{\mathbf \Delta}
-
+\newcommand{\Fet}{\cF^{\text{\'et}}}
 
 % this makes a box with an upward diagonal slash. It is sized to match \boxtimes
 \newcommand{\boxslash}{{\mathrel{
@@ -3026,6 +3026,152 @@ principal bibundle.
   Then $P$ is a $G$-bundle over $M$, and $\sigma$ is $G$-equivariant.
 \end{examplenonit}
 
+\subsection{Connecting Folations to Lie Groupouds}
+\marginnote{\textbf{4-20-18}} % Notes by Taylor S
+Many kinds of structures on a manifold $M$ can be described as $G$-structures on its tangent bundle for a Lie group $G$. For example, an orientation on $M$ is equivalent to giving an $SO(m)$-structure, for $m=\dim M$. Unfortunately, foliations are more subtle and aren't described by a Lie group. Fortunately, though, a foliation of codimension $q$ can be described by a certain Lie \textit{groupoid}, $\Gamma^q$, which we now construct.
 
+The groupoid $\Gamma^q$ is a special case of a general construction. Given a map $f: Y\to M$ of manifolds, the sections form a sheaf of spaces on $M$. If $f$ is \'etale, that is, if $\dim Y=\dim M$ and $f$ is a submersion, then each space of sections is discrete, and so we get a sheaf of sets on $M$. The question is: which sheaves of sets on a manifold arise from \'etale maps in this way? The answer is that \textit{all} sheaves do, as long as $Y$ isn't required to be Hausdorff or second-countable (but still is required to be locally homeomorphic to $\R^m$). This answer is via explicit construction.
+
+\begin{definition}
+  Let $\cF$ be a sheaf of sets on $M$. For $x\in M$, the \emph{stalk} of $\cF$ at $x$, denoted $\cF_x$, is the set of equivalence classes of germs
+  \[
+    \cF_x = \{[x, U, f] \mid U\text{ is an open neighborhood of }x\text{ and }f\in \cF(U)\}
+  \]
+  where
+\[  [x, U, f]\sim [x, V, g]
+\]
+  if there is some open set $W\subseteq U\cap V$ containing $x$ such that
+  \[
+    f|_W = g|_W
+\]
+\end{definition}
+\begin{definition}
+  Let $\cF$ be a sheaf of sets on $M$. We define the \emph{\'etale space} $\Fet$ of $\cF$ to be the set
+  \[
+    \Fet = \bigsqcup_{x\in M}\cF_x.
+  \]
+  The map $f: \Fet\to M$ maps each stalk to the corresponding point. The topology in $\Fet$ is the weakest one such that this map is continuous and the fibers are still discrete. A basis of the topology is given by the sets
+  \[
+    S(U,f)=\{[x,U,f] \mid x\in U\}\subset \Fet
+  \]
+  as $U$ ranges over all open sets in $M$ and $f$ ranges over $\cF(U)$. Each of these open sets maps bijectively to $U$ via $f$, thus $\Fet$ is locally homeomorphic to $\R^m$.
+\end{definition}
+In general, $\Fet$ will not be Hausdorff. For example, if $M=\R$ and $\cF$ is the sheaf of smooth functions, then the two functions
+\[
+  f(x)\equiv 0
+\]
+and
+\[
+  g(x)=
+  \begin{cases}
+    0 & x\le 0\\
+    e^{-1/x}&x> 0
+  \end{cases}
+\]
+have different germs at 0, but the same germ at any $x<0$, thus are not separable by open sets. Furthermore, $\Fet$ may not be second countable, if, for example, any stalk is uncountable.
+
+Now fix a manifold $N$. We can construct a Lie groupoid $\Gamma(N)$ defined by
+\[
+  \Gamma(M)_0 = N
+\]
+\[
+\Gamma(M)_1 = (\Imm(-,B))^\text{\'et}\\
+\]
+where $\Imm(-,N)$ is the sheaf on $N$ whose value on an open set $U$ is the space of immersions $U\to N$. We define the source and target maps as
+\begin{align*}
+  s([x,U,f]) &= x\\
+  t([x,U,f]) &= f(x)
+\end{align*}
+Here, $f:U\to N$ is an immersion, and note that any two germs which agree in a neighborhood of $x$ in particular agree on $x$, thus the target map is well defined. The identity is $\iota(x)=[x,N,\id_N]$, and composition is the composition of the (germs of) immersions. Since these are immersions, they have local inverses, which gives our inverse of morphisms.
+
+\begin{definition}
+  In the case that $N=\R^q$, we write $\Gamma^q:=\Gamma(\R^q)$, which is called the \emph{Haefliger groupoid}.
+\end{definition}
+\begin{definition}
+  A $\Gamma^q$\emph{-structure} on a manifold $M$ is a right principal bibundle from $M$ (regarded as a trivial Lie groupoid) to $\Gamma^q$. Equivalently, a $\Gamma^q$-structure on $M$ consists of
+  \begin{itemize}
+  \item an open cover $\{U_i\}$ of $M$,
+  \item smooth functions $f_i:U_i\to \R^q$,
+  \item transition functions $\phi_{ij}: U_i\cap U_j\to \Gamma^q_1$
+  \end{itemize}
+  such that
+  \begin{itemize}
+  \item $\phi_{ij}(u)$ is a morphism in $\Gamma^q_1$ from $f_j(u)$ to $f_i(u)$, and
+  \item when defined, $\phi_{ij}\phi_{jk}=\phi_{ik}$.
+    \end{itemize}
+  \end{definition}
+  \begin{definition}
+    A $\Gamma^q$\emph{-foliation} on $M$ is a $\Gamma^q$-structure as above such that the maps $f_i$ are submersions.
+  \end{definition}
+  \begin{proposition}
+    Folitions on $M$ are the same as $\Gamma^q$-foliations, where two $\Gamma^q$-foliations are equivalent if there is a common refinement of their open covers on which they agree.
+  \end{proposition}
+  In order to analyze our foliations, we can now separately analyze the two pieces: the $\Gamma^q$ structure, which will lend itself to homotopy theory similar to analyzing (ordinary) principal bundles, and the submersion part, which we understand from H-principle arguments.
+  \subsection{Classifying spaces of Lie Groupoids}
+  Recall that for a Lie group $G$, there is a space $BG$ and a bijection
+  \[
+    \text{Bun}_G(M)/\text{iso}\to [M, BG].
+  \]
+  between principal $G$-bundles on $M$ up to isomorphism and the homotopy classes of maps from $M$ to $BG$. For a Lie groupoid $\Gamma=(\Gamma_1\rightrightarrows \Gamma_0)$, we define $B\Gamma$ similarly. We start with a simplicial manifold $B_\bullet\Gamma$, where
+  \[
+    B_0\Gamma = \Gamma_0
+\]
+\[
+    B_1\Gamma = \Gamma_1
+\]
+\[
+    B_2\Gamma = \Gamma_1\times_{\Gamma_0}\Gamma_1
+\]
+\[
+    B_2\Gamma = \Gamma_1\times_{\Gamma_0}\Gamma_1\times{\Gamma_0}\Gamma_1
+  \]
+  and so on. The degeneracy maps are given by inserting identities, and the boundary maps are composition. For example, the three maps $B_2$ to $B_1$ are
+  \[
+    (f,g) \mapsto f, g\text{ or } f\circ g.
+\]
+Then we define the space
+  \[
+    B\Gamma = |B_\bullet\Gamma|.
+  \]
+  \begin{examplenonit}
+    Let $\Gamma=(N=N)$ be the trivial Lie groupoid. Then $B_\bullet\Gamma$ has all simplices above dimension 0 as degenerate, so $B\Gamma\simeq N$. We have previously seen that principal bundles from $M$ to $N$ are smooth maps and two maps are isomorphic if and only if they are equal. Thus,
+    \[
+      \text{Bun}_\Gamma(M)/\text{iso} = C^\infty(M,N)
+    \]
+    Thus in order to get $[M,N]$, we need to take a weaker notion of equivalence than isomorphism.
+  \end{examplenonit}
+\begin{definition}
+  Two bibundles $P_0,P_1$ on $M$ are \emph{concordant} if there is a bibundle $P$ on $M\times I$ such that
+  \[
+  P_0 = P|_{M\times\{0\}}
+\]
+  \[
+  P_1 = P|_{M\times\{1\}}
+\]
+\end{definition}
+In the example above, two maps in $C^\infty(M,N)$ are concordant if and only if they are homotopic, thus in the example, we get our desired bijection
+\[
+  \text{Bun}_N(M)/\text{concordance} \cong [M,N].
+\]
+Furthermore, it is a classical fact that for a principal bundle over $X\times I$, the bundles over 0 and 1 are isomorphic. Thus, principal bundles are isomorphic if and only if they are concordant.
+
+Next, we will construct an analog of $EG$. The bundle $EG\to BG$ serves gives a natural map
+\[[X,BG]\to \text{Bun}_G(X)/\text{iso}\]
+by pullback.
+\begin{definition}
+  Let $P\to M$ be a submersion. Then the \emph{relative pair groupoid} is $\Gamma_1=P\times_MP\rightrightarrows M=\Gamma_0$. \end{definition}
+The relative pair groupoid $\Gamma=\Gamma(P\to M)$ has a natural functor
+\[  \begin{tikzcd}
+    P\times_MP \ar[r]
+    \ar[d,shift left=.75ex]
+    \ar[d,shift right=.75ex] &
+    M
+    \ar[d,shift left=.5ex, dash]
+    \ar[d,shift right=.5ex, dash] \\
+    P\ar[r] &
+    M
+  \end{tikzcd}
+\]
+which induces a map of spaces $B\Gamma\to BM=M$. Under certain conditions on $P\to M$, this is an equivalence. For example, if $P\to M$ admits a section $\sigma$, then the map $B\sigma: M\to BP$ is gives a simplicial homotopy inverse.
 \printbibliography
 \end{document}
