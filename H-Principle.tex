@@ -3028,7 +3028,7 @@ principal bibundle.
 
 \subsection{Connecting Folations to Lie Groupouds}
 \marginnote{\textbf{4-20-18}} % Notes by Taylor S
-Many kinds of structures on a manifold $M$ can be described as $G$-structures on its tangent bundle for a Lie group $G$. For example, an orientation on $M$ is equivalent to giving an $SO(m)$-structure, for $m=\dim M$. Unfortunately, foliations are more subtle and aren't described by a Lie group. Fortunately, though, a foliation of codimension $q$ can be described by a certain Lie \textit{groupoid}, $\Gamma^q$, which we now construct.
+Many kinds of structures on a manifold $M$ can be described as $G$-structures on its tangent bundle for a Lie group $G$. For example, an orientation on $M$ is equivalent to giving an $GL^+(m,\R)$-structure, for $m=\dim M$. Unfortunately, foliations are more subtle and aren't described by a Lie group. Fortunately, though, a foliation of codimension $q$ can be described by a certain Lie \textit{groupoid}, $\Gamma^q$, which we now construct.
 
 The groupoid $\Gamma^q$ is a special case of a general construction. Given a map $f: Y\to M$ of manifolds, the sections form a sheaf of spaces on $M$. If $f$ is \'etale, that is, if $\dim Y=\dim M$ and $f$ is a submersion, then each space of sections is discrete, and so we get a sheaf of sets on $M$. The question is: which sheaves of sets on a manifold arise from \'etale maps in this way? The answer is that \textit{all} sheaves do, as long as $Y$ isn't required to be Hausdorff or second-countable (but still is required to be locally homeomorphic to $\R^m$). This answer is via explicit construction.
 
@@ -3075,7 +3075,7 @@ Now fix a manifold $N$. We can construct a Lie groupoid $\Gamma(N)$ defined by
   \Gamma(M)_0 = N
 \]
 \[
-\Gamma(M)_1 = (\Imm(-,B))^\text{\'et}\\
+\Gamma(M)_1 = (\Imm(-,N))^\text{\'et}\\
 \]
 where $\Imm(-,N)$ is the sheaf on $N$ whose value on an open set $U$ is the space of immersions $U\to N$. We define the source and target maps as
 \begin{align*}
@@ -3173,5 +3173,101 @@ The relative pair groupoid $\Gamma=\Gamma(P\to M)$ has a natural functor
   \end{tikzcd}
 \]
 which induces a map of spaces $B\Gamma\to BM=M$. Under certain conditions on $P\to M$, this is an equivalence. For example, if $P\to M$ admits a section $\sigma$, then the map $B\sigma: M\to BP$ is gives a simplicial homotopy inverse.
+\newline
+
+With these constructions in hand, we can move on to our application of the H-principle in the realm of foliations on a smooth manifold. Recall that the diagram
+\[  \begin{tikzcd}
+    \Gamma^q_1 \ar[r]
+    \ar[d,shift left=.75ex]
+    \ar[d,shift right=.75ex] &
+    GL(q,\R)
+    \ar[d,shift left=.75ex]
+    \ar[d,shift right=.75ex] \\
+    \R \ar[r] &
+    \text{pt}
+  \end{tikzcd}
+\]
+induces a rank $q$ vector bundle, a sort of "universal normal bundle", given as $\mathcal{V}_{\Gamma^q} \rightarrow B\Gamma^q$. The main result we wish to to prove is then:
+
+\begin{theorem}[Haefliger]
+For $M$ an open, smooth manifold, there exists a bijective correspondence $\textit{Fol}_q(M)/\sim$ $\cong$ $\pi_0\mathrm{Maps}^{\mathrm{Surj}}_{\mathrm{Vect}}(M,\mathcal{V}_{\Gamma^q})$.
+\end{theorem}
+
+Before we try proving this, we need to point out a lack of naturality in generic foliations; while $\Gamma^q$-structures can always be pulled back (which is easily seen using the open cover definition), foliations do not do so in general. Basic counterexamples are straightforward to show using embeddings. Yet, maps with a certain transversality property do indeed pull foliations back to foliations.
+
+\begin{definition}
+A map $f:M \rightarrow E$ is said to be transverse to a foliation $\mathcal{F}$ of E, or "$f \pitchfork \mathcal{F}$", if for all leaves $E_\alpha \subseteq E$, the map $T_{f(x)}E_\alpha \oplus f_*T_xM \hookrightarrow T_{f(x)}E$ is surjective $\forall x \in f^{-1}(E_\alpha)$. Equivalently, the composition $T_xM \xrightarrow{df} T_{f(x)}E \rightarrow \nu_\mathcal{F}$ is surjective.
+\end{definition}
+
+\begin{definition}
+A map $f:M \rightarrow E$ is transverse to a $\Gamma^q$-foliation $\mathcal{F}$ of $E$ if the composition $f^{-1}(U_i) \rightarrow U_i \xrightarrow{f_i} \R^q$ is a submersion.
+\end{definition}
+Note: this second definition is in accord with the first since $\nu_\mathcal{F}|_{U_i} \cong f_i^*(T\R^q)$.
+\newline
+
+Then the set of maps with this property, $\mathrm{Maps}_{\pitchfork\mathcal{F}}(M,E)$ is the subspace of $C^\infty(M,E)$ whose elements $f$ satisfy $TM \xrightarrow{df} TE \rightarrow \nu_\mathcal{F}$ with fiberwise surjectivity. This gives us an open, diffeomorphism invariant PDR $R$ we see as
+\[  \begin{tikzcd}
+    \mathrm{Maps}_{\pitchfork\mathcal{F}}(M,E) \ar[r, leftrightarrow]
+    \ar[d,"\chi" hookrightarrow]
+ &
+    C^\infty_R(M,E)
+    \ar[d, "\text{jet prolongation}"] \\
+    \mathrm{Maps}^{\mathrm{Surj}}_{\mathrm{Vect}}(M,E) \ar[r, leftrightarrow] &
+    \Gamma(R)
+  \end{tikzcd}
+\]
+
+And now we can apply the H-principle to this PDR as we are used to at this point, seen in the following result.
+\begin{theorem}[Gromov, Phillips]
+If $M$ is an open manifold, then $\chi$ is a weak homotopy equivalence.
+\end{theorem}
+
+Our knowledge of principal bibundles imples that at least as far as sets go, we have a clear map $\mathrm{Maps}_{\pitchfork\mathcal{F}}(M,E)\rightarrow \mathit{Fol}_q(M)$, but we need just a bit more understanding of how homotopies behave with respect to this transversality notion in order to move to the $\pi_0$ level.
+
+Consider a map $S:M \times I \rightarrow E$ such that at every time $t \in I$, $S_t \pitchfork \mathcal{F}$. Then we claim $S \pitchfork \mathcal{F}$ as a map from $M \times I$. This follows from the commutativity of 
+\[  \begin{tikzcd}
+    TM \ar[r, "d\iota_t"]
+ \ar[rr, "dS_t"',bend right]& T(M\times I) \ar[r,"dS"] & TE \ar[r] & \nu_\mathcal{F}
+  \end{tikzcd}
+\]
+So $S^*\mathcal{F}$ is a foliation of $M \times I$, and we see that pullbacks descend to the map $\pi_0\mathrm{Maps}_{\pitchfork\mathcal{F}}(M,E) \rightarrow \mathit{Fol}_q(M)/\sim$, which we summarize diagrammatically as
+\[  \begin{tikzcd}
+    \pi_0\mathrm{Maps}_{\pitchfork\mathcal{F}}(M,E) \ar[r]
+    \ar[d,"\cong \text{ for }M \text{ open}" hookrightarrow]
+ &
+    \mathit{Fol}_q(M)/\sim
+    \ar[d, "\varpi"] \\
+    \pi_0\mathrm{Maps}^{\mathrm{Surj}}_{\mathrm{Vect}}(M,E) \ar[r, rightarrow] &
+    \pi_0\mathrm{Maps}^{\mathrm{Surj}}_{\mathrm{Vect}}(TM,\mathcal{V}_{\Gamma^q}) 
+  \end{tikzcd}
+\]
+What we wish to show to prove Haefliger's theorem is that $\varpi$ is in fact a bijection. In order to do this, we need an additional technical yet rather surprising lemma concerning the nature of $\Gamma^q$-structures and $\Gamma^q$-foliations, reminiscent of the splitting principle for vector bundles.
+
+\begin{lemma}
+Given any $\Gamma^q$-structure on $M$, $\exists E$, a closed embedding $\sigma:M \hookrightarrow E$, and a $\Gamma^q$-foliation $\mathcal{\tilde{F}}$ on $E$ such that $\sigma^*\mathcal{\tilde{F}} = \mathcal{F}$.
+\end{lemma}
+
+The power of this proposition will allow us to show both surjectivity and injectivity of $\varpi$. Given any element in $\pi_0\mathrm{Maps}^{\mathrm{Surj}}_{\mathrm{Vect}}(TM,\mathcal{V}_{\Gamma^q})$, it can be viewed as a pullback of a genuine foliation, and so we get a reversal of the bottom arrow. Gromov's theorem allows us to pull that inverse image up, and then use the top map to push it over, and commutativity implies surjectivity. 
+
+Assume now $\exists \mathcal{F}_0,\mathcal{F}_1 \in \mathit{Fol}(M)/\sim$ which map to the same image under $\varpi$. This yields
+\[  \begin{tikzcd}
+    TM \times I \ar[r]
+    \ar[d] &
+	\mathcal{V}_{\Gamma^q}
+    \ar[d] \\
+    M \times I \ar[r] &
+    B\Gamma^q
+  \end{tikzcd}
+\]
+but we now know we can simply insert a foliation $\nu_\mathcal{\tilde{F}} \rightarrow E$ into the middle of this diagram while maintaining commutativity, therefore giving a concordance between $\mathcal{F}_0$ and $\mathcal{F}_1$, guaranteeing injectivity and completing the proof.
+
+This result has a few nice takeaways. First of all, we see that any two foliations of the same codimension on $\R^n$ are concordant, and if $M$ is both framed and open, then there are always foliations on $M$. And beyond this, if $M$ is open, then concordance classes of foliations are in bijective correspondence with lifts of the form
+\[
+\begin{tikzcd}
+{} & BGL(\text{dim} M -q,\R) \times B\Gamma^q \ar[d] \\
+{} & BGL(\text{dim} M -q, \R) \times BGL(q, \R) \ar[d] \\
+M \ar[uur, dashed, bend left] \ar[r] & BGL(\text{dim} M, \R)
+\end{tikzcd}
+\]
 \printbibliography
 \end{document}
