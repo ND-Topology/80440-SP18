@@ -12,8 +12,9 @@
 \usepackage[T1]{fontenc}
 
 
-\usepackage{amsmath}       
-\usepackage{amsthm}        
+\usepackage{amsmath}
+\usepackage{commath}       
+\usepackage{amsthm}
 \usepackage{amssymb}       
 \usepackage{amsfonts}
 \usepackage[all]{xy}
@@ -3243,9 +3244,10 @@ So $S^*\mathcal{F}$ is a foliation of $M \times I$, and we see that pullbacks de
 \]
 What we wish to show to prove Haefliger's theorem is that $\varpi$ is in fact a bijection. In order to do this, we need an additional technical yet rather surprising lemma concerning the nature of $\Gamma^q$-structures and $\Gamma^q$-foliations, reminiscent of the splitting principle for vector bundles.
 
-\begin{lemma}
+\begin{proposition}
+\label{foliationembedding}
 Given any $\Gamma^q$-structure on $M$, $\exists E$, a closed embedding $\sigma:M \hookrightarrow E$, and a $\Gamma^q$-foliation $\mathcal{\tilde{F}}$ on $E$ such that $\sigma^*\mathcal{\tilde{F}} = \mathcal{F}$.
-\end{lemma}
+\end{proposition}
 
 The power of this proposition will allow us to show both surjectivity and injectivity of $\varpi$. Given any element in $\pi_0\mathrm{Maps}^{\mathrm{Surj}}_{\mathrm{Vect}}(TM,\mathcal{V}_{\Gamma^q})$, it can be viewed as a pullback of a genuine foliation, and so we get a reversal of the bottom arrow. Gromov's theorem allows us to pull that inverse image up, and then use the top map to push it over, and commutativity implies surjectivity. 
 
@@ -3269,5 +3271,142 @@ This result has a few nice takeaways. First of all, we see that any two foliatio
 M \ar[uur, dashed, bend left] \ar[r] & BGL(\text{dim} M, \R)
 \end{tikzcd}
 \]
+
+We now prove the proposition. \marginnote{\bf{4-27-2018}}
+
+\begin{proof}[Proof of Proposition \ref{foliationembedding}]
+Recall a $\Gamma^q$-structure on $M$ consists of
+\begin{itemize}
+\item an open cover $\{ U_i\}$ of $M$,
+\item smooth functions $f_i: U_i \to \R^q$,
+\item transition functions $\phi_{ij}: U_{ij} = U_i \cap U_j \to \Gamma^q_1$
+\end{itemize}
+such that
+\begin{itemize}
+\item $\Gamma^q_1 = \Imm(-,\R^q)^{\text{\'et}}$ is the \'etale space of the
+sheaf $\Imm(-,\R^q)$,
+\item $\phi_{ij}(u)$ is a morphism in $\Gamma^q_1$ from $f_j(u)$ to
+$f_i(u)$ and
+\item when defined, $\phi_{ij}\phi_{jk} = \phi_{ik}$.
+\end{itemize}
+
+By paracompactness of $M$, we may assume that $\{U_i\}$ is a locally
+finite cover. By local compactness of $M$, there exists a smaller
+cover $\{V_i\}$ of $M$ such that $V_i \subset \bar{V}_i \subset U_i$.
+
+Before going into the construction of the embedding, we look at a
+slightly more general picture. Consider the following commutative
+diagram
+\begin{equation*}
+\begin{tikzcd}
+U \ar[r,"\phi"] \ar[rd,"f"] & \Gamma^q_1 \ar[d,"s"] \\
+& \R^q
+\end{tikzcd}
+\end{equation*}
+where $U$ is an open set in $M$, $\phi$ and $f$ are smooth maps and
+$s$ is the source map of the groupoid. For any $x$ in $U$, $\phi(x)$
+is a germ of a local diffeomorphism at $f(x)$. Choose an open
+neighborhood $B_x \subseteq \R^q$ of $f(x)$ and an embedding
+$g_x: B_x \to \R^q$ such that the germ of $g_x$ at $f(x)$ is
+$\phi(x)$. Then
+\begin{equation*}
+M_{B_x,g_x} = \{ [b, B_x, g_x] : b \in B_x\} \subseteq \Gamma^q_1
+\end{equation*}
+is an open neighborhood of $\phi(x)$ by the definition of the topology
+on $\Gamma^q_1$. Let $W_x = \phi^{-1}(M_{B_x,g_x}) \subseteq U$ be an
+open neighborhood of $x$. We have the following embedding
+\begin{equation*}
+\Phi_x: W_x \times B_x \to W_x \times \R^q
+\end{equation*}
+given by $\Phi_x = (\operatorname{id}, g_x)$. $W_x \times B_x$ is an
+open neighborhood of the graph of $f$ over $W_x$, and the germ of
+$\Phi$ along the graph of $f$ over $W_x$ is
+$(\operatorname{id},\phi)$.
+
+Let $y \in U$ be another point. If $W_x \cap W_y \ne \emptyset$, then
+\begin{equation*}
+\phi(W_x \cap W_y) = M_{B_x,g_x} \cap M_{B_y,g_y} \ne \emptyset.
+\end{equation*}
+Thus there exists an open set $B \subset B_x \cap B_y$ such that $g_x$
+and $g_y$ agree on $B$. Let $g_{xy}$ be the restriction of $g_x$ on $B$. Then
+\begin{equation*}
+\Phi_{xy}: W_x \cap W_y \times B \to W_x \cap W_y \times \R^q
+\end{equation*}
+given by $\Phi_{xy} = (\operatorname{id}, g)$ is an embedding, and the
+germ of $\Phi_{xy}$ along the graph of $f$ over $W_x \cap W_y$ is
+$(\operatorname{id}, \phi)$.
+
+Continuing this construction, we finally get an open neighborhood
+$W \subset U\times \R^q$ of the graph of $f$ and an embedding
+\begin{equation*}
+\Phi: W \to U \times \R^q
+\end{equation*}
+such that the germ of $\Phi$ along the graph of $f$ is
+$(\operatorname{id},g)$.
+
+We now apply the above argument to the following diagram:
+\begin{equation*}
+\begin{tikzcd}
+U_{ij} \ar[r,"\phi_{ij}"] \ar[rd,"f_j"] & \Gamma^q_1 \ar[d,"s"] \\
+& \R^q
+\end{tikzcd}
+\end{equation*}
+Then we get
+\begin{itemize}
+\item $W_{ij} \subset U_{ij} \times \R^q$, an open neighborhood of the
+graph of $f_j$,
+\item an embedding $\Phi_{ij}: W_{ij} \to U_{ij} \times \R^q$, where
+the germ of $\Phi_{ij}$ along the graph of $f_j$ is
+$(\operatorname{id}, \phi_{ij})$.
+\end{itemize}
+
+By compactness of $\bar{V}_i$, we can choose $\epsilon_i >0$ such that
+for all $(x,u) \in \bar{V}_i \times \R^q$ with
+$\abs{f_i(x)-u} < \epsilon_i$,
+\begin{itemize}
+\item if $x \in \bar{V}_{ij}$, then
+$\Phi_{ij}\circ \Phi_{ji} (x,u) = (x,u)$ is defined and equality
+holds.
+\item if $x \in \bar{V}_{ijk}$, then
+$\Phi_{kj} \circ \Phi_{ji} = \Phi_{ki}$ is defined and equality holds.
+\end{itemize}
+
+Define
+\begin{equation*}
+E_i = \{ (x,v) \in V_i \times \R^q: \abs{f_i(x)-u} < \epsilon_i\}
+\end{equation*}
+The space $E$ is defined by
+\begin{equation*}
+E = \cup_i E_i / \sim,
+\end{equation*}
+where the equivalence relation is given by
+\begin{equation*}
+(i,x,u) \sim (j,y,v)
+\end{equation*}
+if and only if
+\begin{equation*}
+x = y \in V_{ij} \text{ and } \Phi_{ji}(x,u) = (y,v).
+\end{equation*}
+There is a smooth map $\pi: E \to M$ given by the projection
+$[i,x,u] \mapsto x$. We use it to show that $E$ is Hausdorff. Let
+$[i,x,u]$ and $[j,y,v]$ be two distinct points in $E$. If $x \ne y$,
+then these two points are separated by $\pi$. So suppose $x=y$. Then
+$\Phi_{ji}(x,u) = (y,v)$ because these points are distinct. But then
+the projection $\tilde{f}_i: E_i \subseteq V_i\times \R^q \to \R^q$
+separates. So $E$ is a manifold.
+
+The embedding $\sigma: M \to E$ is given by $x \mapsto
+[i,x,f_i(x)]$. It is easily checked to be well-defined. The
+$\Gamma^q$-foliation $\tilde{\cF}$ on $E$ is defined using the open
+cover $\{ E_i \}$ and the submersion $\tilde{f}_i$ defined above. The
+transition maps $\tilde{\phi}_{ij}: E_i \cap E_j \to \Gamma^q_1$ is
+given by mapping $[i,x,u]$ to the $\R^q$ component of the germ of
+$\Phi_{ij}$ at $(x,u)$. From the definition, it is easily seen that
+\begin{equation*}
+\sigma^*\tilde{\cF} = \cF.
+\end{equation*}
+This completes the proof.
+\end{proof}
+
 \printbibliography
 \end{document}
