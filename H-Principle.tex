@@ -2544,6 +2544,61 @@ Notice that the map $H_0 \circ(id \times \psi)$ is a delayed homotopy. Therefore
 \begin{corollary}
 If $p: E \to B$ is a Dold-Serre fibration and a Serre microfibration, then $p$ is a Serre fibration.
 \end{corollary}
+%notes from 04-04%
+
+$\textbf{\underline{Examples of Dold-Serre Fibrations:}}$
+
+1. 
+Serre fibrations.
+
+2.
+If $f\colon E\to E'$ is a fiberwise homotopy equivalence and $p'$ is a serre fibration then p is a Dold-Serre fibration.
+\newline
+
+ \begin{tikzcd}[column sep=scriptsize]
+E \arrow[dr, "p" description] \arrow[rr, "f" description]
+& & E' \arrow[dl, "p'"  description] \\
+& C 
+\end{tikzcd}
+
+\begin{lemma}
+Let $p\colon E \to B$ be a map and \{$U_{\alpha}$\}  be an open cover of B.
+ Define $p_{\alpha}$:=$p\big|_{p^{-1}(U_{\alpha})},$ \newline then p is Dold-Serre iff each $p_{\alpha}$ is Dold-Serre.
+\end{lemma} 
+
+\begin{proof}
+Assume for Dold-Serre
+
+\begin{tikzcd}
+D^{k}\times[0,1] \arrow[r] \arrow[d] \arrow[dr, phantom, , very near start]
+& E \arrow[d] \\
+ D^{k}\times[0,2] \arrow[ur, "\tilde{H}"] \arrow[r]
+& B
+\end{tikzcd}
+
+Subdivide $D^k\times[0,2]$ into small cubes, each contained in some $U_{\alpha}$\newline
+\includegraphics[scale=0.125]{alpha} 
+\newline
+\includegraphics[scale=0.125]{beta}
+\end{proof}
+
+A category has a set/space of objects, $C_0$, and morphisms, $C_1.$
+
+\begin{definition}
+A module, M, over C is a set/space with an anchor map $\pi\colon M\to C_0$ and an action map
+\begin{tikzpicture}[commutative diagrams/every diagram]
+\matrix[matrix of math nodes, name=m, commutative diagrams/every cell] {
+M\times_{C_0}^{\tau,\sigma} C_0 & M \\
+& C_0 \\};
+\path[commutative diagrams/.cd, every arrow, every label]
+(m-1-1) edge (m-1-2)
+edge (m-2-2) 
+(m-1-2) edge (m-2-2);
+\end{tikzpicture} 
+\end{definition} 
+\begin{theorem}
+If C is a homotopy associative topological category and M is a module with anchor $\pi$ and $(\tau,\sigma)\colon C_1 \to C_0\times C_0$ is a Serre Micro-Fibration then, $\pi\colon M \to C_0$ is Dold-Serre.
+\end{theorem}
 
 \subsection{Some incomplete notes on the lecture 04-06}
 \begin{definition}\label{HtpAssTopCat}
